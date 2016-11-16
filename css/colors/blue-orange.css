@@ -1,0 +1,179 @@
+/*=== Blue ===*/
+a, a:hover {
+  color: #05b197; }
+
+.topbar {
+  border-top: 1px solid #05b197;
+  background-color: #05b197; }
+
+.header .navbar-default .navbar-nav li a:hover {
+  color: #05b197; }
+
+.header .navbar-default .navbar-nav .active a,
+.header .navbar-default .navbar-nav .active a:hover,
+.header .navbar-default .navbar-nav .active a:focus {
+  color: #05b197; }
+
+.header .navbar-nav li.open .dropdown-menu li a:hover,
+.header .navbar-nav li.open .dropdown-menu li a:focus,
+.header .navbar-nav li.dropdown .dropdown-menu li a:hover,
+.header .navbar-nav li.dropdown .dropdown-menu li a:focus {
+  color: #05b197 !important; }
+
+.header .navbar-nav li.open .dropdown-menu li.active a {
+  color: #05b197 !important; }
+
+.captionLink, .captionLink:hover {
+  background-color: #05b197; }
+
+.learnBtn {
+  border: 1px solid #05b197;
+  background: #05b197; }
+
+.flex-control-paging li a.flex-active {
+  background: #05b197; }
+
+.related_post_sec a.more_post {
+  border: 1px solid #05b197; }
+
+.courses_right_inner th {
+  background: #05b197; }
+
+.courses_right_inner td ul li.active a {
+  color: #05b197; }
+
+.courses_right_inner td a:hover {
+  color: #05b197; }
+
+.pagination > li > a, .pagination > li > span {
+  border: 1px solid #05b197; }
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+  border-color: #05b197;
+  background: #05b197; }
+
+.pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus {
+  border-color: #05b197;
+  background: #05b197; }
+
+.courses_left_inner ul li a:hover, .courses_left_inner ul li a:focus {
+  color: #05b197; }
+
+.courses_left_inner ul li.active a {
+  color: #05b197; }
+
+.item_inner a.fees {
+  color: #05b197; }
+
+.sidebar_item.admission .item_inner.program ul li a {
+  color: #05b197; }
+
+#single_banner .flex-control-paging li a.flex-active {
+  background: #05b197; }
+
+.item_inner.slider .flex-direction-nav a {
+  border: 1px solid #05b197; }
+
+.item_inner.question a {
+  color: #05b197; }
+
+.tab_menu > ul li a:hover {
+  background: #05b197;
+  border-color: #05b197 !important; }
+
+.tab_menu > ul li.active a {
+  background: #05b197;
+  border-color: #05b197 !important; }
+
+.tab_menu > ul li.active a::after, .tab_menu > ul li a:hover::after {
+  border-top: 10px solid #05b197; }
+
+.fc-center h2 {
+  color: #05b197; }
+
+.fc-event-container a.more {
+  color: #05b197; }
+
+.carousel-indicators li.active {
+  background: #05b197; }
+
+ul.contact_info li .fa {
+  color: #05b197; }
+
+ul.contact_info li a:hover {
+  color: #05b197; }
+
+.error-content a {
+  color: #05b197; }
+
+.price-title {
+  background: #05b197; }
+
+@media (max-width: 767px) {
+  .header .navbar-default .navbar-nav li.apply_now a:hover {
+    color: #05b197; }
+
+  .header .navbar-nav li.open .dropdown-menu li a:hover, .header .navbar-nav li.open .dropdown-menu li a:focus {
+    color: #05b197; } }
+/*=== Orange ===*/
+.navbar-default .navbar-toggle, .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  border: 1px solid #f57137;
+  background: #f57137; }
+
+.caption_inner a {
+  background: #f57137; }
+
+.features ul li:hover i {
+  color: #f57137; }
+
+.content_top .content_left ul li:before {
+  color: #f57137; }
+
+.thumb_title .author_designation a {
+  color: #f57137; }
+
+.meta span a {
+  color: #f57137; }
+
+.post_bottom ul li a span {
+  background: #f57137; }
+
+.list_block {
+  border-top: 3px solid #f57137; }
+
+.rel_right span.date a {
+  color: #f57137; }
+
+.form-control:focus {
+  border-color: #f57137; }
+
+.commonBtn, .commonBtn:hover {
+  background-color: #f57137;
+  border-color: #f57137; }
+
+.commonBtn:hover, .commonBtn:focus {
+  background-color: #f57137 !important; }
+
+.formArea, .getArea {
+  border-top: 3px solid #f57137; }
+
+.block_quate {
+  border-left: 4px solid #f57137; }
+
+.sidebar_item {
+  border-top: 3px solid #f57137; }
+
+.upcoming_events ul li:hover span.date {
+  color: #f57137; }
+
+.event_calendar {
+  border-top: 3px solid #f57137; }
+
+@media (min-width: 768px) {
+  .header .navbar-default .navbar-nav li.apply_now a {
+    background: #f57137 !important; }
+
+  .header .navbar-default .navbar-nav li.apply_now a:hover {
+    background: #f57137 !important; } }
+
+/*# sourceMappingURL=blue-orange.css.map */
