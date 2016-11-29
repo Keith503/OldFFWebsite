@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Royal College Responsive Template</title>
+  
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,600italic,400italic,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body class="cooming-page cooming-dark-page">
+
+  <div class="main_wrapper">
+
+    <section class="page-banner clearfix">
+      <div class="overlay">
+        <div class="container">
+          <div class="banner-inner">
+            <h1 class="top-headline">Welcome to Royal College</h1>
+            <p>We'll be back soon</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- COUNT CONTENT -->
+    <div class="count-down  clearfix">
+      <div class="container">
+        <h3>Time left to the launch</h3>
+        <div id="simple_timer"></div>
+      </div>
+    </div>
+
+    <!-- LIGHT SECTION -->
+    <section class="light-section clearfix">
+      <div class="container">
+        <div class="newsletter">
+          <h3>Join Our Newsletter</h3>
+          <form class="ed-form">
+            <div class="form-group">
+              <input type="email" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-default commonBtn">Search</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div class="social-icon">
+      <div class="container">
+        <h3>Follow Us</h3>
+        <ul>
+          <li class="hidden-xs"><a href="#"><i class="fa fa-twitter"></i></a></li>
+          <li class="hidden-xs"><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li class="hidden-xs"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+          <li class="hidden-xs"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+          <li class="hidden-xs"><a href="#"><i class="fa fa-rss"></i></a></li>
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- JQUERY SCRIPTS -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap/bootstrap.min.js"></script>
+  <script src="js/plugins/jquery.syotimer.js"></script>
+  <script type="text/javascript">
+    jQuery(document).ready(function() {
+      $('#simple_timer').syotimer({
+            year: 2017,
+            month: 5,
+            day: 9,
+            hour: 20,
+            minute: 30,
+        });
+    });
+  </script>
+
+</body>
+
+</html>
