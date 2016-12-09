@@ -359,6 +359,8 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <Content Include="HTMLPage1.html" />
+    <Content Include="HTMLPage2.html" />
     <Content Include="index.html" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\FFWebsite.vbproj.GenerateResource.Cache" />
