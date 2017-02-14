@@ -301,7 +301,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="blank.html" />
     <Content Include="bottombar.html" />
     <Content Include="coming-soon-dark.html" />
     <Content Include="Content\bootstrap.css" />
@@ -496,6 +495,11 @@
     <Content Include="obj\Debug\FFWebsite.pdb" />
     <Content Include="obj\Debug\FFWebsite.vbproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\FFWebsite.xml" />
+    <Content Include="page-blank.html" />
+    <Content Include="page-news-grid-4col.html" />
+    <Content Include="page-news-item.html" />
+    <Content Include="page-news-maint.html" />
+    <Content Include="page-news-test.html" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
