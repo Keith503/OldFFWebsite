@@ -30,13 +30,15 @@
 <body>
 
   <div class="main_wrapper">
-      <div id="top-bar">
-
+      <div class="header clearfix">
+          <nav class="navbar navbar-main navbar-default"> 
+          <div id="top-bar"></div>             
+          </nav><!-- navbar -->
       </div>
 
     <div class="banner carousel slide" id="recommended-item-carousel" data-ride="carousel">
       <div class="slides carousel-inner" id="FFcarousel">
-      
+            
          <div class="item active">
           <!--<img src="img/home/slider/slider_image_1.jpg" alt="" />-->
           <img src="img/1.jpg"  width="1600" height="575"/>
@@ -105,8 +107,8 @@
             </div><!--end container-->
           </div><!--end banner_caption-->
         </div>
-      
-     </div>
+
+     </div> <!---End slides Carousel Inner-->
       <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
         <img src="img/home/slider/prev.png">
         </a>
@@ -535,7 +537,7 @@
   <script src="js/bootstrap-dialog.js"></script>
 
   <script src="js/mods.js"></script>
-  <script src="js/FFWebSite.js"></script>
+  <script src="js/index.js"></script>
   <script>
         $('#top-bar').load('topbarnav.html', "", function (response, status, xhr) { initTopbar(); });
         $('#bottom-bar').load('bottombar.html', "", function (response, status, xhr) { initBottombar(); });

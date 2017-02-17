@@ -80,6 +80,10 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.9\Assemblies\v4.5\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -269,6 +273,7 @@
     </Compile>
     <Compile Include="Models\cEventItem.vb" />
     <Compile Include="Models\cNewsItem.vb" />
+    <Compile Include="Models\cTypeItem.vb" />
     <Compile Include="Models\mFFWebsite.vb" />
     <Compile Include="Models\Product.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -318,6 +323,8 @@
     <Content Include="css\plugins\magnific-popup.css" />
     <Content Include="css\plugins\select_option1.css" />
     <Content Include="css\style.css" />
+    <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -349,16 +356,33 @@
     <Content Include="css\colors\gray-blue.css.map" />
     <Content Include="css\colors\gray-green.css.map" />
     <Content Include="css\style.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\font-awesome\fonts\FontAwesome.otf" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\PublishProfiles\frogforce503.com - Web Deploy.pubxml" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <Content Include="img\FFWebsite\img_170112.jpg" />
+    <Content Include="img\FFWebsite\IMG_160930.jpg" />
+    <Content Include="img\FFWebsite\img_161112.jpg" />
+    <Content Include="img\FFWebsite\img_170108.jpg" />
+    <Content Include="img\FFWebsite\img_170112gov.jpg" />
+    <Content Include="img\FFWebsite\img_FFF_161119.jpg" />
     <Content Include="index.html" />
+    <Content Include="js\d3.js" />
+    <Content Include="js\d3.min.js" />
+    <Content Include="js\index.js" />
+    <Content Include="js\page-news-maint.js" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\FFWebsite.vbproj.GenerateResource.Cache" />
     <Content Include="obj\Debug\FFWebsite.vbprojResolveAssemblyReference.cache" />
@@ -476,7 +500,6 @@
     <Content Include="js\bootstrap-dialog.js" />
     <Content Include="js\bootstrap\bootstrap.min.js" />
     <Content Include="js\custom.js" />
-    <Content Include="js\FFWebSite.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\mods.js" />
     <Content Include="js\plugins\fullcalendar.min.js" />
@@ -499,7 +522,6 @@
     <Content Include="page-news-grid-4col.html" />
     <Content Include="page-news-item.html" />
     <Content Include="page-news-maint.html" />
-    <Content Include="page-news-test.html" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

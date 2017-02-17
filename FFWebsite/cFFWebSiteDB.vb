@@ -4,30 +4,29 @@
 '   Description:     The object provides connection services to the Frog Force Website Database. 
 '                    The database is the default sql server database that comes with Visual Studio 
 '   Change history:
-
-Imports System.Data.Odbc
-
+'
+Imports MySql.Data.MySqlClient
 
 Public Class cFFWebSiteDB
-    Public cn As OdbcConnection
-    Public dr As OdbcDataReader
-    Public cmd As OdbcCommand
+    Public cn As MySqlConnection
+    Public dr As MySqlDataReader
+    Public cmd As MySqlCommand
 
 
     'Public Shared logger As log4net.ILog = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType)
 
-    Public Function GetConnection() As OdbcConnection
+    Public Function GetConnection() As MySqlConnection
         Dim sConn As String
 
         'Build connection string   
         'sConn = "DSN=TEST;UID=" & sUserID & ";PWD=" & sPassword & ";"
-        sConn = "DSN=FFWebsite" & ";"
-
+        'sConn = "DSN=FFWebsite" & ";"
+        sConn = "server=50.62.209.111;User ID=FFAdmin;Password=17@Frog01;Database=FFWebsite;pooling=False"
         If cn Is Nothing Then
             Try
-                cn = New OdbcConnection(sConn)
+                cn = New MySqlConnection(sConn)
                 cn.Open()
-            Catch o As OdbcException
+            Catch o As MySqlException
                 'logger.Error("cFFWebDB:GetConnection - " & o.Message.ToString)
                 Throw New Exception(o.Message.ToString)
             End Try
@@ -55,17 +54,17 @@ Public Class cFFWebSiteDB
         CloseConnection()
     End Sub
     Public Function ExecNonQuery(strSQL As String) As Long
-        'Dim cmd As OdbcCommand
+        'Dim cmd As MySQLCommand
         Dim lRetCode As Long = 0
 
         'Go get a connection to database 
         cn = GetConnection()
         'Execute SQL Command  
         Try
-            cmd = New OdbcCommand(strSQL, cn)
+            cmd = New MySqlCommand(strSQL, cn)
             cmd.ExecuteNonQuery()
             cmd.Dispose()
-        Catch o As OdbcException
+        Catch o As MySqlException
             lRetCode = o.ErrorCode
             Throw New Exception(o.Message.ToString)
         Finally
@@ -76,8 +75,8 @@ Public Class cFFWebSiteDB
         Return lRetCode
     End Function
 
-    Public Function ExecDRQuery(strSQL As String) As OdbcDataReader
-        'Dim cmd As OdbcCommand
+    Public Function ExecDRQuery(strSQL As String) As MySqlDataReader
+        'Dim cmd As MySQLCommand
 
         Dim lRetCode As Long = 0
 
@@ -85,32 +84,32 @@ Public Class cFFWebSiteDB
         cn = GetConnection()
         'Execute SQL Command  
         Try
-            cmd = New OdbcCommand(strSQL, cn)
+            cmd = New MySqlCommand(strSQL, cn)
             dr = cmd.ExecuteReader()
-            cmd.Dispose()
-        Catch o As OdbcException
+            'cmd.Dispose()
+        Catch o As MySqlException
             'logger.Error("Error cFFWebDB:ExecDRQuery - " & o.Message.ToString)
             lRetCode = o.ErrorCode
             Throw New Exception(o.Message.ToString)
         Finally
-            CloseConnection()
+            'CloseConnection()
         End Try
 
         Return dr
     End Function
 
     Public Function ExecSVQuery(strSQL As String) As Object
-        'Dim cmd As OdbcCommand
+        'Dim cmd As MySQLCommand
         Dim oRetData As Object
 
         'Go get a connection to database 
         cn = GetConnection()
         'Execute SQL Command  
         Try
-            cmd = New OdbcCommand(strSQL, cn)
+            cmd = New MySqlCommand(strSQL, cn)
             oRetData = cmd.ExecuteScalar()
             cmd.Dispose()
-        Catch o As OdbcException
+        Catch o As MySqlException
             Throw New Exception(o.Message.ToString)
         Finally
             'Go close database connection 

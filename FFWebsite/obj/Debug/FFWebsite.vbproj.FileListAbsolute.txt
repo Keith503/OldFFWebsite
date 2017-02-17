@@ -92,3 +92,5 @@ c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\obj\Deb
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.dll
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.xml
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.pdb
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\MySql.Data.dll
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\MySql.Data.xml

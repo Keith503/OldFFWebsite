@@ -8,19 +8,17 @@ Public Class cNewsItem
     'Private Data Definitions 
     Private m_ID As Long
     Private m_Post_date As Date
-    Private m_Image1_ID As Long
-    Private m_Image1_Name As String
-    Private m_Image2_ID As Long
-    Private m_Image2_Name As String
-    Private m_Image3_ID As Long
-    Private m_Image3_Name As String
     Private m_Priority_ID As Long
     Private m_Author_ID As Long
-    Private m_Type_ID As Long
+    Private m_Category_ID As Long
     Private m_Status_ID As Long
-    Private m_Event_ID As Long
-    Private m_ApprovedBy_ID As Long
+    Private m_LastUpdate_Date As Date
+    Private m_LastUpdate_ID As Long
+    Private m_Approved_ID As Long
     Private m_Approved_Date As Date
+    Private m_Image1_Name As String
+    Private m_Image2_Name As String
+    Private m_Image3_Name As String
     Private m_Title_text As String
     Private m_Body_text As String
 
@@ -43,29 +41,12 @@ Public Class cNewsItem
         End Set
     End Property
 
-    Public Property Image1_ID() As Long
-        Get
-            Return m_Image1_ID
-        End Get
-        Set(ByVal value As Long)
-            m_Image1_ID = value
-        End Set
-    End Property
-
     Public Property Image1_Name() As String
         Get
             Return m_Image1_Name
         End Get
         Set(ByVal value As String)
             m_Image1_Name = value
-        End Set
-    End Property
-    Public Property Image2_ID() As Long
-        Get
-            Return m_Image2_ID
-        End Get
-        Set(ByVal value As Long)
-            m_Image2_ID = value
         End Set
     End Property
 
@@ -75,15 +56,6 @@ Public Class cNewsItem
         End Get
         Set(ByVal value As String)
             m_Image2_Name = value
-        End Set
-    End Property
-
-    Public Property Image3_ID() As Long
-        Get
-            Return m_Image3_ID
-        End Get
-        Set(ByVal value As Long)
-            m_Image3_ID = value
         End Set
     End Property
 
@@ -114,12 +86,12 @@ Public Class cNewsItem
         End Set
     End Property
 
-    Public Property Type_ID() As Long
+    Public Property Category_ID() As Long
         Get
-            Return m_Type_ID
+            Return m_Category_ID
         End Get
         Set(ByVal value As Long)
-            m_Type_ID = value
+            m_Category_ID = value
         End Set
     End Property
 
@@ -132,21 +104,12 @@ Public Class cNewsItem
         End Set
     End Property
 
-    Public Property Event_ID() As Long
+    Public Property Approved_ID() As Long
         Get
-            Return m_Event_ID
+            Return m_Approved_ID
         End Get
         Set(ByVal value As Long)
-            m_Event_ID = value
-        End Set
-    End Property
-
-    Public Property ApprovedBy_ID() As Long
-        Get
-            Return m_ApprovedBy_ID
-        End Get
-        Set(ByVal value As Long)
-            m_ApprovedBy_ID = value
+            m_Approved_ID = value
         End Set
     End Property
 
@@ -156,6 +119,24 @@ Public Class cNewsItem
         End Get
         Set(ByVal value As Date)
             m_Approved_Date = value
+        End Set
+    End Property
+
+    Public Property LastUpdate_ID() As Long
+        Get
+            Return m_LastUpdate_ID
+        End Get
+        Set(ByVal value As Long)
+            m_LastUpdate_ID = value
+        End Set
+    End Property
+
+    Public Property LastUpdate_Date() As Date
+        Get
+            Return m_LastUpdate_Date
+        End Get
+        Set(ByVal value As Date)
+            m_LastUpdate_Date = value
         End Set
     End Property
 
