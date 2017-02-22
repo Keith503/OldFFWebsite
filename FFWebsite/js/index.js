@@ -18,7 +18,7 @@ function GetCarouselList() {
         var htext = "";
         $.each(data, function (key, item) {
             i++;
-            htext += buildCarouselItem(i, item.Image1_Name, item.Title_text, item.Body_text);
+            htext += buildCarouselItem(i, item.Image1_Name, item.Title_text, item.Body_text, item.ID);
         });  // End each 
         $('#FFcarousel').html(htext + "</div>");
        // htext = htext + "</div><a class='left recommended-item-control' href='#recommended-item-carousel' data-slide='prev'><img src='img/home/slider/prev.png'></a>";
@@ -50,7 +50,7 @@ function getEventList() {
 
 
 
-function buildCarouselItem(n, img, title, bodytext) {
+function buildCarouselItem(n, img, title, bodytext, id) {
     /*******************************************************************
    * buildCarouselItem - build a single slide for the Jumbotron Carousel
    *******************************************************************/
@@ -66,7 +66,7 @@ function buildCarouselItem(n, img, title, bodytext) {
     s+= "<div class='banner_caption'><div class='container'><div class='row'><div class='col-xs-12'><div class='caption_inner animated fadeInUp'>";
     s+= "<h1>" + title + "</h1>"; 
     //s+= "<p>" + bodytext + "</p>";
-    s+= "<a href='about.html'>Learn More</a>"; 
+    s+= "<a href='page-news-item.html?ID=" + id + "'>Learn More</a>"; 
     s += "</div></div></div></div></div></div>";
     return s; 
 }
@@ -121,7 +121,7 @@ function GetEventItems() {
 
             htext = htext + "<li class='related_post_sec single_post'><span class='date-wrapper'>";
             htext = htext + "<span class='date'><span>" + formatdd(sd) + "</span>" + formatmm(sd) +"</span></span>";
-            htext = htext + "<div class='rel_right'><h4><a href='single-events.html'>" + item.Title_text + "</a></h4>";
+            htext = htext + "<div class='rel_right'><h4><a href='page-single-event.html?ID=" + item.ID + "'>" + item.Title_text + "</a></h4>";
             htext = htext + "<div class='meta'><span class='place'><i class='fa fa-map-marker'></i>";
             htext = htext + item.Location_text + "</span><span class='event-time'><i class='fa fa-clock-o'></i>";
             htext = htext + formattt(sd) + "</span></div></div></li>";

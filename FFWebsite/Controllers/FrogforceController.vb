@@ -202,11 +202,13 @@ Namespace Controllers
         End Function
 
 
-        Public Function GetEventSingleItem() As IHttpActionResult
+        Public Function GetEventSingleItem(ByVal id As String) As IHttpActionResult
             Dim m_cFFServer As New cFFWebSiteServer
             Dim EventItem As New cEventItem
+            Dim ItemID As Integer
             Try
-                EventItem = m_cFFServer.GetEventItembyID()
+                ItemID = CInt(id)
+                EventItem = m_cFFServer.GetEventItembyID(ItemID)
             Catch ex As Exception
                 Dim errmsg As String = BuildErrorMsg("GetEventItem", ex.Message.ToString)
                 Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)

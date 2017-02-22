@@ -681,7 +681,7 @@ Public Class cFFWebSiteServer
         Return details
     End Function
 
-    Public Function GetEventItembyID() As cEventItem
+    Public Function GetEventItembyID(ByVal lEventID As Long) As cEventItem
         '---------------------------------------------------------------------------------------
         'Function:	GetEventItembyID
         'Purpose:	return single event item for a given id        
@@ -692,7 +692,6 @@ Public Class cFFWebSiteServer
         Dim dr As MySqlDataReader
         Dim m_cFFWebSiteDB As New cFFWebSiteDB
         Dim EventRow As New cEventItem
-        Dim lEventID As Long = 1
 
         strSQL = "select E.ID, E.Start_date, E.Title_text, E.Location_text, E.Body_text" &
                  ", concat(Concat(M.Last_name,', '), M.First_name) as Mentor_name " &

@@ -1,7 +1,6 @@
 ﻿$(document).ready(function () {
     //test if URL contains passed ID - if so we want to use it 
-    //var id = getURLParameters("ID");
-    var id = "1";
+    var id = getURLParameters("ID");
     GetEventItem(id);
     GetTopNewsItems();
 });  // End of Document Ready function
@@ -10,7 +9,7 @@ function GetEventItem(id) {
     /*******************************************************************
     * GetEventItem - Go get the event data for a particular item  
     *******************************************************************/
-    var uri = "api/frogforce/GetEventSingleItem/";
+    var uri = "api/frogforce/GetEventSingleItem/" + id;
    
     $.getJSON(uri, function (data) {
         //ignore the main new item - we dont want to duplicate it 
