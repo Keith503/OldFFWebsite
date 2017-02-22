@@ -130,6 +130,93 @@ Namespace Controllers
             Return Ok(NewsList)
         End Function
 
+        Public Function GetTopNewsItems(ByVal id As String) As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim NewsList As New List(Of cNewsItem)
+
+            Try
+                NewsList = m_cFFServer.GetTopNewsItems(CInt(id))
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetTopNewsItems", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(NewsList)
+        End Function
+
+        Public Function GetTopNewsItemsNoDups(ByVal id As String) As IHttpActionResult
+            'ID = news item to ignore 
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim NewsList As New List(Of cNewsItem)
+
+            Try
+                NewsList = m_cFFServer.GetTopNewsItems(5, CInt(id))
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetTopNewsItemsNoDups", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(NewsList)
+        End Function
+
+        Public Function GetNewsPage(ByVal id As String) As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim NewsList As New List(Of cNewsItem)
+
+            Try
+                NewsList = m_cFFServer.GetNewsPage(CInt(id))
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetTopNewsItems", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(NewsList)
+        End Function
+
+        Public Function GetEventItems() As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim EventList As New List(Of cEventItem)
+
+            Try
+                EventList = m_cFFServer.GetEventList()
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetEventItems", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(EventList)
+        End Function
+
+        Public Function GetAllEventItems() As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim EventList As New List(Of cEventItem)
+
+            Try
+                EventList = m_cFFServer.GetAllEventList()
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetEventItems", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(EventList)
+        End Function
+
+
+        Public Function GetEventSingleItem() As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim EventItem As New cEventItem
+            Try
+                EventItem = m_cFFServer.GetEventItembyID()
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetEventItem", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(EventItem)
+        End Function
+
+
+
         Private Function BuildErrorMsg(ByVal strFunctionName As String, strThrownError As String) As String
             Dim strErrMsg As String
             Dim mControllerName As String = "api/FFController/"

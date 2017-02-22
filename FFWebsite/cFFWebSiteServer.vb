@@ -73,10 +73,13 @@ Public Class cFFWebSiteServer
         Dim NewsRow As New cNewsItem
 
         strSQL = "SELECT N.ID, N.Post_date, N.Priority_ID, N.Author_ID, N.Category_ID, N.Status_ID " &
-                 ",N.LastUpdate_date, N.LastUpdate_ID, N.Approved_ID, N.Approved_Date, N.Image1_Name" &
+                 ",N.LastUpdate_date, N.LastUpdate_ID, N.Approved_ID, N.Approved_Date, N.Image1_Name " &
                  ",N.Image2_Name, N.Image3_Name,N.Title_text,N.Body_text " &
-                 " FROM News N" &
-                 " Where ID = " & lNewsID.ToString
+                 ",C.Description_text, concat(concat(U.Last_Name,', '),U.First_Name) as Author " &
+                 " From FFWebsite.News N " &
+                 " Left outer join FFWebsite.Users U on N.Author_ID = U.ID " &
+                 " Left outer join FFWebsite.Category_Types C on N.Category_ID = C.ID " &
+                 " Where N.ID = " & lNewsID.ToString
 
         'Execute SQL Command 
         Try
@@ -98,6 +101,8 @@ Public Class cFFWebSiteServer
                     .Image3_Name = TestNullString(dr, 12)
                     .Title_text = TestNullString(dr, 13)
                     .Body_text = TestNullString(dr, 14)
+                    .Category_Name = TestNullString(dr, 15)
+                    .Author_Name = TestNullString(dr, 16)
                 End With
             End While
 
@@ -133,7 +138,7 @@ Public Class cFFWebSiteServer
         Dim details As New List(Of cNewsItem)
         Dim m_cFFWebSiteDB As New cFFWebSiteDB
 
-        strSQL = "select id, Title_text, post_date, Image1_Name, Body_Text from FFWebsite.News " &
+        strSQL = "Select id, Title_text, post_date, Image1_Name, Body_Text from FFWebsite.News " &
                   " where Status_ID = 4 " &
                   " order by post_date desc " &
                   " LIMIT 10"
@@ -171,6 +176,129 @@ Public Class cFFWebSiteServer
         Return details
     End Function
 
+
+    Public Function GetTopNewsItems(ByVal itemCount As Integer, Optional ByVal ignoreItem As Integer = 0) As List(Of cNewsItem)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetTop3NewsItems
+        'Purpose:	return list of top n news items for index page         
+        'Input:     The number of items to return  
+        'Returns:   list of cNewsItem objects containg priority list  
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cNewsItem)
+        Dim m_cFFWebSiteDB As New cFFWebSiteDB
+        Dim strSelect As String
+
+        'If optional parm is submmitted - ignore that news id 
+        If ignoreItem = 0 Then
+            strSelect = ""
+        Else
+            strSelect = " and N.id <> " + ignoreItem.ToString
+        End If
+
+        strSQL = "Select N.id, N.Title_text, N.post_date, C.Description_text, concat(concat(U.Last_Name,', '),U.First_Name) as Author, N.Image1_Name, mid(N.Body_Text,1,150) " &
+                 " from FFWebsite.News N " &
+                 " left outer join FFWebsite.Users U on N.Author_ID = U.ID " &
+                 " left outer join FFWebsite.Category_Types C on N.Category_ID = C.ID " &
+                 " where N.Status_ID = 4 " & strSelect &
+                 " order by N.post_date desc " &
+                 " LIMIT " + itemCount.ToString
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                Dim NewsRow As New cNewsItem
+                With NewsRow
+                    .ID = TestNullLong(dr, 0)
+                    .Title_text = TestNullString(dr, 1)
+                    .Post_Date = TestNullDate(dr, 2)
+                    .Category_Name = TestNullString(dr, 3)
+                    .Author_Name = TestNullString(dr, 4)
+                    .Image1_Name = TestNullString(dr, 5)
+                    .Body_text = TestNullString(dr, 6)
+                End With
+
+                details.Add(NewsRow)
+            End While
+            dr.Close()
+
+        Catch ex As Exception
+            Dim strErr As String = BuildErrorMsg("GetNewsCarouselList", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
+    Public Function GetNewsPage(ByVal itemID As Integer) As List(Of cNewsItem)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetNewsPage
+        'Purpose:	return list of 12 items starting with given item number 
+        'Input:     Item number to begin read 
+        'Returns:   list of cNewsItem objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cNewsItem)
+        Dim m_cFFWebSiteDB As New cFFWebSiteDB
+
+        strSQL = "Select N.id, N.Title_text, N.post_date, C.Description_text, concat(concat(U.Last_Name,', '),U.First_Name) as Author, N.Image1_Name, mid(N.Body_Text,1,150) " &
+                 " from FFWebsite.News N " &
+                 " left outer join FFWebsite.Users U on N.Author_ID = U.ID " &
+                 " left outer join FFWebsite.Category_Types C on N.Category_ID = C.ID " &
+                 " where N.Status_ID = 4 " &
+                 "  and N.id > " + itemID.ToString &
+                 " order by N.post_date desc " &
+                 " LIMIT 12"
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                Dim NewsRow As New cNewsItem
+                With NewsRow
+                    .ID = TestNullLong(dr, 0)
+                    .Title_text = TestNullString(dr, 1)
+                    .Post_Date = TestNullDate(dr, 2)
+                    .Category_Name = TestNullString(dr, 3)
+                    .Author_Name = TestNullString(dr, 4)
+                    .Image1_Name = TestNullString(dr, 5)
+                    .Body_text = TestNullString(dr, 6)
+                End With
+
+                details.Add(NewsRow)
+            End While
+            dr.Close()
+
+        Catch ex As Exception
+            Dim strErr As String = BuildErrorMsg("GetNewsPage", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
+
+
+
     Public Function GetEventItemList() As List(Of cEventItem)
         '---------------------------------------------------------------------------------------
         'Function:	GetEventItemList
@@ -184,7 +312,7 @@ Public Class cFFWebSiteServer
         Dim m_cFFWebSiteDB As New cFFWebSiteDB
         Dim i As Integer = 0
 
-        strSQL = "SELECT E.ID, E.Start_date, E.End_date, E.Type_ID, E.Status_ID, E.Student_Lead_ID, TM.Last_name+', '+TM.First_name AS Student_Lead_Name" &
+        strSQL = "Select E.ID, E.Start_date, E.End_date, E.Type_ID, E.Status_ID, E.Student_Lead_ID, TM.Last_name+', '+TM.First_name AS Student_Lead_Name" &
                  ", E.Mentor_ID, M.Last_name+', '+M.First_name AS Mentor_Name, E.Approved_By_ID, E.Approved_date, E.Transportation_Provided" &
                  ", E.Location_text, E.Title_text, E.Body_text, E.Transportation_text " &
                  " FROM (Events AS E LEFT JOIN Team_Members AS TM ON E.Student_lead_id = TM.ID) LEFT JOIN Team_Members AS M ON E.Mentor_ID = M.ID" &
@@ -485,6 +613,171 @@ Public Class cFFWebSiteServer
         Catch ex As Exception
 
             Dim strErr As String = BuildErrorMsg("GetPriorityList", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
+    Public Function GetEventList() As List(Of cEventItem)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetEventList
+        'Purpose:	return list of event items       
+        'Input:     Nothing 
+        'Returns:   list of cEvent objects containg priority list  
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cEventItem)
+        Dim m_cFFWebSiteDB As New cFFWebSiteDB
+        Dim i As Integer = 0
+
+        strSQL = "select ID, start_date, Title_text, Location_text " &
+                 " from FFWebsite.Events " &
+                 " where start_date >= DATE_SUB(Now(), INTERVAL 36 DAY)" &
+                 " order by start_date desc "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                i = i + 1
+                Dim EventRow As New cEventItem
+                With EventRow
+                    .ID = TestNullLong(dr, 0)
+                    .Start_Date = TestNullDate(dr, 1)
+                    .Title_text = TestNullString(dr, 2)
+                    .Location_text = TestNullString(dr, 3)
+                End With
+
+                details.Add(EventRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetEventList", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
+    Public Function GetEventItembyID() As cEventItem
+        '---------------------------------------------------------------------------------------
+        'Function:	GetEventItembyID
+        'Purpose:	return single event item for a given id        
+        'Input:     ID of event item to read  
+        'Returns:   Returns new event item object 
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim m_cFFWebSiteDB As New cFFWebSiteDB
+        Dim EventRow As New cEventItem
+        Dim lEventID As Long = 1
+
+        strSQL = "select E.ID, E.Start_date, E.Title_text, E.Location_text, E.Body_text" &
+                 ", concat(Concat(M.Last_name,', '), M.First_name) as Mentor_name " &
+                 ", concat(Concat(S.Last_name,', '), S.First_name) as Student_name " &
+                 " From FFWebsite.Events E " &
+                 " Left outer join FFWebsite.Users M on E.Mentor_ID = M.ID " &
+                 " Left outer join FFWebsite.Users S on E.StudentLead_ID = S.ID " &
+                 " where E.ID = " & lEventID.ToString
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                With EventRow
+                    .ID = TestNullLong(dr, 0)
+                    .Start_Date = TestNullDate(dr, 1)
+                    .Title_text = TestNullString(dr, 2)
+                    .Location_text = TestNullString(dr, 3)
+                    .Body_text = TestNullString(dr, 4)
+                    .Mentor_Name = TestNullString(dr, 5)
+                    .Student_Lead_Name = TestNullString(dr, 6)
+                End With
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetEventItemByID", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return EventRow
+
+    End Function
+    Public Function GetAllEventList() As List(Of cEventItem)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetAllEventList
+        'Purpose:	return list of event items       
+        'Input:     Nothing 
+        'Returns:   list of cEvent objects containg priority list  
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cEventItem)
+        Dim m_cFFWebSiteDB As New cFFWebSiteDB
+        Dim i As Integer = 0
+
+        strSQL = "select ID, start_date, Title_text, Location_text, Body_text " &
+                 " from FFWebsite.Events " &
+                 " order by start_date desc " &
+                 " LIMIT 15"
+
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                i = i + 1
+                Dim EventRow As New cEventItem
+                With EventRow
+                    .ID = TestNullLong(dr, 0)
+                    .Start_Date = TestNullDate(dr, 1)
+                    .Title_text = TestNullString(dr, 2)
+                    .Location_text = TestNullString(dr, 3)
+                    .Body_text = TestNullString(dr, 4)
+                End With
+
+                details.Add(EventRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetAllEventList", ex.Message.ToString)
             'logger.Error(strErr)
             Throw New Exception(strErr)
 

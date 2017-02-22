@@ -10,11 +10,14 @@ Public Class cNewsItem
     Private m_Post_date As Date
     Private m_Priority_ID As Long
     Private m_Author_ID As Long
+    Private m_Author_Name As String
     Private m_Category_ID As Long
+    Private m_Category_Name As String
     Private m_Status_ID As Long
     Private m_LastUpdate_Date As Date
     Private m_LastUpdate_ID As Long
     Private m_Approved_ID As Long
+    Private m_Approved_Name As String
     Private m_Approved_Date As Date
     Private m_Image1_Name As String
     Private m_Image2_Name As String
@@ -86,12 +89,30 @@ Public Class cNewsItem
         End Set
     End Property
 
+    Public Property Author_Name() As String
+        Get
+            Return m_Author_Name
+        End Get
+        Set(ByVal value As String)
+            m_Author_Name = value
+        End Set
+    End Property
+
     Public Property Category_ID() As Long
         Get
             Return m_Category_ID
         End Get
         Set(ByVal value As Long)
             m_Category_ID = value
+        End Set
+    End Property
+
+    Public Property Category_Name() As String
+        Get
+            Return m_Category_Name
+        End Get
+        Set(ByVal value As String)
+            m_Category_Name = value
         End Set
     End Property
 

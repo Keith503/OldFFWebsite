@@ -372,17 +372,29 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <Content Include="img\FFWebsite\2016 Recap.mp4" />
+    <Content Include="img\FFWebsite\Cyber_Football_Jumbotron.jpg" />
+    <Content Include="img\FFWebsite\Dean_Jumbotron.jpg" />
+    <Content Include="img\FFWebsite\Girls_Comp_Jumbotron.jpg" />
+    <Content Include="img\FFWebsite\Governor_Jumbotron.jpg" />
     <Content Include="img\FFWebsite\img_170112.jpg" />
     <Content Include="img\FFWebsite\IMG_160930.jpg" />
     <Content Include="img\FFWebsite\img_161112.jpg" />
     <Content Include="img\FFWebsite\img_170108.jpg" />
     <Content Include="img\FFWebsite\img_170112gov.jpg" />
+    <Content Include="img\FFWebsite\IMG_3261_Banner.jpg" />
     <Content Include="img\FFWebsite\img_FFF_161119.jpg" />
+    <Content Include="img\FFWebsite\Rookie_build_Jumbotron.jpg" />
+    <Content Include="img\Frog Force Shield.png" />
     <Content Include="index.html" />
     <Content Include="js\d3.js" />
     <Content Include="js\d3.min.js" />
     <Content Include="js\index.js" />
+    <Content Include="js\page-event-3col.js" />
+    <Content Include="js\page-news-grid-4col.js" />
+    <Content Include="js\page-news-item.js" />
     <Content Include="js\page-news-maint.js" />
+    <Content Include="js\page-single-event.js" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\FFWebsite.vbproj.GenerateResource.Cache" />
     <Content Include="obj\Debug\FFWebsite.vbprojResolveAssemblyReference.cache" />
@@ -519,9 +531,11 @@
     <Content Include="obj\Debug\FFWebsite.vbproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\FFWebsite.xml" />
     <Content Include="page-blank.html" />
+    <Content Include="page-events-3col.html" />
     <Content Include="page-news-grid-4col.html" />
     <Content Include="page-news-item.html" />
     <Content Include="page-news-maint.html" />
+    <Content Include="page-single-event.html" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
