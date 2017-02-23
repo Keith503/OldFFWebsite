@@ -373,8 +373,13 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <Content Include="img\FFWebsite\2016 Recap.mp4" />
+    <Content Include="img\FFWebsite\2016Robot.jpg" />
+    <Content Include="img\FFWebsite\chairman%27s.jpg" />
     <Content Include="img\FFWebsite\Cyber_Football_Jumbotron.jpg" />
     <Content Include="img\FFWebsite\Dean_Jumbotron.jpg" />
+    <Content Include="img\FFWebsite\Detroit_Science_Center.jpg" />
+    <Content Include="img\FFWebsite\Detroit_Science_Center2.jpg" />
+    <Content Include="img\FFWebsite\dhdc_logo.jpg" />
     <Content Include="img\FFWebsite\Girls_Comp_Jumbotron.jpg" />
     <Content Include="img\FFWebsite\Governor_Jumbotron.jpg" />
     <Content Include="img\FFWebsite\img_170112.jpg" />
@@ -384,7 +389,13 @@
     <Content Include="img\FFWebsite\img_170112gov.jpg" />
     <Content Include="img\FFWebsite\IMG_3261_Banner.jpg" />
     <Content Include="img\FFWebsite\img_FFF_161119.jpg" />
+    <Content Include="img\FFWebsite\NoviQualifier.jpg" />
+    <Content Include="img\FFWebsite\NoviQualifier2.jpg" />
+    <Content Include="img\FFWebsite\radiothon.jpg" />
+    <Content Include="img\FFWebsite\radiothon2.jpg" />
     <Content Include="img\FFWebsite\Rookie_build_Jumbotron.jpg" />
+    <Content Include="img\FFWebsite\SAYPLay logo.jpg" />
+    <Content Include="img\FFWebsite\SteamWorksBanner.jpg" />
     <Content Include="img\Frog Force Shield.png" />
     <Content Include="index.html" />
     <Content Include="js\d3.js" />

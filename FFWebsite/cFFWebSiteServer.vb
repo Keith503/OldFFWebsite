@@ -252,7 +252,7 @@ Public Class cFFWebSiteServer
         Dim details As New List(Of cNewsItem)
         Dim m_cFFWebSiteDB As New cFFWebSiteDB
 
-        strSQL = "Select N.id, N.Title_text, N.post_date, C.Description_text, concat(concat(U.Last_Name,', '),U.First_Name) as Author, N.Image1_Name, mid(N.Body_Text,1,150) " &
+        strSQL = "Select N.id, N.Title_text, N.post_date, C.Description_text, concat(concat(U.Last_Name,', '),U.First_Name) as Author, N.Image1_Name, mid(N.Body_Text,1,150), N.Image2_Name " &
                  " from FFWebsite.News N " &
                  " left outer join FFWebsite.Users U on N.Author_ID = U.ID " &
                  " left outer join FFWebsite.Category_Types C on N.Category_ID = C.ID " &
@@ -274,6 +274,8 @@ Public Class cFFWebSiteServer
                     .Author_Name = TestNullString(dr, 4)
                     .Image1_Name = TestNullString(dr, 5)
                     .Body_text = TestNullString(dr, 6)
+                    .Image2_Name = TestNullString(dr, 7)
+
                 End With
 
                 details.Add(NewsRow)
