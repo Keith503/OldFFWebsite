@@ -267,7 +267,6 @@
     <Compile Include="cFFWebSiteDB.vb" />
     <Compile Include="cFFWebSiteServer.vb" />
     <Compile Include="Controllers\FrogforceController.vb" />
-    <Compile Include="Controllers\ProductsController.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

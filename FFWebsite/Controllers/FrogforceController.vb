@@ -166,7 +166,7 @@ Namespace Controllers
             Try
                 NewsList = m_cFFServer.GetNewsPage(CInt(id))
             Catch ex As Exception
-                Dim errmsg As String = BuildErrorMsg("GetTopNewsItems", ex.Message.ToString)
+                Dim errmsg As String = BuildErrorMsg("GetNewsPage", ex.Message.ToString)
                 Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
             End Try
 

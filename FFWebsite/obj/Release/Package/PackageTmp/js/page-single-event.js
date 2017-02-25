@@ -48,7 +48,7 @@ function GetTopNewsItems() {
             var parseDate = d3.timeParse("%Y-%m-%dT%H:%M:%S");
             var formatDate = d3.timeFormat("%B %d, %Y");
             var sd = parseDate(item.Post_Date);
-            htext = htext + "<li><span class='rel_thumb'><img src='img/FFWebsite/" + item.Image1_Name + "' alt='' width='100px' height='67px'/></span><!--end rel_thumb-->";
+            htext = htext + "<li><span class='rel_thumb'><img src='img/FFWebsite/" + pickimage(item.Image1_Name, item.Image2_Name) + "' alt='' width='100px' height='67px'/></span><!--end rel_thumb-->";
             htext = htext + "<div class='rel_right'><a href='page-news-item.html?ID=" + item.ID + "'><h4>" + item.Title_text + "</h4></a>";
             htext = htext + "<span class='date'>Posted: <a href='#'>" + formatDate(sd) + "</a></span></div><!--end rel right--></li>";
         });  // End each 

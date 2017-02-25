@@ -1,21 +1,68 @@
 ﻿$(document).ready(function () {
-    //test if URL contains passed ID - if so we want to use it 
-    var parm = getURLParameters("ID");
+     //test if URL contains passed ID - if so we want to use it 
+    id = getparms();
+
+    //setup an event handler for the user selecting a different event
+    $('#catsel').change(function () {
+        GetNewsPage();
+    });
+   
+    refreshcategory(id);
+});  
+
+function getparms() {
+ var parm = getURLParameters("ID");
     var id = 0;
     if (parm === undefined) {
         id = 0;
     } else {
         id = parm;
     }
-    GetNewsPage(id);
-});  
+    return id;
+}
 
+function refreshcategory(id) {
+    //
+    //*******************************************
+    /* Get Category List  
+    /********************************************/
+    var uri = "api/frogforce/GetCategoryList";
+    showrefreshbtn("#gtbtn", "Refreshing...");
+
+    $.getJSON(uri, function (data) {
+        $('#catsel').empty();
+        var newOption = $('<option value="0">All</option>');
+        $('#catsel').append(newOption);
+        $.each(data, function (key, item) {
+            var newOption = $('<option value="' + item.ID + '">' + item.Description_text + '</option>');
+            $('#catsel').append(newOption);
+        });
+
+        //test if URL contains passed ID - if so we want to use it 
+        if(id > 0) {
+            var select = document.getElementById("catsel");
+            for (var i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === id) {
+                    select.options[i].selected = true;
+                }
+            }
+        }
+        hiderefreshbtn("#gtbtn", "Done");
+        $('#catsel').trigger("change");
+    }) // End Json Call 
+    // Optional - fires when operation completes with error
+    .error(function (jqXHR, textStatus, errorThrown) {
+        msgbox(-1, "RefreshteamList Failed!", 'Error Occurred: ' + jqXHR.responseText);
+        hiderefreshbtn("#gtbtn", "Done");
+    });
+}
  
-function GetNewsPage(id) {
+function GetNewsPage() {
     /*******************************************************************
-    * GetNewsPage - Go get 12 news items based on the last item number   
+    * GetNewsPage - Go get news pag for the category requested    
     *******************************************************************/
-    var uri = "api/frogforce/GetNewsPage/" + id;
+    var saveqid = $('#catsel').val();
+    var uri = "api/frogforce/GetNewsPage/" + saveqid;
 
     $.getJSON(uri, function (data) {
         var i = 0;

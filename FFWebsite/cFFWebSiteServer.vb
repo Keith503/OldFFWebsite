@@ -245,22 +245,29 @@ Public Class cFFWebSiteServer
         '---------------------------------------------------------------------------------------
         'Function:	GetNewsPage
         'Purpose:	return list of 12 items starting with given item number 
-        'Input:     Item number to begin read 
+        'Input:     catergory ID of news items to read 
+        '           0-means all categories  
         'Returns:   list of cNewsItem objects   
         '----------------------------------------------------------------------------------- ---> 	
         Dim strSQL As String = ""
         Dim dr As MySqlDataReader
         Dim details As New List(Of cNewsItem)
         Dim m_cFFWebSiteDB As New cFFWebSiteDB
+        Dim strSQLWhere As String
+
+        If itemID = 0 Then
+            strSQLWhere = ""
+        Else
+            strSQLWhere = "  and N.Category_ID = " + itemID.ToString
+        End If
 
         strSQL = "Select N.id, N.Title_text, N.post_date, C.Description_text, concat(concat(U.Last_Name,', '),U.First_Name) as Author, N.Image1_Name, mid(N.Body_Text,1,150), N.Image2_Name " &
                  " from FFWebsite.News N " &
                  " left outer join FFWebsite.Users U on N.Author_ID = U.ID " &
                  " left outer join FFWebsite.Category_Types C on N.Category_ID = C.ID " &
-                 " where N.Status_ID = 4 " &
-                 "  and N.id > " + itemID.ToString &
+                 " where N.Status_ID = 4 " & strSQLWhere &
                  " order by N.post_date desc " &
-                 " LIMIT 12"
+                 " LIMIT 25"
 
         'Execute SQL Command 
         Try
@@ -447,7 +454,7 @@ Public Class cFFWebSiteServer
         Dim m_cFFWebSiteDB As New cFFWebSiteDB
         Dim i As Integer = 0
 
-        strSQL = "SELECT ID, Description_text from FFWebsite.Category_Types"
+        strSQL = "SELECT ID, Description_text from FFWebsite.Category_Types order by Description_text"
 
         'Execute SQL Command 
         Try

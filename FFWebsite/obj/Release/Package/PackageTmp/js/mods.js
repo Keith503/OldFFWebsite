@@ -412,6 +412,18 @@ function ErrorMsgBox(title, msg, errno) {
 	});
 }
 
+//pick which image to use 
+function pickimage(i1, i2) {
+    var ret;
+    if (i2 === "") {
+        ret = i1;
+    } else {
+        ret = i2;
+    }
+    return ret;
+}
+
+
 
 
 // toggle function
@@ -553,3 +565,4 @@ dateFormat.i18n = {
 		"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 	]
 };
+
