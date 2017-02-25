@@ -3,6 +3,8 @@
     var id = getURLParameters("ID");
     GetNewsItem(id);
     GetTopNewsItems(id);
+    GetEventItems();
+
 });  // End of Document Ready function
  
 var nid = $('#fNewsSelect').val();
@@ -59,4 +61,36 @@ function GetTopNewsItems(id) {
         });
 }  // End getNewsList
 
+function GetEventItems() {
+    /*******************************************************************
+    * GetEventItems - Go get the most recent events  
+    *******************************************************************/
+    var uri = "api/frogforce/GetEventItems";
+
+    $.getJSON(uri, function (data) {
+        var i = 0;
+        var htext = "<ul>";
+
+        $.each(data, function (key, item) {
+            var parseDate = d3.timeParse("%Y-%m-%dT%H:%M:%S");
+            var formatDate = d3.timeFormat("%B %d, %Y");
+            var formatdd = d3.timeFormat("%d");
+            var formattt = d3.timeFormat("%H:%M %p");
+            var formatmm = d3.timeFormat("%B");
+            var sd = parseDate(item.Start_Date);
+
+            htext = htext + "<li class='related_post_sec single_post'><span class='date-wrapper'>";
+            htext = htext + "<span class='date'><span>" + formatdd(sd) + "</span>" + formatmm(sd) + "</span></span>";
+            htext = htext + "<div class='rel_right'><h4><a href='page-single-event.html?ID=" + item.ID + "'>" + item.Title_text + "</a></h4>";
+            htext = htext + "<div class='meta'><span class='place'><i class='fa fa-map-marker'></i>";
+            htext = htext + item.Location_text + "</span><span class='event-time'><i class='fa fa-clock-o'></i>";
+            htext = htext + formattt(sd) + "</span></div></div></li>";
+
+        });  // End each 
+        $('#ffevents').html(htext + "</ul>");
+    }) // End Json Call 
+        .error(function (jqXHR, textStatus, errorThrown) {
+            ErrorMsgBox("Error getNewsList()!", jqXHR.responseJSON, jqXHR.status);
+        });
+}  // End getNewsList
 

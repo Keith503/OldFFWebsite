@@ -73,12 +73,12 @@ function GetTop3NewsItems() {
             var formatDate = d3.timeFormat("%B %d, %Y");
             var sd = parseDate(item.Post_Date);
             htext = htext + "<li><span class='rel_thumb'><a href='page-news-item.html?ID="+item.ID + "'>";
-            htext = htext + "<img src='img/FFWebsite/" + item.Image1_Name + "' alt=''></a></span><!--end rel_thumb-->";
+            htext = htext + "<img src='img/FFWebsite/" + pickimage(item.Image1_Name, item.Image2_Name) + "' alt=''></a></span><!--end rel_thumb-->";
             htext = htext + "<div class='rel_right'><h4><a href='page-news-item.html?ID=" + item.ID + "'>";
             htext = htext + item.Title_text + "</a></h4><div class='meta'>"; 
-            htext = htext + "<span class='author'>Posted in: <a href='#'>XXXX</a></span>";
+            htext = htext + "<span class='author'>Posted in: <a href='#'>" + item.Category_Name + "</a></span>";
             htext = htext + "<span class='date'>on: <a href='#'>" + formatDate(sd) + "</a></span></div>";
-            htext = htext + "<p>" +  item.Body_text + "...</p></div><!--end rel right--></li>";
+            htext = htext + "<p>" +  shrinktext(item.Body_text) + "</p></div><!--end rel right--></li>";
         });  // End each 
         $('#frogtopnews').html(htext + "</ul>");
     }) // End Json Call 
@@ -118,4 +118,24 @@ function GetEventItems() {
         .error(function (jqXHR, textStatus, errorThrown) {
             ErrorMsgBox("Error getNewsList()!", jqXHR.responseJSON, jqXHR.status);
         });
-}  // End getNewsList
+}  // End getEventItems
+
+function shrinktext(intext) {
+    // function to reduce a line of text to a maximum of 150 characters 
+    var st = "";
+    var sx = "";
+    var l = 0;
+    var n;
+    //if length of text is less than limit than return input string to caller
+    if (intext.length < 150) {
+        return intext;
+    }
+    //get the first 150 characters of string 
+    sx = intext.substring(0, 100);
+    //find the last blank in the string 
+    n = sx.lastIndexOf(" ");
+    //only move part of string from start to first blank less than 150 
+    st = intext.substring(0, n);
+    st = st + "...";
+    return st;
+}

@@ -23,12 +23,7 @@ function GetNewsPage(id) {
         var iname = "";
         $.each(data, function (key, item) {
             htext = htext + "<div class='col-xs-6 col-sm-3'><div class='aboutImage'><a href='page-news-item.html?ID=" + item.ID + "'>"; 
-            if (item.Image2_Name === "") {
-                iname = item.Image1_Name;
-            } else {
-                iname = item.Image2_Name;
-            }
-            htext = htext + "<img src='img/FFWebsite/" + iname + "' width='270' height='170' alt='' class='img-responsive' />";
+            htext = htext + "<img src='img/FFWebsite/" + pickimage(item.Image1_Name, item.Image2_Name) + "' width='270' height='170' alt='' class='img-responsive' />";
             htext = htext + "<div class='overlay'><p>" + item.Body_text + "</p></div>";
             htext = htext + "<span class='captionLink'>View Details<span></span></span></a></div><!-- aboutImage -->";
             htext = htext + "<h3><a href='page-news-item.html?ID=" + item.ID + "'>" + item.Title_text + "</a></h3></div>";

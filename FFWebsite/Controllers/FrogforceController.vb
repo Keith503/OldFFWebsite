@@ -216,7 +216,39 @@ Namespace Controllers
 
             Return Ok(EventItem)
         End Function
+        Public Function GetRelatedItems(ByVal id As String) As IHttpActionResult
+            'ID = news item to ignore 
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim NewsList As New List(Of cNewsItem)
+            Dim NewsItem As New cNewsItem
 
+            Try
+                'First go get the main news iteam and obtain the category id 
+                NewsItem = m_cFFServer.GetNewsItembyID(CLng(id))
+                NewsList = m_cFFServer.GetRelatedItems(3, NewsItem.Category_ID, CLng(id))
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetRelatedItems", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(NewsList)
+        End Function
+
+        Public Function GetRelatedbyCategoryItems(ByVal id As String) As IHttpActionResult
+            'ID = news item to ignore 
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim NewsList As New List(Of cNewsItem)
+
+            Try
+                'First go get nes items related to this category  
+                NewsList = m_cFFServer.GetRelatedByCategoryItems(4, CLng(id))
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetRelatedbyCategoryItems", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(NewsList)
+        End Function
 
 
         Private Function BuildErrorMsg(ByVal strFunctionName As String, strThrownError As String) As String

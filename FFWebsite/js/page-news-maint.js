@@ -47,6 +47,7 @@ function refreshItem() {
         var formatDate = d3.timeFormat("%m-%d-%Y %H:%M:%S");
         document.getElementById("fID").value = data.ID;
         document.getElementById("fStatus").value = data.Status_ID;
+        document.getElementById("fCategory").value = data.Category_ID;
         //document.getElementById("fAppBy").value = "";
         //document.getElementById("fAppDate").value = "";
         document.getElementById("fAuthBy").value = data.Author_ID;
@@ -163,6 +164,7 @@ function refreshAuthorlist() {
 function processNew() {
     document.getElementById("fID").value = "0";
     document.getElementById("fStatus").selectedIndex = 0;
+    document.getElementById("fCategory").selectedIndex = 0;
     document.getElementById("fAppBy").value = "";
     document.getElementById("fAppDate").value = "";
     document.getElementById("fAuthBy").selectedIndex = 0;
@@ -178,6 +180,7 @@ function processNew() {
 function processUpdate() {
     var uri = "api/frogforce/UpdateNewsItem";
     var id = document.getElementById("fID").value;
+    var cat = document.getElementById("fCategory").value;
     var status = $('#fStatus').val();
     var authby = $('#fAuthBy').val();
     var postdt = document.getElementById("fPostDate").value;
@@ -192,13 +195,15 @@ function processUpdate() {
         Post_Date: postdt,
         Image1_Name: image1,
         Image2_Name: image2,
+        Category_ID: cat,
         Title_text: title,
         Body_text: body
     };
 
     var testpost = $.post(uri, { "": JSON.stringify(ni) })
         .success(function (data) {
-            msgbox(0,"News Updated Successfully!", "News Item was successfully updated!");  
+            msgbox(0, "News Updated Successfully!", "News Item was successfully updated!");
+          //  refreshNewsItems();
         })
         .error(function (data) {
             msgbox(-1, "News Updated Failed!", "News Item Update failed! " + data);

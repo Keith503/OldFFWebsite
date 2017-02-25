@@ -197,7 +197,7 @@ Public Class cFFWebSiteServer
             strSelect = " and N.id <> " + ignoreItem.ToString
         End If
 
-        strSQL = "Select N.id, N.Title_text, N.post_date, C.Description_text, concat(concat(U.Last_Name,', '),U.First_Name) as Author, N.Image1_Name, mid(N.Body_Text,1,150) " &
+        strSQL = "Select N.id, N.Title_text, N.post_date, C.Description_text, concat(concat(U.Last_Name,', '),U.First_Name) as Author, N.Image1_Name, N.Image2_Name, mid(N.Body_Text,1,150) " &
                  " from FFWebsite.News N " &
                  " left outer join FFWebsite.Users U on N.Author_ID = U.ID " &
                  " left outer join FFWebsite.Category_Types C on N.Category_ID = C.ID " &
@@ -217,7 +217,8 @@ Public Class cFFWebSiteServer
                     .Category_Name = TestNullString(dr, 3)
                     .Author_Name = TestNullString(dr, 4)
                     .Image1_Name = TestNullString(dr, 5)
-                    .Body_text = TestNullString(dr, 6)
+                    .Image2_Name = TestNullString(dr, 6)
+                    .Body_text = TestNullString(dr, 7)
                 End With
 
                 details.Add(NewsRow)
@@ -792,6 +793,122 @@ Public Class cFFWebSiteServer
 
         Return details
     End Function
+
+    Public Function GetRelatedItems(ByVal itemCount As Integer, ByVal CategoryID As Integer, ByVal MainItemID As Long) As List(Of cNewsItem)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetRelatedItems
+        'Purpose:	return list of top n related news items          
+        'Input:     The number of items to return, categoryid of related items to search for   
+        'Returns:   list of cNewsItem objects 
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cNewsItem)
+        Dim m_cFFWebSiteDB As New cFFWebSiteDB
+
+        strSQL = "Select N.id, N.Title_text, N.post_date, C.Description_text, concat(concat(U.Last_Name,', '),U.First_Name) as Author, N.Image1_Name, N.Image2_Name, mid(N.Body_Text,1,150) " &
+                 " from FFWebsite.News N " &
+                 " left outer join FFWebsite.Users U On N.Author_ID = U.ID " &
+                 " left outer join FFWebsite.Category_Types C on N.Category_ID = C.ID " &
+                 " where N.Status_ID = 4 " &
+                 " and N.Category_ID = " & CategoryID.ToString &
+                 " and N.ID <> " + MainItemID.ToString &
+                 " order by N.post_date desc " &
+                 " LIMIT " + itemCount.ToString
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                Dim NewsRow As New cNewsItem
+                With NewsRow
+                    .ID = TestNullLong(dr, 0)
+                    .Title_text = TestNullString(dr, 1)
+                    .Post_Date = TestNullDate(dr, 2)
+                    .Category_Name = TestNullString(dr, 3)
+                    .Author_Name = TestNullString(dr, 4)
+                    .Image1_Name = TestNullString(dr, 5)
+                    .Image2_Name = TestNullString(dr, 6)
+                    .Body_text = TestNullString(dr, 7)
+                End With
+
+                details.Add(NewsRow)
+            End While
+            dr.Close()
+
+        Catch ex As Exception
+            Dim strErr As String = BuildErrorMsg("GetNewsCarouselList", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
+    Public Function GetRelatedByCategoryItems(ByVal itemCount As Integer, ByVal CategoryID As Integer) As List(Of cNewsItem)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetRelatedItems
+        'Purpose:	return list of top n related news items          
+        'Input:     The number of items to return, categoryid of related items to search for   
+        'Returns:   list of cNewsItem objects 
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cNewsItem)
+        Dim m_cFFWebSiteDB As New cFFWebSiteDB
+
+        strSQL = "Select N.id, N.Title_text, N.post_date, C.Description_text, concat(concat(U.Last_Name,', '),U.First_Name) as Author, N.Image1_Name, N.Image2_Name, mid(N.Body_Text,1,150) " &
+                 " from FFWebsite.News N " &
+                 " left outer join FFWebsite.Users U On N.Author_ID = U.ID " &
+                 " left outer join FFWebsite.Category_Types C on N.Category_ID = C.ID " &
+                 " where N.Status_ID = 4 " &
+                 " and N.Category_ID = " & CategoryID.ToString &
+                 " order by N.post_date desc " &
+                 " LIMIT " + itemCount.ToString
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                Dim NewsRow As New cNewsItem
+                With NewsRow
+                    .ID = TestNullLong(dr, 0)
+                    .Title_text = TestNullString(dr, 1)
+                    .Post_Date = TestNullDate(dr, 2)
+                    .Category_Name = TestNullString(dr, 3)
+                    .Author_Name = TestNullString(dr, 4)
+                    .Image1_Name = TestNullString(dr, 5)
+                    .Image2_Name = TestNullString(dr, 6)
+                    .Body_text = TestNullString(dr, 7)
+                End With
+
+                details.Add(NewsRow)
+            End While
+            dr.Close()
+
+        Catch ex As Exception
+            Dim strErr As String = BuildErrorMsg("GetNewsCarouselList", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
 
 
     '---------------------------------------------------------------------------------------------------

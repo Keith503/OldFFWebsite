@@ -1,17 +1,15 @@
 ﻿$(document).ready(function () {
     //test if URL contains passed ID - if so we want to use it 
-    //var id = getURLParameters("ID");
-    var id = "1";
+    var id = getURLParameters("ID");
     GetEventItem(id);
-    //GetTopNewsItems();
+    GetTopNewsItems();
 });  // End of Document Ready function
  
 function GetEventItem(id) {
     /*******************************************************************
     * GetEventItem - Go get the event data for a particular item  
     *******************************************************************/
-    alert(id);
-    var uri = "api/frogforce/GetEventSingleItem/";
+    var uri = "api/frogforce/GetEventSingleItem/" + id;
    
     $.getJSON(uri, function (data) {
         //ignore the main new item - we dont want to duplicate it 
@@ -20,7 +18,7 @@ function GetEventItem(id) {
             var formatdd = d3.timeFormat("%d");
             var formattt = d3.timeFormat("%H:%M %p");
             var formatmm = d3.timeFormat("%B");
-            var sd = parseDate(data.Post_Date);
+            var sd = parseDate(data.Start_Date);
             var htext = "";
 
             htext = htext + "<div class='upcoming_events event-col'><div class='related_post_sec single_post'>";
@@ -30,7 +28,7 @@ function GetEventItem(id) {
             htext = htext + "<span class='event-time'><i class='fa fa-clock-o'></i>" + formattt(sd)+ "</span></div>";
             htext = htext + "<div class='post_desc'><p>" + data.Body_text + "</p></div><!--end post desc-->";
             htext = htext + "<div class='post_bottom'></div><!--end post bottom--></div><!--end single_post--></div></div></div>";
-            $('#FFpost').html(htext);
+            $('#FFEvent').html(htext);
 
     }) // End Json Call 
         .error(function (jqXHR, textStatus, errorThrown) {
