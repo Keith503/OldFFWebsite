@@ -406,7 +406,7 @@ Public Class cFFWebSiteServer
                      strQuote & NI.Image2_Name & strQuote & strComma &
                      strQuote & NI.Image3_Name & strQuote & strComma &
                      strQuote & NI.Title_text & strQuote & strComma &
-                     strQuote & NI.Body_text & strQuote & ")"
+                     strQuote & RemoveQuotes(NI.Body_text) & strQuote & ")"
         Else
             'Update existing record 
             strSQL = "Update FFWebsite.News " &
@@ -915,6 +915,607 @@ Public Class cFFWebSiteServer
 
         Return details
     End Function
+    '---------------------------------------------------------------------------------------------------
+    '  Scouting Functions  
+    '---------------------------------------------------------------------------------------------------
+    Public Function GetScoutingEventList() As List(Of cEventItem)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetScoutingEventList
+        'Purpose:	return list of event items       
+        'Input:     Nothing 
+        'Returns:   list of cEvent objects  
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cEventItem)
+        Dim m_cFFWebSiteDB As New cFFScoutingDB
+        Dim i As Integer = 0
+
+        strSQL = "select ID, name,datestart " &
+                 " from ffscouting.events " &
+                 " order by name "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                i = i + 1
+                Dim EventRow As New cEventItem
+                With EventRow
+                    .ID = TestNullLong(dr, 0)
+                    .Title_text = TestNullString(dr, 1)
+                    .Start_Date = TestNullDate(dr, 2)
+
+                End With
+
+                details.Add(EventRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetScoutingEventList", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
+    Public Function GetScoutingMatchList(ByVal lEventID As Long) As List(Of cMatchItem)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetScoutingMatchList
+        'Purpose:	return list of Match items       
+        'Input:     Nothing 
+        'Returns:   list of cMatchItem objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cMatchItem)
+        Dim m_cFFWebSiteDB As New cFFScoutingDB
+        Dim i As Integer = 0
+
+        strSQL = "select ID, eventID, MatchNumber,Description,StartTime,TournamentLevel " &
+                 " from ffscouting.eventschedule " &
+                 " Where EventID = " & lEventID.ToString &
+                 " order by MatchNumber "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                i = i + 1
+                Dim MatchRow As New cMatchItem
+                With MatchRow
+                    .ID = TestNullLong(dr, 0)
+                    .EventID = TestNullLong(dr, 1)
+                    .MatchNumber = TestNullLong(dr, 2)
+                    .Description = TestNullString(dr, 3)
+                    .StartTime = TestNullDate(dr, 4)
+                    .TournamentLevel = TestNullString(dr, 5)
+                End With
+
+                details.Add(MatchRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetScoutingMatchList", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
+    Public Function GetTeamsinMatch(ByVal lScheduleID As Long) As List(Of cMatchTeams)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetTeamsinMatch
+        'Purpose:	return list of Match items       
+        'Input:     Nothing 
+        'Returns:   list of cMatchTeams objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cMatchTeams)
+        Dim m_cFFWebSiteDB As New cFFScoutingDB
+        Dim i As Integer = 0
+
+        strSQL = "select st.scheduleID, st.TeamNumber, t.NameShort, st.Station " &
+                 " from ffscouting.scheduleteams st  " &
+                 " left outer join ffscouting.teams t on st.TeamNumber = t.TeamNumber " &
+                 " Where st.ScheduleID = " & lScheduleID.ToString &
+                 " order by st.Station "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                Dim MatchRow As New cMatchTeams
+                With MatchRow
+                    .ScheduleID = TestNullLong(dr, 0)
+                    .TeamNumber = TestNullLong(dr, 1)
+                    .TeamName = TestNullString(dr, 2)
+                    .Station = TestNullString(dr, 3)
+                End With
+
+                details.Add(MatchRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetTeamsinMatch", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+    Public Function GetScoutingMatchesforTeam(ByVal lEventID As Long, ByVal lTeamNumber As Long) As List(Of cMatchItem)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetScoutingMatchedforTeam
+        'Purpose:	return list of matches that a particular team is in for a given event        
+        'Input:     Nothing 
+        'Returns:   list of cMatchItem objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cMatchItem)
+        Dim m_cFFWebSiteDB As New cFFScoutingDB
+        Dim i As Integer = 0
+
+        strSQL = "select es.MatchNumber,st.Station" &
+                 " from ffscouting.eventschedule es" &
+                 "  left outer join ffscouting.scheduleteams st on es.id = st.scheduleID " &
+                 " Where es.EventID = " & lEventID.ToString &
+                 " and st.teamnumber = " & lTeamNumber.ToString &
+                 " order by es.MatchNumber,st.station "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                i = i + 1
+                Dim MatchRow As New cMatchItem
+                With MatchRow
+                    .MatchNumber = TestNullLong(dr, 0)
+                    .Station = TestNullString(dr, 1)
+                End With
+
+                details.Add(MatchRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetScoutingScoresforTeam", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
+    Public Function GetScoutingScoresforTeam(ByVal lEventID As Long, ByVal lTeamNumber As Long, ByVal Matchobj As List(Of cMatchItem)) As List(Of cAllianceScore)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetScoutingScoresforTeam
+        'Purpose:	return list of scores for a given set of matches for a particular event         
+        'Input:     Nothing 
+        'Returns:   list of cAllianceScore objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cAllianceScore)
+        Dim m_cFFWebSiteDB As New cFFScoutingDB
+        Dim i As Integer = 0
+        Dim strSQLWhere As String = ""
+        Dim strWork As String
+        Dim boolFirstTime As Boolean = True
+        Dim ScoutList As List(Of cTabletData)
+        Dim AllianceList As List(Of cMatchTeams)
+        Dim strType As String
+        Dim strTeams As String
+
+        'first build the where clause for the select 
+        For Each cMatchItem In Matchobj
+            If Not boolFirstTime Then
+                strSQLWhere = strSQLWhere + " or "
+            Else
+                boolFirstTime = False
+            End If
+
+            If Mid(cMatchItem.Station, 1, 1) = "R" Then
+                strWork = "Red"
+            Else
+                strWork = "Blue"
+            End If
+            strSQLWhere = strSQLWhere + "(es.matchnumber = " + cMatchItem.MatchNumber.ToString + " and sc.type = " + strQuote + strWork + strQuote + ") "
+        Next
+
+        strSQL = "select es.matchNumber,sc.MatchID, sc.type, sc.autoFuelLow, sc.autoFuelHigh, sc.rotor1Auto + sc.rotor2Auto, sc.autoPoints " &
+                 " From ffscouting.eventschedule as es " &
+                 " Left outer join ffscouting.alliance_scores as sc on es.id = sc.matchID" &
+                 " where es.eventID = " & lEventID.ToString & " and (" & strSQLWhere & ")"
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+
+                Dim ScoreRow As New cAllianceScore
+                With ScoreRow
+                    .MatchNumber = TestNullLong(dr, 0)
+                    strtype = TestNullString(dr, 2)
+                    .AutoFuelLow = TestNullLong(dr, 3)
+                    .AutoFuelHigh = TestNullLong(dr, 4)
+                    .AutoRotor = TestNullLong(dr, 5)
+                    .AutoPoints = TestNullLong(dr, 6)
+                    AllianceList = GetAllianceTeams(lEventID, .MatchNumber, strType)
+                    strTeams = ""
+                    For Each cMatchTeam In AllianceList
+                        strTeams = strTeams + CStr(cMatchTeam.TeamNumber) + ","
+                    Next
+                    Mid(strTeams, Len(strTeams), 1) = " "
+                    .AllianceTeams = strTeams
+
+                End With
+
+
+                details.Add(ScoreRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetScoutingMatchesforTeam", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        'go get any manual scouting data observed and enterd on the tablets 
+        ScoutList = GetScoutingObservationsforTeam(lEventID, lTeamNumber, Matchobj)
+
+        'loop through each observation 
+        For Each cTabletData In ScoutList
+            'Loop through each alliace score record to find on to add data 
+            For Each cAlliancescore In details
+                'match on match number 
+                If cAlliancescore.MatchNumber = cTabletData.MatchNumber Then
+                    With cAlliancescore
+                        .ScoutBreachlineA = cTabletData.BreachLineA
+                        strWork = cTabletData.GearLocation
+                        Select Case strWork
+                            Case "C"
+                                .ScoutGearLocationA = "Center"
+                            Case "L"
+                                .ScoutGearLocationA = "Left"
+                            Case "R"
+                                .ScoutGearLocationA = "Right"
+                            Case Else
+                                .ScoutGearLocationA = ""
+                        End Select
+                        .ScoutScore50A = cTabletData.ScoreatLeast50A
+                        .ScoutScoreGearA = cTabletData.ScoreGearA
+                        .ScoutScoreHighA = cTabletData.ScoreHighFuelA
+                        .ScoutScoreLowA = cTabletData.ScoreLowFuelA
+                    End With
+
+                End If
+            Next
+        Next
+
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
+    Public Function GetScoutingObservationsforTeam(ByVal lEventID As Long, ByVal lTeamNumber As Long, ByVal Matchobj As List(Of cMatchItem)) As List(Of cTabletData)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetScoutingobservationsforTeam
+        'Purpose:	return list of scores for a given set of matches for a particular event         
+        'Input:     Nothing 
+        'Returns:   list of cTabletData objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cTabletData)
+        Dim m_cFFWebSiteDB As New cFFScoutingDB
+        Dim i As Integer = 0
+        Dim strSQLWhere As String = ""
+        Dim strWork As String
+        Dim boolFirstTime As Boolean = True
+
+        'first build the where clause for the select 
+        For Each cMatchItem In Matchobj
+            If Not boolFirstTime Then
+                strSQLWhere = strSQLWhere + " or "
+            Else
+                boolFirstTime = False
+            End If
+
+            If Mid(cMatchItem.Station, 1, 1) = "R" Then
+                strWork = "Red"
+            Else
+                strWork = "Blue"
+            End If
+            strSQLWhere = strSQLWhere + "(matchnumber = " + cMatchItem.MatchNumber.ToString + " and Alliance = " + strQuote + strWork + strQuote + ") "
+        Next
+
+        strSQL = "select id,eventid,teamnumber,matchnumber,BreachLineA,ScoreGearA,GearLocation,ScoreHighFuelA " &
+                 ",ScoreatLeast50A,ScoreLowFuelA,ScoreGearT,ScoreHighFuelT,ScoreLowFuelT,Climb,ClimbLocation" &
+                 ",DropGears,TechDiff,TotalHighFuelScore " &
+                 " from ffscouting.scoutdata  " &
+                 " where eventID = " & lEventID.ToString &
+                 " and teamnumber = " & lTeamNumber.ToString &
+                 " and (" & strSQLWhere & ") order by matchNumber"
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+
+                Dim TabletRow As New cTabletData
+                With TabletRow
+                    .ID = TestNullLong(dr, 0)
+                    .EventID = TestNullLong(dr, 1)
+                    .TeamNumber = TestNullLong(dr, 2)
+                    .MatchNumber = TestNullLong(dr, 3)
+                    .BreachLineA = TestNullBoolean(dr, 4)
+                    .ScoreGearA = TestNullBoolean(dr, 5)
+                    .GearLocation = TestNullString(dr, 6)
+                    .ScoreHighFuelA = TestNullLong(dr, 7)
+                    .ScoreatLeast50A = TestNullBoolean(dr, 8)
+                    .ScoreLowFuelA = TestNullBoolean(dr, 9)
+                    .ScoreGearT = TestNullLong(dr, 10)
+                    .ScoreHighFuelT = TestNullLong(dr, 11)
+                    .ScoreLowFuelT = TestNullBoolean(dr, 12)
+                    .Climb = TestNullBoolean(dr, 13)
+                    .ClimbLocation = TestNullString(dr, 14)
+                    .DropGears = TestNullLong(dr, 15)
+                    .TechDiff = TestNullString(dr, 16)
+                    .TotalHighFuelScore = TestNullLong(dr, 17)
+                End With
+
+                details.Add(TabletRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetScoutingObservationsforTeam", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+    Public Function GetAllianceTeams(ByVal lEventID As Long, lMatchNumber As Long, sAlliance As String) As List(Of cMatchTeams)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetAllianceTeams
+        'Purpose:	return list of Match items       
+        'Input:     Nothing 
+        'Returns:   list of cMatchTeams objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cMatchTeams)
+        Dim m_cFFWebSiteDB As New cFFScoutingDB
+        Dim i As Integer = 0
+        Dim strColor As String
+
+        If Mid(sAlliance, 1, 1) = "R" Then
+            strColor = "Red%"
+        Else
+            strColor = "Blue%"
+        End If
+
+        strSQL = "select es.eventid,es.matchnumber,st.teamnumber, st.station " &
+                 " From ffscouting.eventschedule es " &
+                 " Left outer join ffscouting.scheduleteams st on es.ID = st.scheduleid  " &
+                 "  where es.eventid = " & lEventID.ToString &
+                 " And es.matchnumber = " & lMatchNumber.ToString &
+                 " And st.station like " & strQuote & strColor & strQuote
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                Dim MatchRow As New cMatchTeams
+                With MatchRow
+                    .TeamNumber = TestNullLong(dr, 2)
+                End With
+
+                details.Add(MatchRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetAllianceTeams", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
+    Public Function GetGearRanking(ByVal lEventID As Long) As List(Of cGearStats)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetGearRanking
+        'Purpose:	return list of Match items       
+        'Input:     Nothing 
+        'Returns:   list of cGearStats objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cGearStats)
+        Dim m_cFFScoutingDB As New cFFScoutingDB
+        Dim i As Integer = 0
+
+        strSQL = "select concat(concat(sd.teamNumber, '-'), t.NameShort) as Team " &
+                 ", sum(sd.scoregearA),sum(sd.scoregeart), sum(sd.ScoreGearA + sd.ScoreGearT) " &
+                 " from ffscouting.scoutdata sd " &
+                 " left outer join ffscouting.teams t on sd.TeamNumber = t.TeamNumber " &
+                 " where sd.eventid = " & lEventID.ToString &
+                 " Group by concat(concat(sd.teamNumber, '-'), t.NameShort) " &
+                 " order by sum(sd.ScoreGearA + sd.ScoreGearT) desc "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFScoutingDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                i = i + 1
+                Dim GearRow As New cGearStats
+                With GearRow
+                    .Team = TestNullString(dr, 0)
+                    .AutonGears = TestNullLong(dr, 1)
+                    .TeleOpGears = TestNullLong(dr, 2)
+                    .TotalGears = TestNullLong(dr, 3)
+                End With
+
+                details.Add(GearRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetGearRanking", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFScoutingDB.cmd.Dispose()
+            m_cFFScoutingDB.CloseDataReader()
+            m_cFFScoutingDB.CloseConnection()
+        End Try
+
+        m_cFFScoutingDB = Nothing
+
+        Return details
+    End Function
+
+    Public Function GetClimbRanking(ByVal lEventID As Long) As List(Of cClimbStats)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetClimbRanking
+        'Purpose:	return list of Match items       
+        'Input:     Nothing 
+        'Returns:   list of cClimbStats objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cClimbStats)
+        Dim m_cFFScoutingDB As New cFFScoutingDB
+        Dim i As Integer = 0
+
+        strSQL = "select concat(concat(sd.teamNumber, '-'), t.NameShort) as Team, sum(sd.climb) " &
+                 " from ffscouting.scoutdata sd " &
+                 " left outer join ffscouting.teams t on sd.TeamNumber = t.TeamNumber " &
+                 " where sd.eventid = " & lEventID.ToString &
+                 " Group by concat(concat(sd.teamNumber, '-'), t.NameShort) " &
+                 " order by sum(sd.climb) desc "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFScoutingDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                i = i + 1
+                Dim ClimbRow As New cClimbStats
+                With ClimbRow
+                    .Team = TestNullString(dr, 0)
+                    .TotalClimb = TestNullLong(dr, 1)
+                End With
+
+                details.Add(ClimbRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetClimbRanking", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFScoutingDB.cmd.Dispose()
+            m_cFFScoutingDB.CloseDataReader()
+            m_cFFScoutingDB.CloseConnection()
+        End Try
+
+        m_cFFScoutingDB = Nothing
+
+        Return details
+    End Function
+
+
 
 
 

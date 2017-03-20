@@ -249,6 +249,114 @@ Namespace Controllers
 
             Return Ok(NewsList)
         End Function
+        '---------------------------------------------------------------------------------------------------
+        '  Scouting Functions  
+        '---------------------------------------------------------------------------------------------------
+        Public Function GetScoutingEventList() As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim EventList As New List(Of cEventItem)
+
+            Try
+                EventList = m_cFFServer.GetScoutingEventList()
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetScoutingEventList", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(EventList)
+        End Function
+
+        Public Function GetScoutingMatchList(ByVal id As String) As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim MatchList As New List(Of cMatchItem)
+
+            Try
+                MatchList = m_cFFServer.GetScoutingMatchList(CLng(id))
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetScoutingMatchList", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(MatchList)
+        End Function
+
+        Public Function GetScoutingScoresforTeam(ByVal id As String) As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim MatchList As New List(Of cMatchItem)
+            Dim lEventID As Long = 2
+            Dim ScoreList As New List(Of cAllianceScore)
+
+            Try
+                'first go get a list of matches that this team has done 
+                MatchList = m_cFFServer.GetScoutingMatchesforTeam(lEventID, CLng(id))
+                ScoreList = m_cFFServer.GetScoutingScoresforTeam(lEventID, CLng(id), MatchList)
+
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetScoutingMatchList", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(ScoreList)
+        End Function
+
+        Public Function GetTeamsInMatch(ByVal id As String) As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim MatchList As New List(Of cMatchTeams)
+
+            'Id = schedule id  
+
+            Try
+                'first go get a list of matches that this team has done 
+                MatchList = m_cFFServer.GetTeamsinMatch(CLng(id))
+
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetTeamsinMatch", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(MatchList)
+        End Function
+
+        Public Function GetGearRanking(ByVal id As String) As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim GearList As New List(Of cGearStats)
+
+            'Id = event id   
+            Try
+                'first go get a list of matches that this team has done 
+                GearList = m_cFFServer.GetGearRanking(CLng(id))
+
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetGearRanking", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(GearList)
+        End Function
+
+        Public Function GetClimbRanking(ByVal id As String) As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim ClimbList As New List(Of cClimbStats)
+
+            'Id = event id   
+            Try
+                'first go get a list of matches that this team has done 
+                ClimbList = m_cFFServer.GetClimbRanking(CLng(id))
+
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetClimbRanking", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(ClimbList)
+        End Function
+
+
+
+
+
+
+
 
 
         Private Function BuildErrorMsg(ByVal strFunctionName As String, strThrownError As String) As String

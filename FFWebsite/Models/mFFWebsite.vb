@@ -242,4 +242,19 @@ Module mFFWebsite
 
         Return RetDec
     End Function
+    Public Function RemoveQuotes(ByVal inStr As String) As String
+        'removes all quotes from input string 
+        Dim RetStr As String = ""
+        Dim i As Integer
+
+        For i = 1 To Len(inStr)
+        Next
+
+        If Mid(inStr, i, 1) <> strQuote Then
+            If Mid(inStr, i, 1) <> strDblQuote Then
+                RetStr = RetStr + Mid(inStr, i, 1)
+            End If
+        End If
+        Return RetStr
+    End Function
 End Module
