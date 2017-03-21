@@ -1154,6 +1154,7 @@ Public Class cFFWebSiteServer
         Dim strType As String
         Dim strTeams As String
 
+
         'first build the where clause for the select 
         'For Each cMatchItem In Matchobj
         ' If Not boolFirstTime Then
@@ -1171,8 +1172,10 @@ Public Class cFFWebSiteServer
         '        Next
 
         strSQL = "select st.eventid, st.matchnumber, st.TeamNumber, st.Station   " &
-                 ", sc.autoFuelLow, sc.autoFuelHigh, sc.rotor1Auto + sc.rotor2Auto as AutonRotor  " &
+                 ", sc.autoFuelLow, sc.autoFuelHigh, sc.rotor1Auto, sc.rotor2Auto  " &
                  ", sc.autoPoints, sc.TeleopPoints, sc.TeleopFuelPoints,sc.teleoptakeoffpoints, sc.foulPoints  " &
+                 ", sc.autorotorpoints, sc.autoMobilityPoints,sc.AdjustPoints,sc.TotalPoints " &
+                 ", sc.rotor1Engaged, sc.rotor2Engaged, sc.rotor3Engaged,sc.rotor4Engaged " &
                  " From ffscouting.scheduleteams st " &
                  " Left outer join ffscouting.alliancescores sc on " &
                  " (st.eventid = sc.eventid And st.MatchNumber = sc.matchNumber And mid(sc.Type,1,3) = mid(st.Station,1,3))  " &
@@ -1187,20 +1190,50 @@ Public Class cFFWebSiteServer
                 Dim ScoreRow As New cAllianceScore
                 With ScoreRow
                     .MatchNumber = TestNullLong(dr, 1)
-                    strType = TestNullString(dr, 2)
+                    strType = TestNullString(dr, 3)
                     .AutoFuelLow = TestNullLong(dr, 4)
                     .AutoFuelHigh = TestNullLong(dr, 5)
-                    .AutoRotor = TestNullLong(dr, 6)
-                    .AutoPoints = TestNullLong(dr, 7)
-                    .TeleopPoints = TestNullLong(dr, 8)
-                    .TeleopFuelPoints = TestNullLong(dr, 9)
-                    .TeleopTakeOffPoints = TestNullLong(dr, 10)
-                    .FoulPoints = TestNullLong(dr, 11)
+                    .AutoRotor = 0
+                    If TestNullBoolean(dr, 6) Then .AutoRotor = .AutoRotor + 1
+                    If TestNullBoolean(dr, 7) Then .AutoRotor = .AutoRotor + 1
+                    .AutoPoints = TestNullLong(dr, 8)
+                    .TeleopPoints = TestNullLong(dr, 9)
+                    .TeleopFuelPoints = TestNullLong(dr, 10)
+                    .TeleopTakeOffPoints = TestNullLong(dr, 11)
+                    .FoulPoints = TestNullLong(dr, 12)
+                    .AutoRotorPoints = TestNullLong(dr, 13)
+                    .AutoMobilityPoints = TestNullLong(dr, 14)
+                    .Adjustpoints = TestNullLong(dr, 15)
+                    .TotalPoints = TestNullLong(dr, 16)
+                    .TotalRotorPoints = 0
+                    If TestNullBoolean(dr, 6) Then
+                        .TotalRotorPoints = .TotalRotorPoints + 0  'already in total auton points 
+                    Else
+                        If TestNullBoolean(dr, 17) Then
+                            .TotalRotorPoints = .TotalRotorPoints + 40
+                        End If
+                    End If
+                    If TestNullBoolean(dr, 7) Then
+                        .TotalRotorPoints = .TotalRotorPoints + 0   'already in total auton points 
+                    Else
+                        If TestNullBoolean(dr, 18) Then
+                            .TotalRotorPoints = .TotalRotorPoints + 40
+                        End If
+                    End If
+                    If TestNullBoolean(dr, 19) Then .TotalRotorPoints = .TotalRotorPoints + 40
+                    If TestNullBoolean(dr, 20) Then .TotalRotorPoints = .TotalRotorPoints + 40
 
+                    If (TestNullBoolean(dr, 17) And TestNullBoolean(dr, 18) And TestNullBoolean(dr, 19) And TestNullBoolean(dr, 20)) Then
+                        .TotalRotorPoints = .TotalRotorPoints + 100
+                    End If
                     AllianceList = GetAllianceTeams(lEventID, .MatchNumber, strType)
                     strTeams = ""
                     For Each cMatchTeam In AllianceList
-                        strTeams = strTeams + CStr(cMatchTeam.TeamNumber) + ","
+                        If lTeamNumber = cMatchTeam.TeamNumber Then
+                            strTeams = strTeams + "<b>" + CStr(cMatchTeam.TeamNumber) + "</b>" + ","
+                        Else
+                            strTeams = strTeams + CStr(cMatchTeam.TeamNumber) + ","
+                        End If
                     Next
                     Mid(strTeams, Len(strTeams), 1) = " "
                     .AllianceTeams = strTeams
@@ -1258,6 +1291,7 @@ Public Class cFFWebSiteServer
                         .ScoutDropGears = cTabletData.DropGears
                         .ScoutTechDiff = cTabletData.TechDiff
                         .ScoutTotalHighFuel = cTabletData.TotalHighFuelScore
+                        .ScoutClimbLocation = cTabletData.ClimbLocation
                     End With
 
                 End If
@@ -1530,8 +1564,133 @@ Public Class cFFWebSiteServer
         Return details
     End Function
 
+    Public Function DumpScoutingData(ByVal lEventID As Long) As List(Of cTabletDataFixed)
+        '---------------------------------------------------------------------------------------
+        'Function:	DumpScoutingData
+        'Purpose:	return all tablet data for manual input into excel spreadsheet - just in case          
+        'Input:     Nothing 
+        'Returns:   list of cTabletData objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cTabletDataFixed)
+        Dim m_cFFWebSiteDB As New cFFScoutingDB
+
+        strSQL = "Select id,eventid,teamnumber,matchnumber,BreachLineA,ScoreGearA,GearLocation,ScoreHighFuelA " &
+                 ",ScoreatLeast50A,ScoreLowFuelA,ScoreGearT,ScoreHighFuelT,ScoreLowFuelT,Climb,ClimbLocation" &
+                 ",DropGears,TechDiff,TotalHighFuelScore,ScoutName,Alliance " &
+                 " from ffscouting.scoutdata  " &
+                 " where eventID = " & lEventID.ToString
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+
+                Dim TabletRow As New cTabletDataFixed
+                With TabletRow
+                    .ID = TestNullLong(dr, 0)
+                    .EventID = TestNullLong(dr, 1)
+                    .TeamNumber = TestNullLong(dr, 2)
+                    .MatchNumber = TestNullLong(dr, 3)
+                    .BreachLineA = TestNullBoolean(dr, 4)
+                    .ScoreGearA = TestNullBoolean(dr, 5)
+                    .GearLocation = TestNullString(dr, 6)
+                    .ScoreHighFuelA = TestNullLong(dr, 7)
+                    .ScoreatLeast50A = TestNullBoolean(dr, 8)
+                    .ScoreLowFuelA = TestNullBoolean(dr, 9)
+                    .ScoreGearT = TestNullLong(dr, 10)
+                    .ScoreHighFuelT = TestNullLong(dr, 11)
+                    .ScoreLowFuelT = TestNullBoolean(dr, 12)
+                    .Climb = TestNullBoolean(dr, 13)
+                    .ClimbLocation = TestNullString(dr, 14)
+                    .DropGears = TestNullLong(dr, 15)
+                    .TechDiff = TestNullString(dr, 16)
+                    .TotalHighFuelScore = TestNullLong(dr, 17)
+                    .ScoutName = TestNullString(dr, 18)
+                    .Alliance = TestNullString(dr, 19)
 
 
+
+                End With
+
+                details.Add(TabletRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("DumpScoutingData", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+    Public Function GetShootingRanking(ByVal lEventID As Long) As List(Of cClimbStats)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetShootingRanking
+        'Purpose:	return list of Match items       
+        'Input:     Nothing 
+        'Returns:   list of cClimbStats objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cClimbStats)
+        Dim m_cFFScoutingDB As New cFFScoutingDB
+        Dim i As Integer = 0
+        'TODO   need to finish this - query has not been updated !!!!!
+
+        strSQL = "select concat(concat(sd.teamNumber, '-'), t.NameShort) as Team, sum(sd.climb) " &
+                 " from ffscouting.scoutdata sd " &
+                 " left outer join ffscouting.teams t on sd.TeamNumber = t.TeamNumber " &
+                 " where sd.eventid = " & lEventID.ToString &
+                 " Group by concat(concat(sd.teamNumber, '-'), t.NameShort) " &
+                 " order by sum(sd.climb) desc "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFScoutingDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                i = i + 1
+                Dim ClimbRow As New cClimbStats
+                With ClimbRow
+                    .Team = TestNullString(dr, 0)
+                    .TotalClimb = TestNullLong(dr, 1)
+                End With
+
+                details.Add(ClimbRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetClimbRanking", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFScoutingDB.cmd.Dispose()
+            m_cFFScoutingDB.CloseDataReader()
+            m_cFFScoutingDB.CloseConnection()
+        End Try
+
+        m_cFFScoutingDB = Nothing
+
+        Return details
+    End Function
 
 
     '---------------------------------------------------------------------------------------------------

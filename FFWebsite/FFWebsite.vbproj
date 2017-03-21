@@ -279,6 +279,7 @@
     <Compile Include="Models\cMatchTeams.vb" />
     <Compile Include="Models\cNewsItem.vb" />
     <Compile Include="Models\cTabletData.vb" />
+    <Compile Include="Models\cTabletDataFixed.vb" />
     <Compile Include="Models\cTypeItem.vb" />
     <Compile Include="Models\mFFWebsite.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -316,6 +317,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\bootstrap\bootstrap.min.css" />
+    <Content Include="css\buttons.dataTables.css" />
     <Content Include="css\colors\blue-orange.css" />
     <Content Include="css\colors\default.css" />
     <Content Include="css\colors\gray-blue.css" />
@@ -514,6 +516,7 @@
     <Content Include="index.html" />
     <Content Include="js\d3.js" />
     <Content Include="js\d3.min.js" />
+    <Content Include="js\datatables\buttons.html5.js" />
     <Content Include="js\datatables\dataTables.bootstrap.css" />
     <Content Include="js\datatables\dataTables.bootstrap.js" />
     <Content Include="js\datatables\dataTables.bootstrap.min.css" />
@@ -522,6 +525,7 @@
     <Content Include="js\datatables\dataTables.bootstrap4.js" />
     <Content Include="js\datatables\dataTables.bootstrap4.min.css" />
     <Content Include="js\datatables\dataTables.bootstrap4.min.js" />
+    <Content Include="js\datatables\dataTables.buttons.js" />
     <Content Include="js\datatables\dataTables.foundation.css" />
     <Content Include="js\datatables\dataTables.foundation.js" />
     <Content Include="js\datatables\dataTables.foundation.min.css" />
@@ -548,6 +552,7 @@
     <Content Include="js\datatables\jquery.dataTables.min.js" />
     <Content Include="js\datatables\jquery.dataTables_themeroller.css" />
     <Content Include="js\datatables\jquery.js" />
+    <Content Include="js\datatables\jszip.js" />
     <Content Include="js\FFScouting.js" />
     <Content Include="js\index.js" />
     <Content Include="js\page-event-3col.js" />
@@ -560,6 +565,7 @@
     <Content Include="js\page-news-maint.js" />
     <Content Include="js\page-robot2016.js" />
     <Content Include="js\page-robot2017.js" />
+    <Content Include="js\page-scoutingdump.js" />
     <Content Include="js\page-single-event.js" />
     <Content Include="js\page-strategy.js" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
@@ -711,6 +717,7 @@
     <Content Include="page-robot2016.html" />
     <Content Include="page-robot2017.html" />
     <Content Include="page-robotCyber.html" />
+    <Content Include="page-scoutingdump.html" />
     <Content Include="page-single-event.html" />
     <Content Include="page-strategy.html" />
     <Content Include="page-teamhistory.html" />

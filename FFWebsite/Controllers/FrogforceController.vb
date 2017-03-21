@@ -350,8 +350,38 @@ Namespace Controllers
 
             Return Ok(ClimbList)
         End Function
+        Public Function GetScoutingDump(ByVal id As String) As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim ScoutList As New List(Of cTabletDataFixed)
 
+            'Id = event id   
+            Try
+                'first go get a list of matches that this team has done 
+                ScoutList = m_cFFServer.DumpScoutingData(CLng(id))
 
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetScoutingDump", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(ScoutList)
+        End Function
+        Public Function GetShootingRanking(ByVal id As String) As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim ClimbList As New List(Of cClimbStats)
+
+            'Id = event id   
+            Try
+                'first go get a list of matches that this team has done 
+                ClimbList = m_cFFServer.GetClimbRanking(CLng(id))
+
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetClimbRanking", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(ClimbList)
+        End Function
 
 
 

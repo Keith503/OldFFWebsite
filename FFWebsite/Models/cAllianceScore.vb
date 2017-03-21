@@ -29,8 +29,12 @@ Public Class cAllianceScore
     Private m_ScoutDropGears As Integer
     Private m_ScoutTechDiff As String
     Private m_ScoutTotalHighFuel As Integer
-
-
+    Private m_AutoRotorPoints As Integer
+    Private m_AutoMobilityPoints As Integer
+    Private m_Adjustpoints As Integer
+    Private m_TotalPoints As Integer
+    Private m_TotalRotorPoints As Integer
+    Private m_ScoutClimbLocation As String
 
     Public Property MatchNumber() As Long
         Get
@@ -108,6 +112,15 @@ Public Class cAllianceScore
         End Get
         Set(ByVal value As String)
             m_ScoutGearLocationA = value
+        End Set
+    End Property
+
+    Public Property ScoutClimbLocation() As String
+        Get
+            Return m_ScoutClimbLocation
+        End Get
+        Set(ByVal value As String)
+            m_ScoutClimbLocation = value
         End Set
     End Property
 
@@ -239,4 +252,51 @@ Public Class cAllianceScore
     End Property
 
 
+    Public Property AutoRotorPoints() As Long
+        Get
+            Return m_AutoRotorPoints
+        End Get
+        Set(ByVal value As Long)
+            m_AutoRotorPoints = value
+        End Set
+    End Property
+
+
+    Public Property AutoMobilityPoints() As Long
+        Get
+            Return m_AutoMobilityPoints
+        End Get
+        Set(ByVal value As Long)
+            m_AutoMobilityPoints = value
+        End Set
+    End Property
+
+
+    Public Property Adjustpoints() As Long
+        Get
+            Return m_Adjustpoints
+        End Get
+        Set(ByVal value As Long)
+            m_Adjustpoints = value
+        End Set
+    End Property
+
+
+    Public Property TotalPoints() As Long
+        Get
+            Return m_TotalPoints
+        End Get
+        Set(ByVal value As Long)
+            m_TotalPoints = value
+        End Set
+    End Property
+
+    Public Property TotalRotorPoints() As Long
+        Get
+            Return m_TotalRotorPoints
+        End Get
+        Set(ByVal value As Long)
+            m_TotalRotorPoints = value
+        End Set
+    End Property
 End Class

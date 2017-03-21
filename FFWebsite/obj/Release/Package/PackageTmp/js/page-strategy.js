@@ -177,7 +177,7 @@ function TableitemSelected(item) {
 
     }) //End JSON call 
   .error(function (jqXHR, textStatus, errorThrown) {
-      ErrorMsgBox("Error loadTeamTable()!", jqXHR.responseJSON, jqXHR.status);
+      ErrorMsgBox("Error TableitemSelected()!", jqXHR.responseJSON, jqXHR.status);
   });
 }
 
@@ -186,7 +186,7 @@ function formatscorerow(item) {
 }
 
 function formatteleoprow(item) {
-    return [item.MatchNumber, item.AllianceTeams];
+    return [item.MatchNumber, item.AllianceTeams, item.TeleopFuelPoints, item.TeleopPoints, item.TeleopTakeOffPoints, item.ScoutGearT,item.TotalHighFuelScore,item.ScoutDropGears,item.ScoutTechDiff];
 }
 
 
@@ -269,8 +269,14 @@ function initTeleopTable() {
             "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
             "aoColumns": [
                 { "sTitle": "Match ID", "sClass": "FF-center", "sWidth": "50px" },
-                { "sTitle": "Alliance Teams", "sClass": "FF-center", "sWidth": "100px" }
-
+                { "sTitle": "Alliance Teams", "sClass": "FF-center", "sWidth": "100px" },
+                { "sTitle": "Total Fuel Points", "sClass": "FF-center", "sWidth": "100px" },
+                { "sTitle": "Total Teleop Points", "sClass": "FF-center", "sWidth": "100px" },
+                { "sTitle": "Takeoff Points", "sClass": "FF-center", "sWidth": "100px" },
+                { "sTitle": "Scout Total Gears", "sClass": "FF-center", "sWidth": "100px" },
+                { "sTitle": "Scout total High Fuel", "sClass": "FF-center", "sWidth": "100px" },
+                { "sTitle": "Scout gears Dropped", "sClass": "FF-center", "sWidth": "100px" },
+                { "sTitle": "Scout Commentss", "sClass": "FF-center", "sWidth": "100px" }
             ]
         });
         //setup callback function if row is clicked 
@@ -332,7 +338,7 @@ function loadClimbTable() {
             t.rows.add(tableData).draw();
         }) //End JSON call 
         .error(function (jqXHR, textStatus, errorThrown) {
-            ErrorMsgBox("Error loadGearTable()!", jqXHR.responseJSON, jqXHR.status);
+            ErrorMsgBox("Error loadClimbTable()!", jqXHR.responseJSON, jqXHR.status);
         });
 
     } else {
