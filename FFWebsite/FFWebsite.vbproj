@@ -281,7 +281,6 @@
     <Compile Include="Models\cTabletData.vb" />
     <Compile Include="Models\cTypeItem.vb" />
     <Compile Include="Models\mFFWebsite.vb" />
-    <Compile Include="Models\Product.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -409,12 +408,15 @@
     <Content Include="img\FFWebsite\2016_robot_specs.jpg" />
     <Content Include="img\FFWebsite\3DPrinter1.jpg" />
     <Content Include="img\FFWebsite\3DPrinter2.jpg" />
+    <Content Include="img\FFWebsite\ASCO_NUMATICS_TM_green.jpg" />
+    <Content Include="img\FFWebsite\Autoliv.JPG" />
     <Content Include="img\FFWebsite\AVL.jpg" />
     <Content Include="img\FFWebsite\chairman%27s.jpg" />
     <Content Include="img\FFWebsite\Cyber_Football_Jumbotron.jpg" />
     <Content Include="img\FFWebsite\Dean1.jpg" />
     <Content Include="img\FFWebsite\Dean2.jpg" />
     <Content Include="img\FFWebsite\Dean_Jumbotron.jpg" />
+    <Content Include="img\FFWebsite\Denso.jpg" />
     <Content Include="img\FFWebsite\Detroit_Science_Center.jpg" />
     <Content Include="img\FFWebsite\Detroit_Science_Center2.jpg" />
     <Content Include="img\FFWebsite\DHDC1.jpg" />
@@ -435,8 +437,9 @@
     <Content Include="img\FFWebsite\FFF2.jpg" />
     <Content Include="img\FFWebsite\FiM_Logo.jpg" />
     <Content Include="img\FFWebsite\FiM_Logo2.jpg" />
+    <Content Include="img\FFWebsite\FIRST.jpg" />
     <Content Include="img\FFWebsite\Football2.jpg" />
-    <Content Include="img\FFWebsite\Ford_Motor_Co.jpg" />
+    <Content Include="img\FFWebsite\Ford.jpg" />
     <Content Include="img\FFWebsite\Frog Force 2016 Season Recap.mp4" />
     <Content Include="img\FFWebsite\FTC_Kickoff1.jpg" />
     <Content Include="img\FFWebsite\FTC_Kickoff2.JPG" />
@@ -456,13 +459,18 @@
     <Content Include="img\FFWebsite\img_170112gov.jpg" />
     <Content Include="img\FFWebsite\IMG_3261_Banner.jpg" />
     <Content Include="img\FFWebsite\img_FFF_161119.jpg" />
+    <Content Include="img\FFWebsite\Indiana1.jpg" />
+    <Content Include="img\FFWebsite\Indiana2.jpg" />
+    <Content Include="img\FFWebsite\Jackson.jpg" />
     <Content Include="img\FFWebsite\KetteringKickoff1.jpg" />
     <Content Include="img\FFWebsite\KetteringKickoff2.jpg" />
+    <Content Include="img\FFWebsite\Magna.jpg" />
     <Content Include="img\FFWebsite\Magna_Video1.jpg" />
     <Content Include="img\FFWebsite\Magna_Video2.jpg" />
     <Content Include="img\FFWebsite\Maker_2013_crop.jpg" />
     <Content Include="img\FFWebsite\MARC1.jpg" />
     <Content Include="img\FFWebsite\MARC2.jpg" />
+    <Content Include="img\FFWebsite\MDE.jpg" />
     <Content Include="img\FFWebsite\MemorialParade1.jpg" />
     <Content Include="img\FFWebsite\MemorialParade2.jpg" />
     <Content Include="img\FFWebsite\Memorial_Day_Parade_2013_1.jpg" />
@@ -470,6 +478,9 @@
     <Content Include="img\FFWebsite\Misha_2.jpg" />
     <Content Include="img\FFWebsite\Movie_Shield.jpg" />
     <Content Include="img\FFWebsite\NbotLogo.png" />
+    <Content Include="img\FFWebsite\NCSD.jpg" />
+    <Content Include="img\FFWebsite\NGK.jpg" />
+    <Content Include="img\FFWebsite\Nissan.jpg" />
     <Content Include="img\FFWebsite\Nissan.png" />
     <Content Include="img\FFWebsite\NoviQualifier.jpg" />
     <Content Include="img\FFWebsite\NoviQualifier2.jpg" />
@@ -495,6 +506,7 @@
     <Content Include="img\FFWebsite\SetUp2.jpg" />
     <Content Include="img\FFWebsite\SteamWorksBanner.jpg" />
     <Content Include="img\FFWebsite\STEM_Showcase_1.jpg" />
+    <Content Include="img\FFWebsite\Tata_Technologies_logo.jpg" />
     <Content Include="img\FFWebsite\UDM2.jpg" />
     <Content Include="img\FFWebsite\UDM_FTC_Qualifier.jpg" />
     <Content Include="img\FFWebsite\UDM_FTC_Qualifier2.jpg" />

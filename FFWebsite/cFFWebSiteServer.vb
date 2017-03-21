@@ -1155,25 +1155,29 @@ Public Class cFFWebSiteServer
         Dim strTeams As String
 
         'first build the where clause for the select 
-        For Each cMatchItem In Matchobj
-            If Not boolFirstTime Then
-                strSQLWhere = strSQLWhere + " or "
-            Else
-                boolFirstTime = False
-            End If
+        'For Each cMatchItem In Matchobj
+        ' If Not boolFirstTime Then
+        ' strSQLWhere = strSQLWhere + " or "
+        ' Else
+        ' boolFirstTime = False
+        ' End If
+        '
+        '        If Mid(cMatchItem.Station, 1, 1) = "R" Then
+        '        strWork = "Red"
+        '        Else
+        '        strWork = "Blue"
+        '        End If
+        '        strSQLWhere = strSQLWhere + "(es.matchnumber = " + cMatchItem.MatchNumber.ToString + " and sc.type = " + strQuote + strWork + strQuote + ") "
+        '        Next
 
-            If Mid(cMatchItem.Station, 1, 1) = "R" Then
-                strWork = "Red"
-            Else
-                strWork = "Blue"
-            End If
-            strSQLWhere = strSQLWhere + "(es.matchnumber = " + cMatchItem.MatchNumber.ToString + " and sc.type = " + strQuote + strWork + strQuote + ") "
-        Next
-
-        strSQL = "select es.matchNumber,sc.MatchID, sc.type, sc.autoFuelLow, sc.autoFuelHigh, sc.rotor1Auto + sc.rotor2Auto, sc.autoPoints " &
-                 " From ffscouting.eventschedule as es " &
-                 " Left outer join ffscouting.alliance_scores as sc on es.id = sc.matchID" &
-                 " where es.eventID = " & lEventID.ToString & " and (" & strSQLWhere & ")"
+        strSQL = "select st.eventid, st.matchnumber, st.TeamNumber, st.Station   " &
+                 ", sc.autoFuelLow, sc.autoFuelHigh, sc.rotor1Auto + sc.rotor2Auto as AutonRotor  " &
+                 ", sc.autoPoints, sc.TeleopPoints, sc.TeleopFuelPoints,sc.teleoptakeoffpoints, sc.foulPoints  " &
+                 " From ffscouting.scheduleteams st " &
+                 " Left outer join ffscouting.alliancescores sc on " &
+                 " (st.eventid = sc.eventid And st.MatchNumber = sc.matchNumber And mid(sc.Type,1,3) = mid(st.Station,1,3))  " &
+                 " where st.eventID = " & lEventID.ToString &
+                 " And st.teamnumber = " & lTeamNumber.ToString
 
         'Execute SQL Command 
         Try
@@ -1182,12 +1186,17 @@ Public Class cFFWebSiteServer
 
                 Dim ScoreRow As New cAllianceScore
                 With ScoreRow
-                    .MatchNumber = TestNullLong(dr, 0)
-                    strtype = TestNullString(dr, 2)
-                    .AutoFuelLow = TestNullLong(dr, 3)
-                    .AutoFuelHigh = TestNullLong(dr, 4)
-                    .AutoRotor = TestNullLong(dr, 5)
-                    .AutoPoints = TestNullLong(dr, 6)
+                    .MatchNumber = TestNullLong(dr, 1)
+                    strType = TestNullString(dr, 2)
+                    .AutoFuelLow = TestNullLong(dr, 4)
+                    .AutoFuelHigh = TestNullLong(dr, 5)
+                    .AutoRotor = TestNullLong(dr, 6)
+                    .AutoPoints = TestNullLong(dr, 7)
+                    .TeleopPoints = TestNullLong(dr, 8)
+                    .TeleopFuelPoints = TestNullLong(dr, 9)
+                    .TeleopTakeOffPoints = TestNullLong(dr, 10)
+                    .FoulPoints = TestNullLong(dr, 11)
+
                     AllianceList = GetAllianceTeams(lEventID, .MatchNumber, strType)
                     strTeams = ""
                     For Each cMatchTeam In AllianceList
@@ -1243,6 +1252,12 @@ Public Class cFFWebSiteServer
                         .ScoutScoreGearA = cTabletData.ScoreGearA
                         .ScoutScoreHighA = cTabletData.ScoreHighFuelA
                         .ScoutScoreLowA = cTabletData.ScoreLowFuelA
+                        .ScoutGearT = cTabletData.ScoreGearT
+                        .ScoutScoreHighT = cTabletData.ScoreHighFuelT
+                        .ScoutClimb = cTabletData.Climb
+                        .ScoutDropGears = cTabletData.DropGears
+                        .ScoutTechDiff = cTabletData.TechDiff
+                        .ScoutTotalHighFuel = cTabletData.TotalHighFuelScore
                     End With
 
                 End If
@@ -1274,7 +1289,7 @@ Public Class cFFWebSiteServer
         'first build the where clause for the select 
         For Each cMatchItem In Matchobj
             If Not boolFirstTime Then
-                strSQLWhere = strSQLWhere + " or "
+                strSQLWhere = strSQLWhere + " Or "
             Else
                 boolFirstTime = False
             End If
@@ -1284,16 +1299,16 @@ Public Class cFFWebSiteServer
             Else
                 strWork = "Blue"
             End If
-            strSQLWhere = strSQLWhere + "(matchnumber = " + cMatchItem.MatchNumber.ToString + " and Alliance = " + strQuote + strWork + strQuote + ") "
+            strSQLWhere = strSQLWhere + "(matchnumber = " + cMatchItem.MatchNumber.ToString + " And Alliance = " + strQuote + strWork + strQuote + ") "
         Next
 
-        strSQL = "select id,eventid,teamnumber,matchnumber,BreachLineA,ScoreGearA,GearLocation,ScoreHighFuelA " &
+        strSQL = "Select id,eventid,teamnumber,matchnumber,BreachLineA,ScoreGearA,GearLocation,ScoreHighFuelA " &
                  ",ScoreatLeast50A,ScoreLowFuelA,ScoreGearT,ScoreHighFuelT,ScoreLowFuelT,Climb,ClimbLocation" &
                  ",DropGears,TechDiff,TotalHighFuelScore " &
                  " from ffscouting.scoutdata  " &
                  " where eventID = " & lEventID.ToString &
-                 " and teamnumber = " & lTeamNumber.ToString &
-                 " and (" & strSQLWhere & ") order by matchNumber"
+                 " And teamnumber = " & lTeamNumber.ToString &
+                 " And (" & strSQLWhere & ") order by matchNumber"
 
         'Execute SQL Command 
         Try
@@ -1365,12 +1380,12 @@ Public Class cFFWebSiteServer
             strColor = "Blue%"
         End If
 
-        strSQL = "select es.eventid,es.matchnumber,st.teamnumber, st.station " &
+        strSQL = "Select es.eventid,es.matchnumber,st.teamnumber, st.station " &
                  " From ffscouting.eventschedule es " &
-                 " Left outer join ffscouting.scheduleteams st on es.ID = st.scheduleid  " &
+                 " Left outer join ffscouting.scheduleteams st On es.ID = st.scheduleid  " &
                  "  where es.eventid = " & lEventID.ToString &
                  " And es.matchnumber = " & lMatchNumber.ToString &
-                 " And st.station like " & strQuote & strColor & strQuote
+                 " And st.station Like " & strQuote & strColor & strQuote
 
         'Execute SQL Command 
         Try
@@ -1417,7 +1432,7 @@ Public Class cFFWebSiteServer
         Dim m_cFFScoutingDB As New cFFScoutingDB
         Dim i As Integer = 0
 
-        strSQL = "select concat(concat(sd.teamNumber, '-'), t.NameShort) as Team " &
+        strSQL = "Select concat(concat(sd.teamNumber, '-'), t.NameShort) as Team " &
                  ", sum(sd.scoregearA),sum(sd.scoregeart), sum(sd.ScoreGearA + sd.ScoreGearT) " &
                  " from ffscouting.scoutdata sd " &
                  " left outer join ffscouting.teams t on sd.TeamNumber = t.TeamNumber " &

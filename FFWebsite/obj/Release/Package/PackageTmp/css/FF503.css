@@ -20,5 +20,24 @@
 .ffCarouselImg img {
     width: auto;
     height: auto; 
-    max-height: auto;
+}
+
+table.dataTable tbody tr.wireSelected {
+  background-color: #b0bed9;
+}
+
+.wireSelected {
+  background-color: #b0bed9;
+}
+
+.FF-left {
+    text-align: left;
+}
+
+.FF-right {
+    text-align: right;
+}
+
+.FF-center {
+    text-align: center;
 }
