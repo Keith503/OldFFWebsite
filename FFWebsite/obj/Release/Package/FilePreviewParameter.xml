@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="frogforce503.com" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Owner\\Documents\\Visual\ Studio\ 2015\\Projects\\FFWebsite\\FFWebsite\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Owner\\Documents\\Visual\ Studio\ 2015\\Projects\\FFWebsite\\FFWebsite\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-FFWebsite-20161113061303.mdf;Initial Catalog=aspnet-FFWebsite-20161113061303;Integrated Security=True" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Owner\\Documents\\Visual\ Studio\ 2015\\Projects\\FFWebsite\\FFWebsite\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="FFWebSite-Web.config Connection String" description="" value="DSN=FFWebsite" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Owner\\Documents\\Visual\ Studio\ 2015\\Projects\\FFWebsite\\FFWebsite\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='FFWebSite']/@connectionString" />
+  </parameter>
+</parameters>

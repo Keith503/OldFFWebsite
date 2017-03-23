@@ -266,8 +266,8 @@ Public Class cFFWebSiteServer
                  " left outer join FFWebsite.Users U on N.Author_ID = U.ID " &
                  " left outer join FFWebsite.Category_Types C on N.Category_ID = C.ID " &
                  " where N.Status_ID = 4 " & strSQLWhere &
-                 " order by N.post_date desc " &
-                 " LIMIT 25"
+                 " order by N.post_date desc "
+        '   " LIMIT 25"
 
         'Execute SQL Command 
         Try

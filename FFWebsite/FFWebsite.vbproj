@@ -410,6 +410,7 @@
     <Content Include="img\FFWebsite\2016_robot_specs.jpg" />
     <Content Include="img\FFWebsite\3DPrinter1.jpg" />
     <Content Include="img\FFWebsite\3DPrinter2.jpg" />
+    <Content Include="img\FFWebsite\503.jpg" />
     <Content Include="img\FFWebsite\ASCO_NUMATICS_TM_green.jpg" />
     <Content Include="img\FFWebsite\Autoliv.JPG" />
     <Content Include="img\FFWebsite\AVL.jpg" />
@@ -443,6 +444,10 @@
     <Content Include="img\FFWebsite\Football2.jpg" />
     <Content Include="img\FFWebsite\Ford.jpg" />
     <Content Include="img\FFWebsite\Frog Force 2016 Season Recap.mp4" />
+    <Content Include="img\FFWebsite\FTC1.jpg" />
+    <Content Include="img\FFWebsite\FTC2.jpg" />
+    <Content Include="img\FFWebsite\FTC3.jpg" />
+    <Content Include="img\FFWebsite\FTC4.jpg" />
     <Content Include="img\FFWebsite\FTC_Kickoff1.jpg" />
     <Content Include="img\FFWebsite\FTC_Kickoff2.JPG" />
     <Content Include="img\FFWebsite\GirlsComp2.jpg" />

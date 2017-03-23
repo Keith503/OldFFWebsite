@@ -93,13 +93,13 @@ function initScoreTable() {
             "aoColumns": [
                 { "sTitle": "Match ID","sClass": "FF-center", "sWidth": "50px" },
                 { "sTitle": "Alliance Teams", "sClass": "FF-center", "sWidth": "100px" },
-                { "sTitle": "Fuel Low", "sClass": "FF-center", "sWidth": "70px" },
-                { "sTitle": "Fuel High", "sClass": "FF-center", "sWidth": "70px" },
-                { "sTitle": "Rotor Point", "sClass": "FF-center", "sWidth": "70px" },
-                { "sTitle": "Total Points", "sClass": "FF-center", "sWidth": "70px" },
+                { "sTitle": "Total Fuel", "sClass": "FF-center", "sWidth": "70px" },
+                { "sTitle": "Rotor Points", "sClass": "FF-center", "sWidth": "70px" },
+                { "sTitle": "Mobility Points", "sClass": "FF-center", "sWidth": "70px" },
+                { "sTitle": "Total Auton Points", "sClass": "FF-center", "sWidth": "70px" },
                 { "sTitle": "Scout Gears", "sClass": "FF-center", "sWidth": "70px" },
                 { "sTitle": "Scout Gear Location", "sClass": "FF-center", "sWidth": "100px" },
-                { "sTitle": "Scout Shooting High", "sClass": "FF-center", "sWidth": "90px" }
+                { "sTitle": "Scout Score High", "sClass": "FF-center", "sWidth": "90px" }
             ]
         });
         //setup callback function if row is clicked 
@@ -110,7 +110,36 @@ function initScoreTable() {
     }
 }
 
-
+function initTeleopTable() {
+    if (!$.fn.dataTable.isDataTable('#teleop-table')) {
+        var table = $('#teleop-table').DataTable({
+            dom: 'T<"clear">lfrtip',
+            bFilter: false,
+            "paging": false,
+            "info": false,
+            "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
+            "aoColumns": [
+              { "sTitle": "Match ID", "sClass": "FF-center", "sWidth": "50px" },
+                { "sTitle": "Alliance Teams", "sClass": "FF-center", "sWidth": "100px" },
+                { "sTitle": "Teleop Fuel", "sClass": "FF-center", "sWidth": "40px" },
+                { "sTitle": "Teleop Rotor", "sClass": "FF-center", "sWidth": "40px" },
+                { "sTitle": "Total Takeoff", "sClass": "FF-center", "sWidth": "40px" },
+                { "sTitle": "Total Auton", "sClass": "FF-center", "sWidth": "40px" },
+                { "sTitle": "Total Penalty", "sClass": "FF-center", "sWidth": "50px" },
+                { "sTitle": "Final Score", "sClass": "FF-center", "sWidth": "60px" },
+                { "sTitle": "Scout Gears", "sClass": "FF-center", "sWidth": "50px" },
+                { "sTitle": "Scout Drop Gears", "sClass": "FF-center", "sWidth": "80px" },
+                { "sTitle": "Scout Climb", "sClass": "FF-center", "sWidth": "50px" },
+                { "sTitle": "Scout Tech Diff", "sClass": "FF-center", "sWidth": "180px" }
+            ]
+        });
+        //setup callback function if row is clicked 
+        //$('#score-table tbody').on('click', 'tr', function () {
+        //    var aData = table.row(this).data();
+        //    ScoreTableitemSelected(aData);
+        //})
+    }
+}
 
 function loadTeamTable() {
     var nid = $('#matchdropdown').val();
@@ -173,7 +202,7 @@ function TableitemSelected(item) {
 
         var t2 = $("#teleop-table").DataTable();
         t2.clear();
-        t2.rows.add(tableData).draw();
+        t2.rows.add(tableData2).draw();
 
     }) //End JSON call 
   .error(function (jqXHR, textStatus, errorThrown) {
@@ -182,13 +211,12 @@ function TableitemSelected(item) {
 }
 
 function formatscorerow(item) {
-    return [item.MatchNumber, item.AllianceTeams, item.AutoFuelLow, item.AutoFuelHigh, item.AutoRotor, item.AutoPoints, item.ScoutScoreGearA, item.ScoutGearLocationA, item.ScoutScoreHighA];
+    return [item.MatchNumber, item.AllianceTeams, item.AutoFuelLow + item.AutoFuelHigh, item.AutoRotorPoints, item.AutoMobilityPoints,item.AutoPoints, item.ScoutScoreGearA, item.ScoutGearLocationA, item.ScoutScoreHighA];
 }
 
 function formatteleoprow(item) {
-    return [item.MatchNumber, item.AllianceTeams, item.TeleopFuelPoints, item.TeleopPoints, item.TeleopTakeOffPoints, item.ScoutGearT,item.TotalHighFuelScore,item.ScoutDropGears,item.ScoutTechDiff];
+    return [item.MatchNumber, item.AllianceTeams, item.TeleopFuelPoints, item.TotalRotorPoints,item.TeleopTakeOffPoints,item.AutoPoints,item.FoulPoints,item.TotalPoints, item.ScoutGearT,item.ScoutDropGears,item.ScoutClimb,item.ScoutTechDiff];
 }
-
 
 function initGearTable() {
     if (!$.fn.dataTable.isDataTable('#topgear-table')) {
@@ -259,33 +287,7 @@ function initShootTable() {
     }
 }
 
-function initTeleopTable() {
-    if (!$.fn.dataTable.isDataTable('#teleop-table')) {
-        var table = $('#teleop-table').DataTable({
-            dom: 'T<"clear">lfrtip',
-            bFilter: false,
-            "paging": false,
-            "info": false,
-            "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
-            "aoColumns": [
-                { "sTitle": "Match ID", "sClass": "FF-center", "sWidth": "50px" },
-                { "sTitle": "Alliance Teams", "sClass": "FF-center", "sWidth": "100px" },
-                { "sTitle": "Total Fuel Points", "sClass": "FF-center", "sWidth": "100px" },
-                { "sTitle": "Total Teleop Points", "sClass": "FF-center", "sWidth": "100px" },
-                { "sTitle": "Takeoff Points", "sClass": "FF-center", "sWidth": "100px" },
-                { "sTitle": "Scout Total Gears", "sClass": "FF-center", "sWidth": "100px" },
-                { "sTitle": "Scout total High Fuel", "sClass": "FF-center", "sWidth": "100px" },
-                { "sTitle": "Scout gears Dropped", "sClass": "FF-center", "sWidth": "100px" },
-                { "sTitle": "Scout Commentss", "sClass": "FF-center", "sWidth": "100px" }
-            ]
-        });
-        //setup callback function if row is clicked 
-        //$('#score-table tbody').on('click', 'tr', function () {
-        //    var aData = table.row(this).data();
-        //    ScoreTableitemSelected(aData);
-        //})
-    }
-}
+
 
 function loadGearTable() {
     var nid = $('#eventdropdown').val();
