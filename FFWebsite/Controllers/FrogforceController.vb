@@ -283,7 +283,7 @@ Namespace Controllers
         Public Function GetScoutingScoresforTeam(ByVal id As String) As IHttpActionResult
             Dim m_cFFServer As New cFFWebSiteServer
             Dim MatchList As New List(Of cMatchItem)
-            Dim lEventID As Long = 2
+            Dim lEventID As Long = 6
             Dim ScoreList As New List(Of cAllianceScore)
 
             Try
@@ -352,7 +352,7 @@ Namespace Controllers
         End Function
         Public Function GetScoutingDump(ByVal id As String) As IHttpActionResult
             Dim m_cFFServer As New cFFWebSiteServer
-            Dim ScoutList As New List(Of cTabletDataFixed)
+            Dim ScoutList As New List(Of cTabletData)
 
             'Id = event id   
             Try
@@ -382,7 +382,22 @@ Namespace Controllers
 
             Return Ok(ClimbList)
         End Function
+        Public Function GetTeamsAtEvent(ByVal id As String) As IHttpActionResult
+            Dim m_cFFServer As New cFFWebSiteServer
+            Dim TeamList As New List(Of cTypeItem)
 
+            'Id = event id   
+            Try
+                'first go get a list of matches that this team has done 
+                TeamList = m_cFFServer.GetTeamsAtEvent(CLng(id))
+
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetTeamsAtEvent", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(TeamList)
+        End Function
 
 
 

@@ -17,7 +17,7 @@ Public Class cAllianceScore
     Private m_ScoutGearLocationA As String
     Private m_ScoutScoreHighA As Long
     Private m_ScoutScoreLowA As Boolean
-    Private m_ScoutScore50A As Boolean
+    Private m_ScoutAutonHighFuelScore As Integer
     Private m_TeleopPoints As Integer
     Private m_TeleopFuelPoints As Integer
     Private m_TeleopTakeOffPoints As Integer
@@ -142,12 +142,12 @@ Public Class cAllianceScore
         End Set
     End Property
 
-    Public Property ScoutScore50A() As Boolean
+    Public Property ScoutAutonHighFuelScore() As Integer
         Get
-            Return m_ScoutScore50A
+            Return m_ScoutAutonHighFuelScore
         End Get
-        Set(ByVal value As Boolean)
-            m_ScoutScore50A = value
+        Set(ByVal value As Integer)
+            m_ScoutAutonHighFuelScore = value
         End Set
     End Property
 

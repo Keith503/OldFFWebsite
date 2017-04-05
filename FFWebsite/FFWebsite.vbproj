@@ -278,8 +278,8 @@
     <Compile Include="Models\cMatchItem.vb" />
     <Compile Include="Models\cMatchTeams.vb" />
     <Compile Include="Models\cNewsItem.vb" />
+    <Compile Include="Models\cTabletData_old.vb" />
     <Compile Include="Models\cTabletData.vb" />
-    <Compile Include="Models\cTabletDataFixed.vb" />
     <Compile Include="Models\cTypeItem.vb" />
     <Compile Include="Models\mFFWebsite.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -415,6 +415,8 @@
     <Content Include="img\FFWebsite\Autoliv.JPG" />
     <Content Include="img\FFWebsite\AVL.jpg" />
     <Content Include="img\FFWebsite\chairman%27s.jpg" />
+    <Content Include="img\FFWebsite\China1.jpg" />
+    <Content Include="img\FFWebsite\China2.jpg" />
     <Content Include="img\FFWebsite\Cyber_Football_Jumbotron.jpg" />
     <Content Include="img\FFWebsite\Dean1.jpg" />
     <Content Include="img\FFWebsite\Dean2.jpg" />
@@ -471,6 +473,10 @@
     <Content Include="img\FFWebsite\Jackson.jpg" />
     <Content Include="img\FFWebsite\KetteringKickoff1.jpg" />
     <Content Include="img\FFWebsite\KetteringKickoff2.jpg" />
+    <Content Include="img\FFWebsite\LEAP1.jpg" />
+    <Content Include="img\FFWebsite\LEAP2.jpg" />
+    <Content Include="img\FFWebsite\Library1.jpg" />
+    <Content Include="img\FFWebsite\Library2.jpg" />
     <Content Include="img\FFWebsite\Magna.jpg" />
     <Content Include="img\FFWebsite\Magna_Video1.jpg" />
     <Content Include="img\FFWebsite\Magna_Video2.jpg" />
@@ -573,6 +579,7 @@
     <Content Include="js\page-scoutingdump.js" />
     <Content Include="js\page-single-event.js" />
     <Content Include="js\page-strategy.js" />
+    <Content Include="js\spin.js" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\FFWebsite.vbproj.GenerateResource.Cache" />
     <Content Include="obj\Debug\FFWebsite.vbprojResolveAssemblyReference.cache" />

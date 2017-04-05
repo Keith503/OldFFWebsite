@@ -97,6 +97,7 @@ function initScoreTable() {
                 { "sTitle": "Rotor Points", "sClass": "FF-center", "sWidth": "70px" },
                 { "sTitle": "Mobility Points", "sClass": "FF-center", "sWidth": "70px" },
                 { "sTitle": "Total Auton Points", "sClass": "FF-center", "sWidth": "70px" },
+                { "sTitle": "Scout High Fuel", "sClass": "FF-center", "sWidth": "70px" },
                 { "sTitle": "Scout Gears", "sClass": "FF-center", "sWidth": "70px" },
                 { "sTitle": "Scout Gear Location", "sClass": "FF-center", "sWidth": "100px" },
                 { "sTitle": "Scout Score High", "sClass": "FF-center", "sWidth": "90px" }
@@ -127,6 +128,7 @@ function initTeleopTable() {
                 { "sTitle": "Total Auton", "sClass": "FF-center", "sWidth": "40px" },
                 { "sTitle": "Total Penalty", "sClass": "FF-center", "sWidth": "50px" },
                 { "sTitle": "Final Score", "sClass": "FF-center", "sWidth": "60px" },
+                { "sTitle": "Scout High Fuel", "sClass": "FF-center", "sWidth": "60px" },
                 { "sTitle": "Scout Gears", "sClass": "FF-center", "sWidth": "50px" },
                 { "sTitle": "Scout Drop Gears", "sClass": "FF-center", "sWidth": "80px" },
                 { "sTitle": "Scout Climb", "sClass": "FF-center", "sWidth": "50px" },
@@ -211,11 +213,11 @@ function TableitemSelected(item) {
 }
 
 function formatscorerow(item) {
-    return [item.MatchNumber, item.AllianceTeams, item.AutoFuelLow + item.AutoFuelHigh, item.AutoRotorPoints, item.AutoMobilityPoints,item.AutoPoints, item.ScoutScoreGearA, item.ScoutGearLocationA, item.ScoutScoreHighA];
+    return [item.MatchNumber, item.AllianceTeams, item.AutoFuelLow + item.AutoFuelHigh, item.AutoRotorPoints, item.AutoMobilityPoints, item.AutoPoints, item.ScoutAutonHighFuelScore, item.ScoutScoreGearA, item.ScoutGearLocationA, item.ScoutScoreHighA];
 }
 
 function formatteleoprow(item) {
-    return [item.MatchNumber, item.AllianceTeams, item.TeleopFuelPoints, item.TotalRotorPoints,item.TeleopTakeOffPoints,item.AutoPoints,item.FoulPoints,item.TotalPoints, item.ScoutGearT,item.ScoutDropGears,item.ScoutClimb,item.ScoutTechDiff];
+    return [item.MatchNumber, item.AllianceTeams, item.TeleopFuelPoints, item.TotalRotorPoints, item.TeleopTakeOffPoints, item.AutoPoints, item.FoulPoints, item.TotalPoints, item.ScoutTotalHighFuel, item.ScoutGearT, item.ScoutDropGears, item.ScoutClimb, item.ScoutTechDiff];
 }
 
 function initGearTable() {

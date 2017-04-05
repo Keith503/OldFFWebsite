@@ -652,8 +652,9 @@ Public Class cFFWebSiteServer
 
         strSQL = "select ID, start_date, Title_text, Location_text " &
                  " from FFWebsite.Events " &
-                 " where start_date >= DATE_SUB(Now(), INTERVAL 36 DAY)" &
-                 " order by start_date desc "
+                 " where start_date >= Now() " &
+                 " order by start_date Asc " &
+                 " LIMIT 5 "
 
         'Execute SQL Command 
         Try
@@ -915,9 +916,63 @@ Public Class cFFWebSiteServer
 
         Return details
     End Function
+
+
     '---------------------------------------------------------------------------------------------------
     '  Scouting Functions  
     '---------------------------------------------------------------------------------------------------
+    Public Function GetTeamsAtEvent(ByVal lEventID As Long) As List(Of cTypeItem)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetEventList
+        'Purpose:	return list of event items       
+        'Input:     Nothing 
+        'Returns:   list of cEvent objects containg priority list  
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cTypeItem)
+        Dim m_cFFWebSiteDB As New cFFScoutingDB
+        Dim i As Integer = 0
+
+        strSQL = "select et.TeamNumber, t.NameShort " &
+                  " From ffscouting.eventteams et " &
+                  " Left outer join ffscouting.teams t on et.TeamNumber = t.TeamNumber " &
+                  " where et.EventID = " & lEventID.ToString
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                i = i + 1
+                Dim TeamRow As New cTypeItem
+                With TeamRow
+                    .ID = TestNullLong(dr, 0)
+                    .Description_text = TestNullString(dr, 1)
+                End With
+
+                details.Add(TeamRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetTeamsAtEvent", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseDataReader()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return details
+    End Function
+
     Public Function GetScoutingEventList() As List(Of cEventItem)
         '---------------------------------------------------------------------------------------
         'Function:	GetScoutingEventList
@@ -931,7 +986,7 @@ Public Class cFFWebSiteServer
         Dim m_cFFWebSiteDB As New cFFScoutingDB
         Dim i As Integer = 0
 
-        strSQL = "select ID, name,datestart " &
+        strSQL = "Select ID, name,datestart " &
                  " from ffscouting.events " &
                  " order by name "
 
@@ -984,7 +1039,7 @@ Public Class cFFWebSiteServer
         Dim m_cFFWebSiteDB As New cFFScoutingDB
         Dim i As Integer = 0
 
-        strSQL = "select ID, eventID, MatchNumber,Description,StartTime,TournamentLevel " &
+        strSQL = "Select ID, eventID, MatchNumber,Description,StartTime,TournamentLevel " &
                  " from ffscouting.eventschedule " &
                  " Where EventID = " & lEventID.ToString &
                  " order by MatchNumber "
@@ -1040,9 +1095,9 @@ Public Class cFFWebSiteServer
         Dim m_cFFWebSiteDB As New cFFScoutingDB
         Dim i As Integer = 0
 
-        strSQL = "select st.scheduleID, st.TeamNumber, t.NameShort, st.Station " &
+        strSQL = "Select st.scheduleID, st.TeamNumber, t.NameShort, st.Station " &
                  " from ffscouting.scheduleteams st  " &
-                 " left outer join ffscouting.teams t on st.TeamNumber = t.TeamNumber " &
+                 " left outer join ffscouting.teams t On st.TeamNumber = t.TeamNumber " &
                  " Where st.ScheduleID = " & lScheduleID.ToString &
                  " order by st.Station "
 
@@ -1093,11 +1148,11 @@ Public Class cFFWebSiteServer
         Dim m_cFFWebSiteDB As New cFFScoutingDB
         Dim i As Integer = 0
 
-        strSQL = "select es.MatchNumber,st.Station" &
+        strSQL = "Select es.MatchNumber,st.Station" &
                  " from ffscouting.eventschedule es" &
-                 "  left outer join ffscouting.scheduleteams st on es.id = st.scheduleID " &
+                 "  left outer join ffscouting.scheduleteams st On es.id = st.scheduleID " &
                  " Where es.EventID = " & lEventID.ToString &
-                 " and st.teamnumber = " & lTeamNumber.ToString &
+                 " And st.teamnumber = " & lTeamNumber.ToString &
                  " order by es.MatchNumber,st.station "
 
         'Execute SQL Command 
@@ -1158,7 +1213,7 @@ Public Class cFFWebSiteServer
         'first build the where clause for the select 
         'For Each cMatchItem In Matchobj
         ' If Not boolFirstTime Then
-        ' strSQLWhere = strSQLWhere + " or "
+        ' strSQLWhere = strSQLWhere + " Or "
         ' Else
         ' boolFirstTime = False
         ' End If
@@ -1168,16 +1223,16 @@ Public Class cFFWebSiteServer
         '        Else
         '        strWork = "Blue"
         '        End If
-        '        strSQLWhere = strSQLWhere + "(es.matchnumber = " + cMatchItem.MatchNumber.ToString + " and sc.type = " + strQuote + strWork + strQuote + ") "
+        '        strSQLWhere = strSQLWhere + "(es.matchnumber = " + cMatchItem.MatchNumber.ToString + " And sc.type = " + strQuote + strWork + strQuote + ") "
         '        Next
 
-        strSQL = "select st.eventid, st.matchnumber, st.TeamNumber, st.Station   " &
+        strSQL = "Select st.eventid, st.matchnumber, st.TeamNumber, st.Station   " &
                  ", sc.autoFuelLow, sc.autoFuelHigh, sc.rotor1Auto, sc.rotor2Auto  " &
                  ", sc.autoPoints, sc.TeleopPoints, sc.TeleopFuelPoints,sc.teleoptakeoffpoints, sc.foulPoints  " &
                  ", sc.autorotorpoints, sc.autoMobilityPoints,sc.AdjustPoints,sc.TotalPoints " &
                  ", sc.rotor1Engaged, sc.rotor2Engaged, sc.rotor3Engaged,sc.rotor4Engaged " &
                  " From ffscouting.scheduleteams st " &
-                 " Left outer join ffscouting.alliancescores sc on " &
+                 " Left outer join ffscouting.alliancescores sc On " &
                  " (st.eventid = sc.eventid And st.MatchNumber = sc.matchNumber And mid(sc.Type,1,3) = mid(st.Station,1,3))  " &
                  " where st.eventID = " & lEventID.ToString &
                  " And st.teamnumber = " & lTeamNumber.ToString
@@ -1241,6 +1296,7 @@ Public Class cFFWebSiteServer
                 End With
 
 
+
                 details.Add(ScoreRow)
 
             End While
@@ -1281,7 +1337,7 @@ Public Class cFFWebSiteServer
                             Case Else
                                 .ScoutGearLocationA = ""
                         End Select
-                        .ScoutScore50A = cTabletData.ScoreatLeast50A
+                        .ScoutAutonHighFuelScore = cTabletData.TotalAutonHighFuelScore
                         .ScoutScoreGearA = cTabletData.ScoreGearA
                         .ScoutScoreHighA = cTabletData.ScoreHighFuelA
                         .ScoutScoreLowA = cTabletData.ScoreLowFuelA
@@ -1337,7 +1393,7 @@ Public Class cFFWebSiteServer
         Next
 
         strSQL = "Select id,eventid,teamnumber,matchnumber,BreachLineA,ScoreGearA,GearLocation,ScoreHighFuelA " &
-                 ",ScoreatLeast50A,ScoreLowFuelA,ScoreGearT,ScoreHighFuelT,ScoreLowFuelT,Climb,ClimbLocation" &
+                 ",TotalAutonHighFuelScore,ScoreLowFuelA,ScoreGearT,ScoreHighFuelT,ScoreLowFuelT,Climb,ClimbLocation" &
                  ",DropGears,TechDiff,TotalHighFuelScore " &
                  " from ffscouting.scoutdata  " &
                  " where eventID = " & lEventID.ToString &
@@ -1359,7 +1415,7 @@ Public Class cFFWebSiteServer
                     .ScoreGearA = TestNullBoolean(dr, 5)
                     .GearLocation = TestNullString(dr, 6)
                     .ScoreHighFuelA = TestNullLong(dr, 7)
-                    .ScoreatLeast50A = TestNullBoolean(dr, 8)
+                    .TotalAutonHighFuelScore = TestNullLong(dr, 8)
                     .ScoreLowFuelA = TestNullBoolean(dr, 9)
                     .ScoreGearT = TestNullLong(dr, 10)
                     .ScoreHighFuelT = TestNullLong(dr, 11)
@@ -1564,7 +1620,7 @@ Public Class cFFWebSiteServer
         Return details
     End Function
 
-    Public Function DumpScoutingData(ByVal lEventID As Long) As List(Of cTabletDataFixed)
+    Public Function DumpScoutingData(ByVal lEventID As Long) As List(Of cTabletData)
         '---------------------------------------------------------------------------------------
         'Function:	DumpScoutingData
         'Purpose:	return all tablet data for manual input into excel spreadsheet - just in case          
@@ -1573,11 +1629,11 @@ Public Class cFFWebSiteServer
         '----------------------------------------------------------------------------------- ---> 	
         Dim strSQL As String = ""
         Dim dr As MySqlDataReader
-        Dim details As New List(Of cTabletDataFixed)
+        Dim details As New List(Of cTabletData)
         Dim m_cFFWebSiteDB As New cFFScoutingDB
 
         strSQL = "Select id,eventid,teamnumber,matchnumber,BreachLineA,ScoreGearA,GearLocation,ScoreHighFuelA " &
-                 ",ScoreatLeast50A,ScoreLowFuelA,ScoreGearT,ScoreHighFuelT,ScoreLowFuelT,Climb,ClimbLocation" &
+                 ",TotalAutonHighFuelScore,ScoreLowFuelA,ScoreGearT,ScoreHighFuelT,ScoreLowFuelT,Climb,ClimbLocation" &
                  ",DropGears,TechDiff,TotalHighFuelScore,ScoutName,Alliance " &
                  " from ffscouting.scoutdata  " &
                  " where eventID = " & lEventID.ToString
@@ -1587,7 +1643,7 @@ Public Class cFFWebSiteServer
             dr = m_cFFWebSiteDB.ExecDRQuery(strSQL)
             While dr.Read()
 
-                Dim TabletRow As New cTabletDataFixed
+                Dim TabletRow As New cTabletData
                 With TabletRow
                     .ID = TestNullLong(dr, 0)
                     .EventID = TestNullLong(dr, 1)
@@ -1597,7 +1653,7 @@ Public Class cFFWebSiteServer
                     .ScoreGearA = TestNullBoolean(dr, 5)
                     .GearLocation = TestNullString(dr, 6)
                     .ScoreHighFuelA = TestNullLong(dr, 7)
-                    .ScoreatLeast50A = TestNullBoolean(dr, 8)
+                    .TotalAutonHighFuelScore = TestNullLong(dr, 8)
                     .ScoreLowFuelA = TestNullBoolean(dr, 9)
                     .ScoreGearT = TestNullLong(dr, 10)
                     .ScoreHighFuelT = TestNullLong(dr, 11)

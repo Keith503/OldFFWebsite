@@ -7,17 +7,17 @@ Public Class cTabletData
     Private m_TeamNumber As Long
     Private m_MatchNumber As Long
     Private m_Alliance As String
-    Private m_BreachLineA As Integer
-    Private m_ScoreGearA As Long
+    Private m_BreachLineA As Boolean
+    Private m_ScoreGearA As Boolean
     Private m_GearLocation As String
     Private m_ScoreHighFuelA As Long
-    Private m_ScoreatLeast50A As Integer
-    Private m_ScoreLowFuelA As Integer
+    Private m_TotalAutonHighFuelScore As Integer
+    Private m_ScoreLowFuelA As Boolean
     Private m_ScoreGearT As Long
     Private m_ScoreHighFuelT As Long
     Private m_TotalHighFuelScore As Long
-    Private m_ScoreLowFuelT As Integer
-    Private m_Climb As Integer
+    Private m_ScoreLowFuelT As Boolean
+    Private m_Climb As Boolean
     Private m_ClimbLocation As String
     Private m_DropGears As Long
     Private m_TechDiff As String
@@ -96,22 +96,22 @@ Public Class cTabletData
 
     '<CsvColumn(Name:="BreachLineA", FieldIndex:=6)> _
     '<CsvColumn(FieldIndex:=6)>
-    Public Property BreachLineA() As Integer
+    Public Property BreachLineA() As Boolean
         Get
             Return m_BreachLineA
         End Get
-        Set(value As Integer)
+        Set(value As Boolean)
             m_BreachLineA = value
         End Set
     End Property
 
     '<CsvColumn(Name:="ScoreGearA", FieldIndex:=7)> _
     '<CsvColumn(FieldIndex:=7)>
-    Public Property ScoreGearA() As Integer
+    Public Property ScoreGearA() As Boolean
         Get
             Return m_ScoreGearA
         End Get
-        Set(value As Integer)
+        Set(value As Boolean)
             m_ScoreGearA = value
         End Set
     End Property
@@ -140,25 +140,25 @@ Public Class cTabletData
         End Set
     End Property
 
-    '<CsvColumn(Name:="ScoreatLeast50A", FieldIndex:=10)> _
+    '<CsvColumn(Name:="TotalAutonHighFuelScore", FieldIndex:=10)> _
     '<CsvColumn(FieldIndex:=10)>
-    Public Property ScoreatLeast50A() As Integer
+    Public Property TotalAutonHighFuelScore() As Integer
         Get
-            Return m_ScoreatLeast50A
+            Return m_TotalAutonHighFuelScore
         End Get
         Set(value As Integer)
-            m_ScoreatLeast50A = value
+            m_TotalAutonHighFuelScore = value
         End Set
     End Property
 
 
     '<CsvColumn(Name:="ScoreLowFuelA", FieldIndex:=11)> _
     '<CsvColumn(FieldIndex:=11)>
-    Public Property ScoreLowFuelA() As Integer
+    Public Property ScoreLowFuelA() As Boolean
         Get
             Return m_ScoreLowFuelA
         End Get
-        Set(value As Integer)
+        Set(value As Boolean)
             m_ScoreLowFuelA = value
         End Set
     End Property
@@ -200,11 +200,11 @@ Public Class cTabletData
 
     '<CsvColumn(Name:="ScoreLowFuelT", FieldIndex:=15)> _
     '<CsvColumn(FieldIndex:=15)>
-    Public Property ScoreLowFuelT() As Integer
+    Public Property ScoreLowFuelT() As Boolean
         Get
             Return m_ScoreLowFuelT
         End Get
-        Set(value As Integer)
+        Set(value As Boolean)
             m_ScoreLowFuelT = value
         End Set
     End Property
@@ -212,11 +212,11 @@ Public Class cTabletData
 
     '<CsvColumn(Name:="Climb", FieldIndex:=16)> _
     '<CsvColumn(FieldIndex:=16)>
-    Public Property Climb() As Integer
+    Public Property Climb() As Boolean
         Get
             Return m_Climb
         End Get
-        Set(value As Integer)
+        Set(value As Boolean)
             m_Climb = value
         End Set
     End Property
