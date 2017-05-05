@@ -283,8 +283,10 @@ Namespace Controllers
         Public Function GetScoutingScoresforTeam(ByVal id As String) As IHttpActionResult
             Dim m_cFFServer As New cFFWebSiteServer
             Dim MatchList As New List(Of cMatchItem)
-            Dim lEventID As Long = 6
+            Dim lEventID As Long
             Dim ScoreList As New List(Of cAllianceScore)
+
+            lEventID = HttpUtility.ParseQueryString(Request.RequestUri.Query).Get("eventid")
 
             Try
                 'first go get a list of matches that this team has done 

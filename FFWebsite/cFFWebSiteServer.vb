@@ -141,7 +141,7 @@ Public Class cFFWebSiteServer
         strSQL = "Select id, Title_text, post_date, Image1_Name, Body_Text from FFWebsite.News " &
                   " where Status_ID = 4 " &
                   " order by post_date desc " &
-                  " LIMIT 10"
+                  " LIMIT 15"
 
         'Execute SQL Command 
         Try
