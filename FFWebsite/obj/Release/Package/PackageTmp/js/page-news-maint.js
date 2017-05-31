@@ -1,8 +1,14 @@
-﻿$(document).ready(function () {
+﻿var newFlag = false;
+var spinner;
+
+$(document).ready(function () {
+
+    $('#datetimepicker1').datetimepicker({ format: 'MM/DD/YYYY' });
 
     document.getElementById('btnNew').addEventListener('click', processNew, false);
     document.getElementById('btnSav').addEventListener('click', processUpdate, false);
-    document.getElementById('fNewsSelect').addEventListener('change', refreshItem, false);
+    document.getElementById('btnDel').addEventListener('click', processDelete, false);
+    $('#fNewsSelect').change(function () { refreshItem(); });
 
     refreshNewsItems();
     refreshCategorylist();
@@ -40,6 +46,8 @@ function refreshItem() {
     //*******************************************
     /* Refresh screen with selected news item   
     /********************************************/
+    //turn on the spinner 
+    startSpinner();
     var nid = $('#fNewsSelect').val();
     var uri = "api/frogforce/GetNewsItem/" + nid;
     $.getJSON(uri, function (data) {
@@ -52,19 +60,17 @@ function refreshItem() {
         //document.getElementById("fAppDate").value = "";
         document.getElementById("fAuthBy").value = data.Author_ID;
         var pd = parseDate(data.Post_Date);
-        //var fpd = formatDate(pd);
-        document.getElementById("fPostDate").value = formatDate(pd);
-
-        //document.getElementById("fPostDate").value = "02/16/2016 09:00:00";
+        $('#datetimepicker1').data("DateTimePicker").date(pd);
         document.getElementById("fTitle").value = data.Title_text;
         document.getElementById("fBody").value = data.Body_text;
         document.getElementById("fImageID1").value = data.Image1_Name;
         document.getElementById("fImageID2").value = data.Image2_Name;
+        stopSpinner();
     }) // End Json Call 
     // Optional - fires when operation completes with error
     .error(function (jqXHR, textStatus, errorThrown) {
         msgbox(-1, "refreshitem Failed!", 'Error Occurred: ' + jqXHR.responseText);
-        //hiderefreshbtn("#gtbtn", "Done");
+        stopSpinner();
     });
 }
 
@@ -168,13 +174,14 @@ function processNew() {
     document.getElementById("fAppBy").value = "";
     document.getElementById("fAppDate").value = "";
     document.getElementById("fAuthBy").selectedIndex = 0;
+
     var formatDate = d3.timeFormat("%m-%d-%Y %H:%M:%S");
-    document.getElementById("fPostDate").value = formatDate(new Date());
-    //document.getElementById("fPostDate").value = "02/16/2016 09:00:00";
+    $('#datetimepicker1').data("DateTimePicker").date(formatDate(new Date()));
     document.getElementById("fTitle").value = "";
     document.getElementById("fBody").value = "";
     document.getElementById("fImageID1").value = "";
     document.getElementById("fImageID2").value = "";
+    newFlag = true; 
 }
 
 function processUpdate() {
@@ -183,7 +190,7 @@ function processUpdate() {
     var cat = document.getElementById("fCategory").value;
     var status = $('#fStatus').val();
     var authby = $('#fAuthBy').val();
-    var postdt = document.getElementById("fPostDate").value;
+    var postdt = $('#datetimepicker1').data("DateTimePicker").date();
     var title = document.getElementById("fTitle").value;
     var body = document.getElementById("fBody").value;
     var image1 = document.getElementById("fImageID1").value;
@@ -203,7 +210,12 @@ function processUpdate() {
     var testpost = $.post(uri, { "": JSON.stringify(ni) })
         .success(function (data) {
             msgbox(0, "News Updated Successfully!", "News Item was successfully updated!");
-          //  refreshNewsItems();
+            //if this was a new add, then refresh the selection box to include it 
+            if (newFlag) {
+                refreshNewsItems();
+            }
+            newFlag = false; 
+           
         })
         .error(function (data) {
             msgbox(-1, "News Updated Failed!", "News Item Update failed! " + data);
@@ -213,7 +225,7 @@ function processUpdate() {
 }
 
 function processDelete() {
-    var uri = "api/frogforce/DeleteNewsItem";
+    var uri = "api/frogforce/RemoveNewsItem";
     BootstrapDialog.confirm('Are you sure you want to delete this news item?', function (result) {
         if (result) {
             var id = document.getElementById("fID").value;
@@ -223,6 +235,7 @@ function processDelete() {
             var testpost = $.post(uri, { "": JSON.stringify(ni) })
                 .success(function (data) {
                     msgbox(0, "News Deleted Successfully!", "News Item was successfully deleted!");
+                    refreshNewsItems();
                 })
                 .error(function (data) {
                     msgbox(-1, "News Delete Failed!", "News Item delete failed! " + data);
@@ -231,3 +244,16 @@ function processDelete() {
       } // End bootstrap function 
     )// End Boot strap Dialog
 }
+
+function startSpinner() {
+    spinner = displaySpinner('spin1');
+}
+
+function stopSpinner() {
+    if (spinner !== null) {
+        spinner.stop();
+        spinner = null;
+    }
+}
+
+

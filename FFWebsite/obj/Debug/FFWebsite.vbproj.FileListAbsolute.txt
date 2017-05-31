@@ -190,3 +190,209 @@ C:\Users\T420\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\obj\Debu
 C:\Users\T420\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.dll
 C:\Users\T420\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.xml
 C:\Users\T420\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.pdb
+C:\Users\keith\OneDrive\Documents\Visual Studio 2017\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.vbprojResolveAssemblyReference.cache
+C:\Users\keith\OneDrive\Documents\Visual Studio 2017\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.Resources.resources
+C:\Users\keith\OneDrive\Documents\Visual Studio 2017\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.vbproj.GenerateResource.Cache
+C:\Users\keith\OneDrive\Documents\Visual Studio 2017\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.dll
+C:\Users\keith\OneDrive\Documents\Visual Studio 2017\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.xml
+C:\Users\keith\OneDrive\Documents\Visual Studio 2017\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.pdb
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\ApplicationInsights.config
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\csc.exe
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\vbc.exe
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\VBCSCompiler.exe
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\FFWebsite.dll.config
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\FFWebsite.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\FFWebsite.pdb
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\FFWebsite.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Antlr3.Runtime.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\EntityFramework.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\EntityFramework.SqlServer.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.Web.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.ApplicationInsights.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\MySql.Data.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Newtonsoft.Json.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Owin.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Net.Http.Formatting.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Helpers.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.Owin.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.WebHost.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Mvc.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Optimization.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Razor.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.Deployment.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.Razor.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\WebGrease.dll
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.Web.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.ApplicationInsights.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\MySql.Data.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Newtonsoft.Json.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Net.Http.Formatting.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Helpers.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.WebHost.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Mvc.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Optimization.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Razor.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.Deployment.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.Razor.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Antlr3.Runtime.pdb
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\EntityFramework.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\EntityFramework.SqlServer.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\keith\onedrive\documents\visual studio 2017\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.Owin.xml
+C:\Projects\FFWebsite\FFWebsite\bin\ApplicationInsights.config
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\csc.exe
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\System.Collections.Immutable.dll
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\System.Reflection.Metadata.dll
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\vbc.exe
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\VBCSCompiler.exe
+C:\Projects\FFWebsite\FFWebsite\bin\roslyn\VBCSCompiler.exe.config
+C:\Projects\FFWebsite\FFWebsite\bin\FFWebsite.dll.config
+C:\Projects\FFWebsite\FFWebsite\bin\FFWebsite.dll
+C:\Projects\FFWebsite\FFWebsite\bin\FFWebsite.pdb
+C:\Projects\FFWebsite\FFWebsite\bin\FFWebsite.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Antlr3.Runtime.dll
+C:\Projects\FFWebsite\FFWebsite\bin\EntityFramework.dll
+C:\Projects\FFWebsite\FFWebsite\bin\EntityFramework.SqlServer.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.DependencyCollector.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.Web.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.WindowsServer.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.ApplicationInsights.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Google.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Web.Infrastructure.dll
+C:\Projects\FFWebsite\FFWebsite\bin\MySql.Data.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Newtonsoft.Json.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Owin.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Net.Http.Formatting.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Helpers.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.Owin.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.WebHost.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Mvc.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Optimization.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Razor.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.Deployment.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.dll
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.Razor.dll
+C:\Projects\FFWebsite\FFWebsite\bin\WebGrease.dll
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.DependencyCollector.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.Web.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.WindowsServer.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.ApplicationInsights.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Projects\FFWebsite\FFWebsite\bin\MySql.Data.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Newtonsoft.Json.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Net.Http.Formatting.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Helpers.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.WebHost.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Mvc.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Optimization.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Razor.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.Deployment.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.Razor.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Antlr3.Runtime.pdb
+C:\Projects\FFWebsite\FFWebsite\bin\EntityFramework.xml
+C:\Projects\FFWebsite\FFWebsite\bin\EntityFramework.SqlServer.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Google.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.Owin.xml
+C:\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.vbprojResolveAssemblyReference.cache
+C:\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.Resources.resources
+C:\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.vbproj.GenerateResource.Cache
+C:\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.dll
+C:\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.xml
+C:\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.pdb
+C:\Projects\FFWebsite\FFWebsite\bin\itext.barcodes.dll
+C:\Projects\FFWebsite\FFWebsite\bin\itext.forms.dll
+C:\Projects\FFWebsite\FFWebsite\bin\itext.io.dll
+C:\Projects\FFWebsite\FFWebsite\bin\itext.kernel.dll
+C:\Projects\FFWebsite\FFWebsite\bin\itext.layout.dll
+C:\Projects\FFWebsite\FFWebsite\bin\itext.pdfa.dll
+C:\Projects\FFWebsite\FFWebsite\bin\itext.sign.dll
+C:\Projects\FFWebsite\FFWebsite\bin\itext.barcodes.xml
+C:\Projects\FFWebsite\FFWebsite\bin\itext.forms.xml
+C:\Projects\FFWebsite\FFWebsite\bin\itext.io.xml
+C:\Projects\FFWebsite\FFWebsite\bin\itext.kernel.xml
+C:\Projects\FFWebsite\FFWebsite\bin\itext.layout.xml
+C:\Projects\FFWebsite\FFWebsite\bin\itext.pdfa.xml
+C:\Projects\FFWebsite\FFWebsite\bin\itext.sign.xml

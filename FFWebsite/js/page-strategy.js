@@ -70,9 +70,12 @@ function loadTeamDropdown() {
 
     $.getJSON(uri, function (data) {
         $('#teamdropdown').empty();
+        $('#kateamdropdown').empty();
         $.each(data, function (index, item) {
             var newOption = $('<option value="' + item.ID + '">' + item.ID + '-' +item.Description_text + '</option>');    //TODO: what is the members of the data coming back?
             $('#teamdropdown').append(newOption);
+            $('#kateamdropdown').append(newOption);
+            
         });
 
         loadTeamTable();

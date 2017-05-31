@@ -248,13 +248,12 @@ Module mFFWebsite
         Dim i As Integer
 
         For i = 1 To Len(inStr)
-        Next
-
-        If Mid(inStr, i, 1) <> strQuote Then
-            If Mid(inStr, i, 1) <> strDblQuote Then
-                RetStr = RetStr + Mid(inStr, i, 1)
+            If Mid(inStr, i, 1) <> strQuote Then
+                If Mid(inStr, i, 1) <> strDblQuote Then
+                    RetStr = RetStr + Mid(inStr, i, 1)
+                End If
             End If
-        End If
+        Next
         Return RetStr
     End Function
 End Module

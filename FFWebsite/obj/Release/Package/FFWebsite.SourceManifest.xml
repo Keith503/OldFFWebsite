@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\obj\Release\Package\PackageTmp" />
-  <setAcl path="C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+  <IisApp path="C:\Projects\FFWebsite\FFWebsite\obj\Release\Package\PackageTmp" />
+  <setAcl path="C:\Projects\FFWebsite\FFWebsite\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="C:\Projects\FFWebsite\FFWebsite\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
 </sitemanifest>

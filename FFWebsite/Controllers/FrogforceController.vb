@@ -400,7 +400,19 @@ Namespace Controllers
 
             Return Ok(TeamList)
         End Function
+        Public Function UpdateNbotInterest(<FromBody()> ByVal value As String) As IHttpActionResult
+            Dim obj As cNbotInterest
+            Dim m_cFFServer As New cFFWebSiteServer
+            Try
+                obj = JsonConvert.DeserializeObject(Of cNbotInterest)(value)
+                m_cFFServer.UpdateNbotInterest(obj)
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("UpdateNbotInterest", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
 
+            Return Ok()
+        End Function
 
 
 

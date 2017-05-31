@@ -48,6 +48,27 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itext.barcodes, Version=7.0.2.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.2.2\lib\net40\itext.barcodes.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.forms, Version=7.0.2.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.2.2\lib\net40\itext.forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io, Version=7.0.2.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.2.2\lib\net40\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel, Version=7.0.2.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.2.2\lib\net40\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout, Version=7.0.2.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.2.2\lib\net40\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=7.0.2.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.2.2\lib\net40\itext.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.sign, Version=7.0.2.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.7.0.2.2\lib\net40\itext.sign.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -278,11 +299,19 @@
     <Compile Include="Models\cClimbStats.vb" />
     <Compile Include="Models\cEventItem.vb" />
     <Compile Include="Models\cGearStats.vb" />
+    <Compile Include="Models\cInventory.vb" />
+    <Compile Include="Models\cKit.vb" />
+    <Compile Include="Models\cKitPartTeamInv.vb" />
+    <Compile Include="Models\cKit_Types.vb" />
     <Compile Include="Models\cMatchItem.vb" />
     <Compile Include="Models\cMatchTeams.vb" />
+    <Compile Include="Models\cNbotInterest.vb" />
     <Compile Include="Models\cNewsItem.vb" />
+    <Compile Include="Models\cPart.vb" />
     <Compile Include="Models\cTabletData_old.vb" />
     <Compile Include="Models\cTabletData.vb" />
+    <Compile Include="Models\cTeam.vb" />
+    <Compile Include="Models\cTeam_Inventory.vb" />
     <Compile Include="Models\cTypeItem.vb" />
     <Compile Include="Models\mFFWebsite.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -399,6 +428,8 @@
     <Content Include="css\images\Sorting icons.psd" />
     <Content Include="images\Sorting icons.psd" />
     <Content Include="css\.DS_Store" />
+    <Content Include="fonts\SEGOEUI.TTF" />
+    <Content Include="fonts\calibri.ttf" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -416,7 +447,7 @@
     <Content Include="css\images\sort_desc.png" />
     <Content Include="css\images\sort_desc_disabled.png" />
     <Content Include="images\favicon.ico" />
-    <Content Include="images\sort_asc.png" />
+    <Content Include="img\sort_asc.png" />
     <Content Include="images\sort_asc_disabled.png" />
     <Content Include="images\sort_both.png" />
     <Content Include="images\sort_desc.png" />
@@ -608,12 +639,17 @@
     <Content Include="js\index.js" />
     <Content Include="js\moment-with-locales.min.js" />
     <Content Include="js\page-event-3col.js" />
-    <Content Include="js\page-FTCKOP.js" />
+    <Content Include="js\page-FTCKOP-inventory.js" />
+    <Content Include="js\page-FTCKOP-KitMaint.js" />
+    <Content Include="js\page-FTCKOP-PartMaint.js" />
+    <Content Include="js\page-FTCKOP-teaminv.js" />
+    <Content Include="js\page-FTCKOP-TeamMaint.js" />
     <Content Include="js\page-initiative-ftc.js" />
     <Content Include="js\page-initiative-dhdc.js" />
     <Content Include="js\page-initiative-hands.js" />
     <Content Include="js\page-initiative-sayplay.js" />
     <Content Include="js\page-ms.js" />
+    <Content Include="js\page-nbot-interest.js" />
     <Content Include="js\page-news-grid-4col.js" />
     <Content Include="js\page-news-item.js" />
     <Content Include="js\page-news-maint.js" />
@@ -762,13 +798,18 @@
     <Content Include="page-achievements.html" />
     <Content Include="page-blank.html" />
     <Content Include="page-events-3col.html" />
-    <Content Include="page-FTCKOP.html" />
+    <Content Include="page-FTCKOP-Inventory.html" />
+    <Content Include="page-FTCKOP-KitMaint.html" />
+    <Content Include="page-FTCKOP-PartMaint.html" />
+    <Content Include="page-FTCKOP-TeamInv.html" />
+    <Content Include="page-FTCKOP-TeamMaint.html" />
     <Content Include="page-initiative-ftc.html" />
     <Content Include="page-initiative-dhdc.html" />
     <Content Include="page-initiative-hands.html" />
     <Content Include="page-initiative-sayplay.html" />
     <Content Include="page-initiative.html" />
     <Content Include="page-ms.html" />
+    <Content Include="page-nbot-interest.html" />
     <Content Include="page-news-grid-4col.html" />
     <Content Include="page-news-item.html" />
     <Content Include="page-news-maint.html" />
@@ -798,6 +839,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="topbarnav-FTCKop.html" />
     <Content Include="topbarnav.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

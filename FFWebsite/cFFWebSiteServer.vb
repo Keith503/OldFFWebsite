@@ -1747,7 +1747,53 @@ Public Class cFFWebSiteServer
 
         Return details
     End Function
+    Public Function UpdateNbotInterest(ByVal obj As cNbotInterest) As Long
+        '******************************************************************************
+        '*  Name:       UpdateNbotInterest 
+        '*  Purpose:    Update database with nBot Interest data 
+        '*  Input:      nBot Interest object 
+        '*  returns:    ?????? 
+        '******************************************************************************
+        Dim strSQL As String
+        Dim DBServer As New cFFWebSiteDB
+        Dim lRet As Long = 0
 
+        'make sure there are no quotes in the prior experience field 
+        obj.PriorExperience = RemoveQuotes(obj.PriorExperience)
+
+        strSQL = "Insert into FFWebsite.Nbot_Interest(StudentFirstName,StudentLastName,StudentPhone,StudenteMail," &
+                 "SchoolID,Grade,Gender,Parent1Name,Parent1eMail,Parent1Phone,Parent2Name,Parent2eMail," &
+                 "FirstProgram,Question1,Question2,Question3,PriorExperience) " &
+                 "values(" &
+                  strQuote & obj.StudentFirstName & strQuote & strComma &
+                  strQuote & obj.StudentLastName & strQuote & strComma &
+                  strQuote & obj.StudentPhone & strQuote & strComma &
+                  strQuote & obj.StudenteMail & strQuote & strComma &
+                  obj.SchoolID.ToString & strComma &
+                  obj.Grade.ToString & strComma &
+                  strQuote & obj.Gender & strQuote & strComma &
+                  strQuote & obj.Parent1Name & strQuote & strComma &
+                  strQuote & obj.Parent1eMail & strQuote & strComma &
+                  strQuote & obj.Parent1Phone & strQuote & strComma &
+                  strQuote & obj.Parent2Name & strQuote & strComma &
+                  strQuote & obj.Parent2eMail & strQuote & strComma &
+                  obj.FirstProgram.ToString & strComma &
+                  strQuote & obj.Question1 & strQuote & strComma &
+                  strQuote & obj.Question2 & strQuote & strComma &
+                  strQuote & obj.Question3 & strQuote & strComma &
+                  strQuote & obj.PriorExperience & strQuote & ")"
+
+        Try
+            DBServer.ExecNonQuery(strSQL)
+        Catch ex As Exception
+            'indicate error to caller 
+            Dim strErr As String = BuildErrorMsg("Error inserting UpdateNbotInterest! Msg-", ex.Message.ToString)
+            Throw New Exception(strErr)
+        End Try
+
+        DBServer = Nothing
+        Return lRet
+    End Function
 
     '---------------------------------------------------------------------------------------------------
     '  Private Functions 
