@@ -40,11 +40,28 @@
         <div class="custom_content custom">
             <div class="container">
                 <div class="row">
-
                     <div class="col-xs-12 col-sm-8 custom_right">
                         <div class="single_content_left">
-                            <h3>NBot Interest Form</h3>
-                            <p>Use this secure online application or <a href="#">download a PDF application</a>. All applicants are welcome and encouraged to apply. Should you have any questions as you complete the <a href="#">admissions process</a>, please contact our admissions office at (573) 777-9257 or flugumj@cislions.org. A non-refundable application fee of $30 must be submitted with the completed application form.</p>
+
+                            <h3>
+                                <span>
+                                    NBot Interest Form
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                    <button type="button" id="btnClear" class="btn commonBtn">Clear Form </button>
+
+                                </span>
+                            </h3>
+                            <p>Nbot creates the forum through which teams can form in the Novi area. We do not place students on teams. We bring interested families together to form teams! 
+                            Filling out the NBot Team Interest form is a good way to let us know of your interest. You will receive additional information about the team formation meeting 
+                            we are hosting July 8th at Novi High School. Additionally, we will be able to connect you with teams wishing to add members. 
+                            There is no guarantee of placement.  Starting a team is the very best way to provide this experience for your child.
+                            </p>
+                            <p>Your contact information may be shared with other families and/or coaches interested in FIRST programs.</p>
+     
                             <form action="#" method="post" class="apply_from">
                                 <h4>PARTICIPANT INFORMATION</h4>
                                 <div class="form-group">
@@ -54,12 +71,12 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-8">
                                             <div class="text-field">
-                                                <input type="text" class="form-control" id ="sfname" name="sfname">
+                                                <input type="text" class="form-control" id="sfname" name="sfname">
                                             </div>
                                         </div>
                                     </div>
                                 </div><!--end form group-->
-                             
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-4">
@@ -67,7 +84,24 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-8">
                                             <div class="text-field">
-                                                <input type="text" class="form-control" id ="slname" name="slname">
+                                                <input type="text" class="form-control" id="slname" name="slname">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!--end form group-->
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="label">Gender <span class="error">*</span></div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <div class="text-field">
+                                                <select id="gender" name="gender" class="option-select">
+                                                    <option value="0">Select</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Female</option>
+
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +113,7 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-8">
                                             <div class="text-field">
-                                                <select id="school" name="school" class="option-select">
+                                                <select id="school" name="school" class="combobox option-select">
                                                     <option value="0">Select</option>
                                                     <option value="1">Deerfield</option>
                                                     <option value="2">Novi Woods</option>
@@ -121,23 +155,7 @@
                                         </div>
                                     </div>
                                 </div><!--end form group-->
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-4">
-                                            <div class="label">Gender <span class="error">*</span></div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-8">
-                                            <div class="text-field">
-                                                <select id="gender" name="gender" class="option-select">
-                                                    <option value="0">Select</option>
-                                                    <option value="1">Male</option>
-                                                    <option value="2">Female</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!--end form group-->
+                            
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-4">
@@ -145,12 +163,12 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-8">
                                             <div class="text-field">
-                                                <input type="text" disabled="disabled" class="form-control" id ="fprogram" name="fprogram">
+                                                <input type="text" disabled="disabled" class="form-control" id="fprogram" name="fprogram">
                                             </div>
                                         </div>
                                     </div>
                                 </div><!--end form group-->
-                                
+
 
                                 <h4>PARENT/GUARDIAN #1</h4>
                                 <div class="form-group">
@@ -165,7 +183,7 @@
                                         </div>
                                     </div>
                                 </div><!--end form group-->
-                          
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-4">
@@ -178,9 +196,9 @@
                                         </div>
                                     </div>
                                 </div><!--end form group-->
-                         
+
                                 <h4>PARENT/GUARDIAN #2</h4>
-                             
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-4">
@@ -193,7 +211,7 @@
                                         </div>
                                     </div>
                                 </div><!--end form group-->
-                        
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-4">
@@ -207,8 +225,8 @@
                                     </div>
                                 </div><!--end form group-->
 
-                                <h4>PARENT/GUARDIAN QUESTIONS</h4>    
-                                
+                                <h4>PARENT/GUARDIAN QUESTIONS</h4>
+
 
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a data-toggle="tab" href="#jrfll">Jr FLL</a></li>
@@ -285,7 +303,7 @@
                                             </div>
                                         </div><!--end form group-->
                                     </div>
-                                    <div id="fll" class="tab-pane fade"> 
+                                    <div id="fll" class="tab-pane fade">
                                         <h4>FLL Mentorship</h4>
                                         <p>
                                             Mentorship is a key component to the success of a robotics team. Parents of team memmbers
@@ -483,7 +501,7 @@
 
 
                                     </div>
-                                    <div id="frc" class="tab-pane fade">                       
+                                    <div id="frc" class="tab-pane fade">
                                         <h4>Frog Force 2017 Offseason - New student signup</h4>
                                         <p>
                                             This is a signup for new students interested in paarticipating in FRC Team 503 - Frog Force events during the offseason, prior to official student registration in Sept - Oct 2017.
@@ -542,7 +560,7 @@
                                             </div>
                                         </div><!--end form group-->
 
-                                        <h4>Note: Frog Force is dependant on parent mentors and volenteers. Please pick an area of interest where your parent can possibly help.</h4>
+                                        <h4>Note: Frog Force is dependant on parent mentors and volunteers. Please pick an area of interest where your parent can possibly help.</h4>
                                         <h5>Select areas where you can help:</h5>
                                         <div class="form-group">
                                             <div class="row">
@@ -610,7 +628,7 @@
                                                 </div>
                                             </div>
                                         </div><!--end form group-->
-                                    </div>     
+                                    </div>
                                 </div>
                                 <br />
                                 <br />

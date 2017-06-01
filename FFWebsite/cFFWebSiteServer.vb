@@ -1794,7 +1794,72 @@ Public Class cFFWebSiteServer
         DBServer = Nothing
         Return lRet
     End Function
+    Public Function GetNbotList() As List(Of cNbotInterest)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetNbotList
+        'Purpose:	return list of cNbotInterest items        
+        'Input:     Nothing 
+        'Returns:   list of cNbotInterest objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cNbotInterest)
+        Dim m_cFFWebsiteDB As New cFFWebSiteDB
 
+        strSQL = "select ID,StudentFirstName,StudentLastName,StudentPhone,StudenteMail,SchoolID, " &
+                 "Grade,Gender,Parent1Name,Parent1eMail,Parent1Phone,Parent2Name,Parent2eMail, " &
+                 "FirstProgram,Question1,Question2,Question3, PriorExperience " &
+                 "from FFWebsite.Nbot_Interest " &
+                 " order by id "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebsiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                Dim NBotRow As New cNbotInterest
+                With NBotRow
+                    .ID = TestNullLong(dr, 0)
+                    .StudentFirstName = TestNullString(dr, 1)
+                    .StudentLastName = TestNullString(dr, 2)
+                    .StudentPhone = TestNullString(dr, 3)
+                    .StudenteMail = TestNullString(dr, 4)
+                    .SchoolID = TestNullLong(dr, 5)
+                    .Grade = TestNullLong(dr, 6)
+                    .Gender = TestNullString(dr, 7)
+                    .Parent1Name = TestNullString(dr, 8)
+                    .Parent1eMail = TestNullString(dr, 9)
+                    .Parent1Phone = TestNullString(dr, 10)
+                    .Parent2Name = TestNullString(dr, 11)
+                    .Parent2eMail = TestNullString(dr,12)
+                    .FirstProgram = TestNullLong(dr, 13)
+                    .Question1 = TestNullString(dr, 14)
+                    .Question2 = TestNullString(dr, 15)
+                    .Question3 = TestNullString(dr, 16)
+                    .PriorExperience = TestNullString(dr, 17)
+                End With
+
+                details.Add(NBotRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetNbotList", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebsiteDB.cmd.Dispose()
+            m_cFFWebsiteDB.CloseDataReader()
+            m_cFFWebsiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebsiteDB = Nothing
+
+        Return details
+    End Function
     '---------------------------------------------------------------------------------------------------
     '  Private Functions 
     '---------------------------------------------------------------------------------------------------

@@ -649,6 +649,7 @@
     <Content Include="js\page-initiative-hands.js" />
     <Content Include="js\page-initiative-sayplay.js" />
     <Content Include="js\page-ms.js" />
+    <Content Include="js\page-nbot-download.js" />
     <Content Include="js\page-nbot-interest.js" />
     <Content Include="js\page-news-grid-4col.js" />
     <Content Include="js\page-news-item.js" />
@@ -809,6 +810,7 @@
     <Content Include="page-initiative-sayplay.html" />
     <Content Include="page-initiative.html" />
     <Content Include="page-ms.html" />
+    <Content Include="page-nbot-download.html" />
     <Content Include="page-nbot-interest.html" />
     <Content Include="page-news-grid-4col.html" />
     <Content Include="page-news-item.html" />
@@ -859,8 +861,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="js\Properties\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

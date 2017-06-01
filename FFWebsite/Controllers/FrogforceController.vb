@@ -400,6 +400,24 @@ Namespace Controllers
 
             Return Ok(TeamList)
         End Function
+
+        Public Function GetNbotInterest() As IHttpActionResult
+            Dim nBotList As List(Of cNbotInterest)
+            Dim m_cFFServer As New cFFWebSiteServer
+
+            'Id = event id   
+            Try
+                'first go get a list of matches that this team has done 
+                nBotList = m_cFFServer.GetNbotList()
+
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetNbotList", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(nBotList)
+        End Function
+
         Public Function UpdateNbotInterest(<FromBody()> ByVal value As String) As IHttpActionResult
             Dim obj As cNbotInterest
             Dim m_cFFServer As New cFFWebSiteServer

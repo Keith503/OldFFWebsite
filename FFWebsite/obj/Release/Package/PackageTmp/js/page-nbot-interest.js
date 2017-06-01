@@ -5,6 +5,10 @@
     $('#btnSubmit').click(function () {
         processUpdate();
     });
+    $('#btnClear').click(function () {
+     //   window.location.reload(false);
+       clearform();
+    });
    
 });  // End of Document Ready function
  
@@ -48,25 +52,25 @@ function processUpdate() {
     var uri = "api/FrogForce/UpdateNbotInterest";
     var sfn = document.getElementById("sfname").value;
     if (sfn === "") {
-        msgbox(-1, "Student First Name Misssing!", "You must enter a student first name. Try Again!!");
+        msgbox(-1, "Student First Name Missing!", "You must enter a student first name. Try Again!!");
         document.getElementById("sfname").focus(); 
         return false;
     }
     var sln = document.getElementById("slname").value;
     if (sln === "") {
-        msgbox(-1, "Student Last Name Misssing!", "You must enter a student last name. Try Again!!");
+        msgbox(-1, "Student Last Name Missing!", "You must enter a student last name. Try Again!!");
         document.getElementById("slname").focus(); 
         return false;
     }
     var sch = document.getElementById("school").value;
     if (sch === "0") {
-        msgbox(-1, "School Misssing!", "You select a school. Try Again!!");
+        msgbox(-1, "School Missing!", "You select a school. Try Again!!");
         document.getElementById("school").focus(); 
         return false;
     }
     var g = document.getElementById("grade").value;
     if (g === "0") {
-        msgbox(-1, "Grade Misssing!", "You select a grade. Try Again!!");
+        msgbox(-1, "Grade Missing!", "You select a grade. Try Again!!");
         document.getElementById("school").focus();
         return false;
     }
@@ -74,7 +78,7 @@ function processUpdate() {
     x = document.getElementById("gender");
     var gen = x.options[x.selectedIndex].text;
     if (x.value === "0") {
-        msgbox(-1, "Gender Misssing!", "You select a gender (male or female). Try Again!!");
+        msgbox(-1, "Gender Missing!", "You select a gender (male or female). Try Again!!");
         document.getElementById("school").focus();
         return false;
     }
@@ -91,18 +95,50 @@ function processUpdate() {
 
     var p1name = document.getElementById("pn1name").value;
     if (p1name === "") {
-        msgbox(-1, "Parent 1 Name Misssing!", "You must enter a parent 1 name. Try Again!!");
+        msgbox(-1, "Parent 1 Name Missing!", "You must enter a parent 1 name. Try Again!!");
         document.getElementById("pn1name").focus();
         return false;
     }
     var p1e = document.getElementById("p1email").value;
     if (p1e === "") {
-        msgbox(-1, "Parent 1 eMail Address Misssing!", "You must enter a parent 1 eMail address. Try Again!!");
+        msgbox(-1, "Parent 1 eMail Address Missing!", "You must enter a parent 1 eMail address. Try Again!!");
         document.getElementById("p1email").focus();
         return false;
     }
     var p2name = document.getElementById("pn2name").value;
     var p2e = document.getElementById("p2email").value;
+
+    //test to ensure that school and grade match 
+    var s1 = parseInt(sch);
+    var g1 = parseInt(g); 
+    if (s1 < 6) {
+        //must be elementary school
+        if (g1 > 6) {
+            msgbox(-1, "Grade/school mismatch!", "You selected an elementary school but grade in greater than 4th. Try Again!!");
+            return false;
+        }
+    }
+    if (s1 === 6) {
+        // must be novi meadows 
+        if (g1 < 7 || g > 8) {
+            msgbox(-1, "Grade/school mismatch!", "You selected Novi Meadows but grade is not 5th or 6th. Try Again!!");
+            return false;
+        }
+    } 
+    if (s1 === 7) {
+        // must be middle school
+        if (g1 < 9 || g > 10) {
+            msgbox(-1, "Grade/school mismatch!", "You selected middle school but grade is not 7th or 8th. Try Again!!");
+            return false;
+        }
+    } 
+    if (s1 === 8) {
+        // must be high school 
+        if (g1 < 11) {
+            msgbox(-1, "Grade/school mismatch!", "You selected high school but grade is not 9, 10, 11 or 12. Try Again!!");
+            return false;
+        }
+    }
 
     switch (fpgmname) {
         case "Jr FLL":
@@ -247,8 +283,11 @@ function processUpdate() {
 
     var testpost = $.post(uri, { "": JSON.stringify(ni) })
         .success(function (data) {
-            msgbox(0, "Form Saved!", "Nbot Interest Form has been successfully saved! - Thank you!!");
-            clearform();
+            if (confirm('Nbot Interest Form has been successfully saved! - Thank you!!')) {
+                clearform();
+            } else {
+                clearform();
+            }
         })
         .error(function (data) {
             msgbox(-1, "Form Save Failed!", "Nbot INterest Form Save failed! " + data);
@@ -256,32 +295,36 @@ function processUpdate() {
 }
 
 function clearform() {
-    var x;
-    document.getElementById("sfname").value = "";
-    document.getElementById("slname").value = "";
-    document.getElementById("school").selectedIndex = 0;
-    document.getElementById("grade").selectedIndex = 0;
-    document.getElementById("gender").selectedIndex = 0;
-    document.getElementById("fprogram").value = "";
-    document.getElementById("pn1name").value = "";
-    document.getElementById("p1email").value = "";
-    document.getElementById("pn2name").value = "";
-    document.getElementById("p2email").value = "";
-    document.getElementById("jrfllq1").selectedIndex = 0;
-    document.getElementById("jrfllq2").selectedIndex = 0;
-    document.getElementById("jrfllq3").selectedIndex = 0;
-    document.getElementById("fllq1").selectedIndex = 0;
-    document.getElementById("fllq2").selectedIndex = 0;
-    document.getElementById("fllq3").selectedIndex = 0;
-    document.getElementById("ftcq1").selectedIndex = 0;
-    document.getElementById("ftcq2").selectedIndex = 0;
-    document.getElementById("ftcq3").selectedIndex = 0;
-    document.getElementById("ftcpexp").value = "";
-    document.getElementById("frcstuemail").value = "";
-    document.getElementById("frcstuphone").value = "";
-    document.getElementById("frcparphone").value = "";
-    document.getElementById("frcq1").selectedIndex = 0;
-    document.getElementById("frcq2").selectedIndex = 0;
-    document.getElementById("frcq3").selectedIndex = 0;
-    document.getElementById("frcpexp").value = "";
+    window.location.reload(false);
+
+    //var x;
+    //document.getElementById("sfname").value = "";
+    //document.getElementById("slname").value = "";
+    //$('#school select').val('0');
+    //$('#school select').data('combobox').refresh();
+    //document.querySelector('school [value="0"]').selected = true;
+    //document.getElementById("grade").selectedIndex = 0;
+    //document.getElementById("gender").selectedIndex = 0;
+    //document.getElementById("fprogram").value = "";
+    //document.getElementById("pn1name").value = "";
+    //document.getElementById("p1email").value = "";
+    //document.getElementById("pn2name").value = "";
+    //document.getElementById("p2email").value = "";
+    //document.getElementById("jrfllq1").selectedIndex = 0;
+    //document.getElementById("jrfllq2").selectedIndex = 0;
+    //document.getElementById("jrfllq3").selectedIndex = 0;
+    //document.getElementById("fllq1").selectedIndex = 0;
+    //document.getElementById("fllq2").selectedIndex = 0;
+    //document.getElementById("fllq3").selectedIndex = 0;
+    //document.getElementById("ftcq1").selectedIndex = 0;
+    //document.getElementById("ftcq2").selectedIndex = 0;
+    //document.getElementById("ftcq3").selectedIndex = 0;
+    //document.getElementById("ftcpexp").value = "";
+    //document.getElementById("frcstuemail").value = "";
+    //document.getElementById("frcstuphone").value = "";
+    //document.getElementById("frcparphone").value = "";
+    //document.getElementById("frcq1").selectedIndex = 0;
+    //document.getElementById("frcq2").selectedIndex = 0;
+    //document.getElementById("frcq3").selectedIndex = 0;
+    //document.getElementById("frcpexp").value = "";
 }
