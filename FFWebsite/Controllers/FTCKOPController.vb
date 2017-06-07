@@ -319,6 +319,24 @@ Namespace Controllers
             Return Ok()
         End Function
 
+        Public Function ProcessReturn(<FromBody()> ByVal value As String) As IHttpActionResult
+            Dim m_cFTCKoPServer As New cFTCKoPServer
+            Dim lRet As Long
+            Dim obj As cPart_Returned
+
+            'ID is team ID 
+            Try
+                'go update returned quantity 
+                obj = JsonConvert.DeserializeObject(Of cPart_Returned)(value)
+                lRet = m_cFTCKoPServer.UpdateReturned(obj.TeamID, obj.PartID, obj.Returned)
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("ProcessReturn", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok()
+        End Function
+
         Public Function ProcessReturnCommit(<FromBody()> ByVal value As String) As IHttpActionResult
             Dim m_cFTCKoPServer As New cFTCKoPServer
             Dim lRet As Long
@@ -344,8 +362,6 @@ Namespace Controllers
 
             Return Ok()
         End Function
-
-
 
 
         Public Function GetKitCompare(ByVal id As String) As IHttpActionResult
@@ -399,10 +415,10 @@ Namespace Controllers
                 Dim document = New Document(pdf)
                 document.SetMargins(20, 20, 20, 20)
 
-                Dim tableparms() As Single = {1, 3, 1, 1}
+                Dim tableparms() As Single = {1, 3, 1, 1, 1}
                 Dim table = New Table(tableparms)
                 table.SetWidthPercent(100)
-
+                Dim diff As Integer
                 Dim strPath As String = HttpContext.Current.Request.PhysicalApplicationPath
                 Dim titleFont As iText.Kernel.Font.PdfFont
                 titleFont = iText.Kernel.Font.PdfFontFactory.CreateFont(strPath + "fonts\segoeui.ttf", Nothing, True)
@@ -411,24 +427,27 @@ Namespace Controllers
                 baseFont = iText.Kernel.Font.PdfFontFactory.CreateFont(strPath + "fonts\calibri.ttf", Nothing, True)
 
                 'Create page headings
-                table.AddHeaderCell(New Cell(1, 4).Add("").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetBorderBottom(New Borders.SolidBorder(iText.Kernel.Colors.Color.BLUE, 1)).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFontSize(11).SetBold.SetUnderline)
-                table.AddHeaderCell(New Cell(1, 4).Add("Team Inventory").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER).SetFont(titleFont).SetFontSize(20).SetFontColor(iText.Kernel.Colors.Color.BLACK).SetBold)
-                table.AddHeaderCell(New Cell(1, 4).Add("").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetBorderBottom(New Borders.SolidBorder(iText.Kernel.Colors.Color.BLUE, 1)).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFontSize(8).SetBold.SetUnderline)
-                table.AddHeaderCell(New Cell(1, 4).Add(sTeamTitle).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER).SetFont(baseFont).SetFontSize(12).SetFontColor(iText.Kernel.Colors.Color.BLACK).SetBold.SetItalic)
-                table.AddHeaderCell(New Cell(1, 4).Add("").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetBorderBottom(New Borders.SolidBorder(iText.Kernel.Colors.Color.BLUE, 2)).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFontSize(8).SetBold.SetUnderline).SetHeight(72.0F)
+                table.AddHeaderCell(New Cell(1, 5).Add("").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetBorderBottom(New Borders.SolidBorder(iText.Kernel.Colors.Color.BLUE, 1)).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFontSize(11).SetBold.SetUnderline)
+                table.AddHeaderCell(New Cell(1, 5).Add("Team Inventory").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER).SetFont(titleFont).SetFontSize(20).SetFontColor(iText.Kernel.Colors.Color.BLACK).SetBold)
+                table.AddHeaderCell(New Cell(1, 5).Add("").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetBorderBottom(New Borders.SolidBorder(iText.Kernel.Colors.Color.BLUE, 1)).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFontSize(8).SetBold.SetUnderline)
+                table.AddHeaderCell(New Cell(1, 5).Add(sTeamTitle).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER).SetFont(baseFont).SetFontSize(12).SetFontColor(iText.Kernel.Colors.Color.BLACK).SetBold.SetItalic)
+                table.AddHeaderCell(New Cell(1, 5).Add("").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetBorderBottom(New Borders.SolidBorder(iText.Kernel.Colors.Color.BLUE, 2)).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFontSize(8).SetBold.SetUnderline).SetHeight(72.0F)
                 'blank row 
-                table.AddHeaderCell(New Cell(1, 4).Add("").SetBorder(iText.Layout.Borders.Border.NO_BORDER))
+                table.AddHeaderCell(New Cell(1, 5).Add("").SetBorder(iText.Layout.Borders.Border.NO_BORDER))
 
                 table.AddHeaderCell(New Cell().Add("Part ID").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER).SetFont(baseFont).SetFontSize(10).SetFontColor(iText.Kernel.Colors.Color.BLUE))
                 table.AddHeaderCell(New Cell().Add("Description").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFont(baseFont).SetFontSize(10).SetFontColor(iText.Kernel.Colors.Color.BLUE))
                 table.AddHeaderCell(New Cell().Add("Quantity").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT).SetFont(baseFont).SetFontSize(10).SetFontColor(iText.Kernel.Colors.Color.BLUE))
                 table.AddHeaderCell(New Cell().Add("Returned").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT).SetFont(baseFont).SetFontSize(10).SetFontColor(iText.Kernel.Colors.Color.BLUE))
+                table.AddHeaderCell(New Cell().Add("Difference").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT).SetFont(baseFont).SetFontSize(10).SetFontColor(iText.Kernel.Colors.Color.BLUE))
 
                 'table.AddCell(New Cell(1, 6).Add("Cost Center Title").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFont(baseFont).SetFontSize(11).SetBold.SetUnderline)
                 'table.AddCell(New Cell(1, 6).Add("Cat1-Cat2 Title").SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFont(baseFont).SetFontSize(10).SetBold.SetUnderline)
 
                 bOddLine = True
                 For Each TeamRow In TeamInventoryList
+                    diff = TeamRow.Quantity - TeamRow.Returned
+
                     If bOddLine = True Then
                         bOddLine = False
                         '******* HERE IS HOW TO SET THE BACKGROUND COLOR OF A CELL/ROW - this could be used to do alternating row colors. 
@@ -436,13 +455,14 @@ Namespace Controllers
                         table.AddCell(New Cell().Add(TeamRow.Description).SetBackgroundColor(LIGHT_GRAY).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFont(baseFont).SetFontSize(10))
                         table.AddCell(New Cell().Add(TeamRow.Quantity).SetBackgroundColor(LIGHT_GRAY).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT).SetFont(baseFont).SetFontSize(10))
                         table.AddCell(New Cell().Add(TeamRow.Returned).SetBackgroundColor(LIGHT_GRAY).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT).SetFont(baseFont).SetFontSize(10))
+                        table.AddCell(New Cell().Add(diff).SetBackgroundColor(LIGHT_GRAY).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT).SetFont(baseFont).SetFontSize(10))
                     Else
                         bOddLine = True
                         table.AddCell(New Cell().Add(TeamRow.PartID).SetBackgroundColor(WHITE).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT).SetFont(baseFont).SetFontSize(10))
                         table.AddCell(New Cell().Add(TeamRow.Description).SetBackgroundColor(WHITE).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT).SetFont(baseFont).SetFontSize(10))
                         table.AddCell(New Cell().Add(TeamRow.Quantity).SetBackgroundColor(WHITE).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT).SetFont(baseFont).SetFontSize(10))
                         table.AddCell(New Cell().Add(TeamRow.Returned).SetBackgroundColor(WHITE).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT).SetFont(baseFont).SetFontSize(10))
-
+                        table.AddCell(New Cell().Add(diff).SetBackgroundColor(WHITE).SetBorder(iText.Layout.Borders.Border.NO_BORDER).SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT).SetFont(baseFont).SetFontSize(10))
                     End If
                 Next
 

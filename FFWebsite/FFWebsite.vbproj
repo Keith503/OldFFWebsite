@@ -308,6 +308,7 @@
     <Compile Include="Models\cNbotInterest.vb" />
     <Compile Include="Models\cNewsItem.vb" />
     <Compile Include="Models\cPart.vb" />
+    <Compile Include="Models\cPart_Returned.vb" />
     <Compile Include="Models\cTabletData_old.vb" />
     <Compile Include="Models\cTabletData.vb" />
     <Compile Include="Models\cTeam.vb" />
@@ -447,6 +448,14 @@
     <Content Include="css\images\sort_desc.png" />
     <Content Include="css\images\sort_desc_disabled.png" />
     <Content Include="images\favicon.ico" />
+    <Content Include="img\FFWebsite\17MAC1.jpg" />
+    <Content Include="img\FFWebsite\17MAC2.jpg" />
+    <Content Include="img\FFWebsite\17MemorialParade1.jpg" />
+    <Content Include="img\FFWebsite\17MemorialParade2.jpg" />
+    <Content Include="img\FFWebsite\17RougeRescue1.jpg" />
+    <Content Include="img\FFWebsite\17RougeRescue2.jpg" />
+    <Content Include="img\FFWebsite\17Townhall1.jpg" />
+    <Content Include="img\FFWebsite\17Townhall2.jpg" />
     <Content Include="img\sort_asc.png" />
     <Content Include="images\sort_asc_disabled.png" />
     <Content Include="images\sort_both.png" />

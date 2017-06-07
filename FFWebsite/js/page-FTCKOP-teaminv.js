@@ -11,6 +11,7 @@ $(document).ready(function () {
     $('#tikitdropdown').change(function () { compareKit(); });
     document.getElementById('btnComparePrint').addEventListener('click', printKitCompareReport, false);
     document.getElementById('btnCommit').addEventListener('click', processcommit, false);
+    document.getElementById('btnReturn').addEventListener('click', processreturn, false);
    
 });
 
@@ -54,26 +55,18 @@ function initPartTable() {
             "order": [[2,"asc"]],
             "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
             "aoColumns": [
-                { "sTitle": "Part ID", "sWidth": "50px" },
-                { "sTitle": "Description", "sWidth": "250px" },
-                { "sTitle": "Quantity", "sWidth": "70px" },
-                { "sTitle": "Returned", "sWidth": "70px" }
+                { "sTitle": "Part ID", "sClass": "FF-left", "sWidth": "50px" },
+                { "sTitle": "Description", "sClass": "FF-left", "sWidth": "250px" },
+                { "sTitle": "Quantity", "sClass": "FF-center","sWidth": "70px" },
+                { "sTitle": "Returned", "sClass": "FF-center","sWidth": "70px" },
+                { "sTitle": "Difference", "sClass": "FF-center","sWidth": "70px" }
             ]
         });
         //setup callback function if row is clicked 
-        //$('#part-table tbody').on('click', 'tr', function (eventObject) {
-        //    var aData = table.row(this).data();
-        //    if ($(this).hasClass('wireSelected')) {
-        //        //not going to allow for toggling or unselecting of a selected row.
-        //        table.$('tr.wireSelected').removeClass('wireSelected');
-        //        TableitemSelected(aData);
-        //    }
-        //    else {
-        //        table.$('tr.wireSelected').removeClass('wireSelected');
-        //        $(this).addClass('wireSelected');
-        //        TableitemSelected(aData);
-        //   }
-        //});
+        $('#part-table tbody').on('click', 'tr', function (eventObject) {
+            var aData = table.row(this).data();
+                TableitemSelected(aData);
+        });
     }
 }
 
@@ -98,47 +91,14 @@ function loadTeamTable() {
 }  // End loadteamTable
 
 function formatPartrow(item) {
-    return [item.PartID, item.Description, item.Quantity, item.Returned];
+    return [item.PartID, item.Description, item.Quantity, item.Returned, item.Quantity - item.Returned];
 }
 
 function TableitemSelected(item) {
- //   if (item !== null) {
- //       var nid = $('#eventdropdown').val();
- //       var uri = "api/frogforce/GetScoutingScoresforTeam/" + item[0] + "?eventid=" + nid;
- //       var tableData = [];
- //       var tableData2 = [];
-//
- //       document.getElementById("p1name").innerHTML = "<h5>Team: " + item[0] + " - " + item[1] + "</h5>";
- //       document.getElementById("p2name").innerHTML = "<h5>Team: " + item[0] + " - " + item[1] + "</h5>";
-//
-//        var options = document.getElementById('teamdropdown').options;
-//        //change team drop down box to match 
-//        for (var i = 0, n = options.length; i < n; i++) {
- //           if (options[i].value === item[0]) {
-//                document.getElementById('teamdropdown').selectedIndex = i;
-//                break;
-//            }
-//        }
-//
-//        $.getJSON(uri, function (data) {
-//            $.each(data, function (key, item) {
-//                tableData.push(formatscorerow(item));
-//                tableData2.push(formatteleoprow(item));
-//            });
-//            //add row from array to table 
-//            var t = $("#score-table").DataTable();
-//            t.clear();
-//            t.rows.add(tableData).draw();
-//
-//            var t2 = $("#teleop-table").DataTable();
-//            t2.clear();
-//            t2.rows.add(tableData2).draw();
-//
-//        }) //End JSON call 
-//      .error(function (jqXHR, textStatus, errorThrown) {
-//          ErrorMsgBox("Error TableitemSelected()!", jqXHR.responseJSON, jqXHR.status);
-//      });
-//    } // end if 
+    document.getElementById("rtpartid").value = item[0]; 
+    document.getElementById("rtpartdesc").value = item[1]; 
+    document.getElementById("rtqty").value = item[2]; 
+    $('#partReturnModal').modal('show');
 }
 
 function TeamSelected() {
@@ -278,6 +238,30 @@ function processcommit() {
         })
         .error(function (data) {
             msgbox(-1, "Commit Returned Kit Failed!", "Team Kit was not returned to inventory! " + data);
+        });
+}
+
+function processreturn() {
+    var uri = "api/FTCKOP/ProcessReturn";
+    var tid = $('#teamdropdown').val();
+    var pid = $('#rtpartid').val();
+    var qty = $('#rtqty').val();
+
+    var ni = {
+        TeamID: tid,
+        PartID: pid, 
+        Returned: qty 
+    };
+
+    var testpost = $.post(uri, { "": JSON.stringify(ni) })
+        .success(function (data) {
+            msgbox(0, "Part Returned Updated Successfully!", "Part was successfully marked Returned!");
+            loadTeamTable();
+            $('#partReturnModal').modal('hide');
+
+        })
+        .error(function (data) {
+            msgbox(-1, "Part Return Failed!", "Part was not returned to inventory! " + data);
         });
 }
 
