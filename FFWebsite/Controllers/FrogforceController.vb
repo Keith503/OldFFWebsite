@@ -432,6 +432,49 @@ Namespace Controllers
             Return Ok()
         End Function
 
+        'Authorize(Roles:="jnl_nt\Audit Tracking edit")> _
+        <HttpPost>
+        Public Function UploadFile() As IHttpActionResult
+
+            Dim FileLen As Integer
+            Dim MyStream As System.IO.Stream
+
+            'Dim aProjectName As String
+            'Dim aRecommendationTitle As String
+            Try
+                'Dim id As String = HttpUtility.ParseQueryString(Request.RequestUri.Query).Get("id")
+                'Dim words As String() = id.Split(New Char() {"|"c})
+                'aProjectName = words(0)
+                'aRecommendationTitle = words(1)
+
+                For Each fileKey As String In HttpContext.Current.Request.Files.AllKeys
+                    Dim httpPostedFile As System.Web.HttpPostedFile = HttpContext.Current.Request.Files(fileKey)
+                    '  If httpPostedFile.FileName.Contains(".txt") Then
+                    FileLen = httpPostedFile.ContentLength
+                    Dim input(FileLen) As Byte
+                    MyStream = httpPostedFile.InputStream
+                    MyStream.Read(input, 0, FileLen)
+
+                    Dim outpath As String
+                    outpath = HttpContext.Current.Request.PhysicalApplicationPath & "img\FFWebsite\" & httpPostedFile.FileName
+
+                    Dim fs As System.IO.FileStream
+                    fs = New System.IO.FileStream(outpath, System.IO.FileMode.Create)
+                    fs.Write(input, 0, FileLen)
+
+                    fs.Close()
+
+                Next
+
+
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("UpdateResponseFile", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok()
+
+        End Function
 
 
 
