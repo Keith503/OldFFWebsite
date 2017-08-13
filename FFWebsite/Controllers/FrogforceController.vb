@@ -432,6 +432,20 @@ Namespace Controllers
             Return Ok()
         End Function
 
+        Public Function FTCKickoffRegister(<FromBody()> ByVal value As String) As IHttpActionResult
+            Dim obj As cFTCKickoffRegister
+            Dim m_cFFServer As New cFFWebSiteServer
+            Try
+                obj = JsonConvert.DeserializeObject(Of cFTCKickoffRegister)(value)
+                m_cFFServer.UpdateFTCKickoffRegister(obj)
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("UpdateFTCKickoffRegister", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok()
+        End Function
+
         'Authorize(Roles:="jnl_nt\Audit Tracking edit")> _
         <HttpPost>
         Public Function UploadFile() As IHttpActionResult

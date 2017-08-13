@@ -1,23 +1,4 @@
-﻿.header {
-     height: 100px; 
-}
-
-@media (min-width: 768px) {
-  .header .navbar-brand {
-    /*width: 214px;*/   /*changed to fit ff logo at 367x100*/
-    width: 300px;       /* was 367*/
-  }
-}
-
-.navbar-default {
-  height: 100px; /* added for ff logo*/
-}
-
-.navbar-collapse {
-    height: 100px;
-}
-
-.ffCarouselImg img {
+﻿.ffCarouselImg img {
     width: auto;
     height: auto; 
 }

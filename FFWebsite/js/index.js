@@ -20,7 +20,8 @@ function GetCarouselList() {
             i++;
             htext += buildCarouselItem(i, item.Image1_Name, item.Title_text, item.Body_text, item.ID);
         });  // End each
-        $('#FFcarousel').append(htext + "</div>");
+        //$('#FFcarousel').append(htext + "</div>");
+        $('#FFcarousel').append(htext);
     }) // End Json Call 
         .error(function (jqXHR, textStatus, errorThrown) {
             ErrorMsgBox("Error getNewsList()!", jqXHR.responseJSON, jqXHR.status);

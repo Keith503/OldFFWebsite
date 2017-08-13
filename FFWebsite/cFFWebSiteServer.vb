@@ -1860,6 +1860,111 @@ Public Class cFFWebSiteServer
 
         Return details
     End Function
+    Public Function UpdateFTCKickoffRegister(ByVal obj As cFTCKickoffRegister) As Long
+        '******************************************************************************
+        '*  Name:       UpdateFTCKickoffRegister 
+        '*  Purpose:    Update database with FTC Kickoff Registration data 
+        '*  Input:      FTC Kickoff Register object 
+        '*  returns:    ?????? 
+        '******************************************************************************
+        Dim strSQL As String
+        Dim DBServer As New cFFWebSiteDB
+        Dim lRet As Long = 0
+        Dim bolTeamOnFile As Boolean
+
+        'make sure there are no quotes in the school name and team name fields 
+        obj.School = RemoveQuotes(obj.School)
+        obj.TeamName = RemoveQuotes(obj.TeamName)
+
+        'Test to see if team is already on file 
+        bolTeamOnFile = CheckFTCRegTeamID(obj.ID)
+
+        If bolTeamOnFile = True Then
+            'Update 
+            strSQL = "Update FFWebsite.FTC_Kickoff_Register" &
+                     " Set TeamName = " & strQuote & obj.TeamName & strQuote & strComma &
+                     " Experience = " & strQuote & obj.Experience & strQuote & strComma &
+                     " School = " & strQuote & obj.School & strQuote & strComma &
+                     " TeamContactName = " & strQuote & obj.TeamContactName & strQuote & strComma &
+                     " TeamContactEmail = " & strQuote & obj.TeamContactEmail & strQuote & strComma &
+                     " TeamContactPhone = " & strQuote & obj.TeamContactPhone & strQuote & strComma &
+                     " MentorCount = " & obj.MentorCount.ToString & strComma &
+                     " StudentCount = " & obj.StudentCount.ToString &
+                     " Where ID = " & obj.ID.ToString
+        Else
+            'Insert 
+            strSQL = "Insert into FFWebsite.FTC_Kickoff_Register(ID,  TeamName, Experience,School,TeamContactName, TeamContactEmail," &
+                 "TeamContactPhone,MentorCount,StudentCount) values(" &
+                  obj.ID.ToString & strComma &
+                  strQuote & obj.TeamName & strQuote & strComma &
+                  strQuote & obj.Experience & strQuote & strComma &
+                  strQuote & obj.School & strQuote & strComma &
+                  strQuote & obj.TeamContactName & strQuote & strComma &
+                  strQuote & obj.TeamContactEmail & strQuote & strComma &
+                  strQuote & obj.TeamContactPhone & strQuote & strComma &
+                  obj.MentorCount.ToString & strComma &
+                  obj.StudentCount.ToString & ")"
+        End If
+
+        Try
+            DBServer.ExecNonQuery(strSQL)
+        Catch ex As Exception
+            'indicate error to caller 
+            Dim strErr As String = BuildErrorMsg("Error updateing FTC Registration! Msg-", ex.Message.ToString)
+            Throw New Exception(strErr)
+        End Try
+
+        DBServer = Nothing
+        Return lRet
+    End Function
+
+    Public Function CheckFTCRegTeamID(ByVal lTeamID As Long) As Boolean
+        '---------------------------------------------------------------------------------------
+        'Function:	CheckFTCRegTeamID
+        'Purpose:	Determine if a team is already in the database to avoid adding duplicates        
+        'Input:     Team Number to read  
+        'Returns:   Returns boolean - true found, false - not found  
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim obj As Object
+        Dim m_cFFWebSiteDB As New cFFWebSiteDB
+        Dim retBool As Boolean = False
+        Dim lTeamNo As Long
+
+        strSQL = "SELECT ID From FFWebsite.FTC_Kickoff_Register R" &
+                 " Where R.ID = " & lTeamID.ToString
+
+        'Execute SQL Command 
+        Try
+            obj = m_cFFWebSiteDB.ExecSVQuery(strSQL)
+            If Not obj Is Nothing Then
+                If TypeOf obj Is Integer Then
+                    lTeamNo = CLng(obj)
+                    retBool = True
+                End If
+            End If
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("CheckFTCRegTeamID", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return retBool
+
+    End Function
+
+
+
+
+
+
     '---------------------------------------------------------------------------------------------------
     '  Private Functions 
     '---------------------------------------------------------------------------------------------------

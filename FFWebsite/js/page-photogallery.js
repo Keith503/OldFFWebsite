@@ -76,7 +76,7 @@ function GetPhotoPage() {
         var iname = "";
         //was 270 170 item.Body_text
         $.each(data.photoset.photo, function (key, item) {
-            htext = htext + "<div class='col-xs-6 col-sm-3'><div class='aboutImage'><a href='https://www.flickr.com/photos/" + flickrUID + "/" + item.id + "/'>";
+            htext = htext + "<div class='col-xs-6 col-sm-3'><div class='aboutImage'><a href='https://www.flickr.com/photos/" + flickrUID + "/" + item.id + "/in/album-" + flickrphotoset + "/'>";
             htext = htext + "<img src='https://farm" + item.farm + ".staticflickr.com/" + item.server + "/" + item.id + "_" + item.secret + "_m.jpg width='240' height='170' alt='' class='img-responsive' />";
             htext = htext + "<div class='overlay'><p>" + item.title + "</p></div>";
             htext = htext + "</a></div></div>";
