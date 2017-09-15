@@ -28,6 +28,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -290,6 +291,7 @@
     <Compile Include="cFFWebSiteServer.vb" />
     <Compile Include="cFTCKopDB.vb" />
     <Compile Include="cFTCKoPServer.vb" />
+    <Compile Include="Controllers\AuthController.vb" />
     <Compile Include="Controllers\FrogforceController.vb" />
     <Compile Include="Controllers\FTCKOPController.vb" />
     <Compile Include="Global.asax.vb">
@@ -566,7 +568,15 @@
     <Content Include="img\FFWebsite\17RougeRescue2.jpg" />
     <Content Include="img\FFWebsite\17Townhall1.jpg" />
     <Content Include="img\FFWebsite\17Townhall2.jpg" />
+    <Content Include="img\FFWebsite\2017Championship1.jpg" />
+    <Content Include="img\FFWebsite\2017Championship2.jpg" />
+    <Content Include="img\FFWebsite\2017_Girls_Camp1.jpg" />
+    <Content Include="img\FFWebsite\2017_Girls_Camp2.jpg" />
     <Content Include="img\FFWebsite\2017_Jumbo.jpg" />
+    <Content Include="img\FFWebsite\2017_Maker_Faire1.jpg" />
+    <Content Include="img\FFWebsite\2017_Maker_Faire2.jpg" />
+    <Content Include="img\FFWebsite\Camp_Newspaper1.jpg" />
+    <Content Include="img\FFWebsite\Camp_Newspaper2.jpg" />
     <Content Include="img\FFWebsite\FIRST-FTC-RelicRecovery%2717-18-Color.jpg" />
     <Content Include="img\FFWebsite\FrogForceShield- WhtBackground.png" />
     <Content Include="img\FFWebsite\FTC_IMG_1.jpg" />
@@ -574,6 +584,8 @@
     <Content Include="img\FFWebsite\FTC_IMG_3.jpg" />
     <Content Include="img\FFWebsite\FTC_IMG_4.jpg" />
     <Content Include="img\FFWebsite\FTC_IMG_5.jpg" />
+    <Content Include="img\FFWebsite\hydro-dynamics-color.jpg" />
+    <Content Include="img\FFWebsite\RapidRobotsLogo.jpg" />
     <Content Include="img\sort_asc.png" />
     <Content Include="images\sort_asc_disabled.png" />
     <Content Include="images\sort_both.png" />
@@ -767,6 +779,9 @@
     <Content Include="js\moment-with-locales.min.js" />
     <Content Include="js\page-2017-FTC-Kickoff.js" />
     <Content Include="js\page-event-3col.js" />
+    <Content Include="js\page-fll-workshop-download.js" />
+    <Content Include="js\page-fll-workshop-register.js" />
+    <Content Include="js\page-ftc-kickoff-download.js" />
     <Content Include="js\page-ftc-kickoff-register.js" />
     <Content Include="js\page-FTCKOP-inventory.js" />
     <Content Include="js\page-FTCKOP-KitMaint.js" />
@@ -777,6 +792,7 @@
     <Content Include="js\page-initiative-dhdc.js" />
     <Content Include="js\page-initiative-hands.js" />
     <Content Include="js\page-initiative-sayplay.js" />
+    <Content Include="js\page-login.js" />
     <Content Include="js\page-ms.js" />
     <Content Include="js\page-nbot-download.js" />
     <Content Include="js\page-nbot-interest.js" />
@@ -926,10 +942,14 @@
     <Content Include="obj\Debug\FFWebsite.pdb" />
     <Content Include="obj\Debug\FFWebsite.vbproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\FFWebsite.xml" />
+    <Content Include="page-2017-FLL-Workshop.html" />
     <Content Include="page-2017-FTC-Kickoff.html" />
     <Content Include="page-achievements.html" />
     <Content Include="page-blank.html" />
     <Content Include="page-events-3col.html" />
+    <Content Include="page-fll-workshop-download.html" />
+    <Content Include="page-fll-workshop-register.html" />
+    <Content Include="page-ftc-kickoff-download.html" />
     <Content Include="page-ftc-kickoff-register.html" />
     <Content Include="page-ftc-resources.html" />
     <Content Include="page-FTCKOP-Inventory.html" />

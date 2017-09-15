@@ -769,7 +769,6 @@ Public Class cFTCKoPServer
         Dim strSQL As String
         Dim DBServer As New cFTCKoPDB
         Dim dr As MySqlDataReader
-        Dim i As Integer
         Dim strWork As String = ""
 
         'THis allowed for a list of kit ids to be passed-changed to allow on a single kit id 

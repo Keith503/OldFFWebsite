@@ -350,3 +350,4 @@ C:\Projects\FFWebsite\FFWebsite\bin\itext.kernel.xml
 C:\Projects\FFWebsite\FFWebsite\bin\itext.layout.xml
 C:\Projects\FFWebsite\FFWebsite\bin\itext.pdfa.xml
 C:\Projects\FFWebsite\FFWebsite\bin\itext.sign.xml
+C:\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.vbproj.CoreCompileInputs.cache

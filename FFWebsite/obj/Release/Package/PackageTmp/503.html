@@ -33,11 +33,11 @@
 
   <div class="main_wrapper">
 
-      <!-- TOP BAR Navigation -->
-      <div id="top-bar">
+      <div class="header clearfix">
+          <nav class="navbar navbar-main navbar-default">
+              <div id="top-bar"></div>
+          </nav><!-- navbar -->
       </div>
-      <!-- /top -->
-
 
     <div class="mainContent clearfix">
       <div class="container">
@@ -52,6 +52,8 @@
               <li><a href="page-FTCKOP-Inventory.html">FTC KoP Master Inventory</a></li>
               <li><a href="page-FTCKOP-TeamInv.html">FTC KoP Team Inventory</a></li>
               <li><a href="page-nbot-interest.html">Nbot Interest Form</a></li>
+              <li><a href="page-ftc-kickoff-download.html">FTC Kickoff Download List</a></li>
+              <li><a href="page-fll-workshop-download.html">FLL Workshop Download List</a></li>
           </ul>
 
       </div>
@@ -80,7 +82,6 @@
 
   <script src="js/bootstrap-dialog.js"></script>
   <script src="js/mods.js"></script>
-  <script src="js/FFWebSite.js"></script>
   <script>
       $('#top-bar').load('topbarnav.html', "", function (response, status, xhr) { initTopbar(); });
       $('#bottom-bar').load('bottombar.html', "", function (response, status, xhr) { initBottombar(); });

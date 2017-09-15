@@ -1960,14 +1960,312 @@ Public Class cFFWebSiteServer
 
     End Function
 
+    Public Function GetFTCKickoffList() As List(Of cFTCKickoffRegister)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetFTCKickoffList
+        'Purpose:	return list of cFTCKickoffRefister items        
+        'Input:     Nothing 
+        'Returns:   list of cFTCKickoffRegister objects   
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cFTCKickoffRegister)
+        Dim m_cFFWebsiteDB As New cFFWebSiteDB
+
+        strSQL = "select ID,TeamName,Experience,School,TeamContactName,TeamContactEmail," &
+                 "TeamContactPhone,MentorCount,StudentCount " &
+                 "from FFWebsite.FTC_Kickoff_Register " &
+                 " order by id "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebsiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                Dim FTCKickoffRow As New cFTCKickoffRegister
+                With FTCKickoffRow
+                    .ID = TestNullLong(dr, 0)
+                    .TeamName = TestNullString(dr, 1)
+                    .Experience = TestNullString(dr, 2)
+                    .School = TestNullString(dr, 3)
+                    .TeamContactName = TestNullString(dr, 4)
+                    .TeamContactEmail = TestNullString(dr, 5)
+                    .TeamContactPhone = TestNullString(dr, 6)
+                    .MentorCount = TestNullLong(dr, 7)
+                    .StudentCount = TestNullLong(dr, 8)
+                End With
+
+                details.Add(FTCKickoffRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetFTCKickoffList", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebsiteDB.cmd.Dispose()
+            m_cFFWebsiteDB.CloseDataReader()
+            m_cFFWebsiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebsiteDB = Nothing
+
+        Return details
+    End Function
+
+
+    Public Function UpdateFLLWorkshopRegister(ByVal obj As cFTCKickoffRegister) As Long
+        '******************************************************************************
+        '*  Name:       UpdateFLLWorkshopRegister 
+        '*  Purpose:    Update database with FLL Workshop Registration data 
+        '*  Input:      FTC Kickoff Register object (FLL & FTC use the same object)  
+        '*  returns:    ?????? 
+        '******************************************************************************
+        Dim strSQL As String
+        Dim DBServer As New cFFWebSiteDB
+        Dim lRet As Long = 0
+        Dim bolTeamOnFile As Boolean
+
+        'make sure there are no quotes in the school name and team name fields 
+        obj.School = RemoveQuotes(obj.School)
+        obj.TeamName = RemoveQuotes(obj.TeamName)
+
+        'Test to see if team is already on file 
+        bolTeamOnFile = CheckFLLRegTeamID(obj.ID)
+
+        If bolTeamOnFile = True Then
+            'Update 
+            strSQL = "Update FFWebsite.FLL_Workshop_Register" &
+                     " Set TeamName = " & strQuote & obj.TeamName & strQuote & strComma &
+                     " Experience = " & strQuote & obj.Experience & strQuote & strComma &
+                     " School = " & strQuote & obj.School & strQuote & strComma &
+                     " TeamContactName = " & strQuote & obj.TeamContactName & strQuote & strComma &
+                     " TeamContactEmail = " & strQuote & obj.TeamContactEmail & strQuote & strComma &
+                     " TeamContactPhone = " & strQuote & obj.TeamContactPhone & strQuote & strComma &
+                     " MentorCount = " & obj.MentorCount.ToString & strComma &
+                     " StudentCount = " & obj.StudentCount.ToString &
+                     " Where ID = " & obj.ID.ToString
+        Else
+            'Insert 
+            strSQL = "Insert into FFWebsite.FLL_Workshop_Register(ID,  TeamName, Experience,School,TeamContactName, TeamContactEmail," &
+                 "TeamContactPhone,MentorCount,StudentCount) values(" &
+                  obj.ID.ToString & strComma &
+                  strQuote & obj.TeamName & strQuote & strComma &
+                  strQuote & obj.Experience & strQuote & strComma &
+                  strQuote & obj.School & strQuote & strComma &
+                  strQuote & obj.TeamContactName & strQuote & strComma &
+                  strQuote & obj.TeamContactEmail & strQuote & strComma &
+                  strQuote & obj.TeamContactPhone & strQuote & strComma &
+                  obj.MentorCount.ToString & strComma &
+                  obj.StudentCount.ToString & ")"
+        End If
+
+        Try
+            DBServer.ExecNonQuery(strSQL)
+        Catch ex As Exception
+            'indicate error to caller 
+            Dim strErr As String = BuildErrorMsg("Error updateing FLL Workshop Registration! Msg-", ex.Message.ToString)
+            Throw New Exception(strErr)
+        End Try
+
+        DBServer = Nothing
+        Return lRet
+    End Function
+
+    Public Function CheckFLLRegTeamID(ByVal lTeamID As Long) As Boolean
+        '---------------------------------------------------------------------------------------
+        'Function:	CheckFLLRegTeamID
+        'Purpose:	Determine if a team is already in the database to avoid adding duplicates        
+        'Input:     Team Number to read  
+        'Returns:   Returns boolean - true found, false - not found  
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim obj As Object
+        Dim m_cFFWebSiteDB As New cFFWebSiteDB
+        Dim retBool As Boolean = False
+        Dim lTeamNo As Long
+
+        strSQL = "SELECT ID From FFWebsite.FLL_Workshop_Register R" &
+                 " Where R.ID = " & lTeamID.ToString
+
+        'Execute SQL Command 
+        Try
+            obj = m_cFFWebSiteDB.ExecSVQuery(strSQL)
+            If Not obj Is Nothing Then
+                If TypeOf obj Is Integer Then
+                    lTeamNo = CLng(obj)
+                    retBool = True
+                End If
+            End If
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("CheckFLLRegTeamID", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return retBool
+
+    End Function
+
+    Public Function GetFLLWorkshopList() As List(Of cFTCKickoffRegister)
+        '---------------------------------------------------------------------------------------
+        'Function:	GetFLLWorkshopList
+        'Purpose:	return list of cFLLKickoffRegister items        
+        'Input:     Nothing 
+        'Returns:   list of cFTCKickoffRegister objects (FTC & FLL use same object)    
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim dr As MySqlDataReader
+        Dim details As New List(Of cFTCKickoffRegister)
+        Dim m_cFFWebsiteDB As New cFFWebSiteDB
+
+        strSQL = "select ID,TeamName,Experience,School,TeamContactName,TeamContactEmail," &
+                 "TeamContactPhone,MentorCount,StudentCount " &
+                 "from FFWebsite.FLL_Workshop_Register " &
+                 " order by id "
+
+        'Execute SQL Command 
+        Try
+            dr = m_cFFWebsiteDB.ExecDRQuery(strSQL)
+            While dr.Read()
+                Dim FTCKickoffRow As New cFTCKickoffRegister
+                With FTCKickoffRow
+                    .ID = TestNullLong(dr, 0)
+                    .TeamName = TestNullString(dr, 1)
+                    .Experience = TestNullString(dr, 2)
+                    .School = TestNullString(dr, 3)
+                    .TeamContactName = TestNullString(dr, 4)
+                    .TeamContactEmail = TestNullString(dr, 5)
+                    .TeamContactPhone = TestNullString(dr, 6)
+                    .MentorCount = TestNullLong(dr, 7)
+                    .StudentCount = TestNullLong(dr, 8)
+                End With
+
+                details.Add(FTCKickoffRow)
+
+            End While
+
+            dr.Close()
+
+        Catch ex As Exception
+
+            Dim strErr As String = BuildErrorMsg("GetFLLWorkshopList", ex.Message.ToString)
+            'logger.Error(strErr)
+            Throw New Exception(strErr)
+
+        Finally
+            m_cFFWebsiteDB.cmd.Dispose()
+            m_cFFWebsiteDB.CloseDataReader()
+            m_cFFWebsiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebsiteDB = Nothing
+
+        Return details
+    End Function
 
 
 
+    Public Function ValidateUserID(ByVal sUserID As String, ByVal sPassword As String) As Boolean
+        '---------------------------------------------------------------------------------------
+        'Function:	ValidateUserID
+        'Purpose:	Check if a submitted user id is on file and passwords match         
+        'Input:     Team Number to read  
+        'Returns:   Returns boolean - true found, false - not found  
+        '----------------------------------------------------------------------------------- ---> 	
+        Dim strSQL As String = ""
+        Dim obj As Object
+        Dim m_cFFWebSiteDB As New cFFWebSiteDB
+        Dim retBool As Boolean = False
+        Dim sPwdOnFile As String = ""
 
+        strSQL = "SELECT Password From FFWebsite.Users U" &
+                 " Where U.UserID = " & sUserID
+
+        'Execute SQL Command 
+        Try
+            obj = m_cFFWebSiteDB.ExecSVQuery(strSQL)
+            If Not obj Is Nothing Then
+                If TypeOf obj Is String Then
+                    sPwdOnFile = CStr(obj)
+                End If
+            End If
+        Catch ex As Exception
+            retBool = False
+        Finally
+            m_cFFWebSiteDB.cmd.Dispose()
+            m_cFFWebSiteDB.CloseConnection()
+        End Try
+
+        m_cFFWebSiteDB = Nothing
+
+        Return retBool
+
+    End Function
 
     '---------------------------------------------------------------------------------------------------
     '  Private Functions 
     '---------------------------------------------------------------------------------------------------
+
+
+    'AES Key Encrypt 
+    Private Function AESEncrypt(ByVal plaintext As String, ByVal key As String) As String
+        Dim AES As New System.Security.Cryptography.RijndaelManaged
+        Dim SHA256 As New System.Security.Cryptography.SHA256Cng
+        Dim ciphertext As String = ""
+        Try
+            AES.GenerateIV()
+            AES.Key = SHA256.ComputeHash(System.Text.ASCIIEncoding.ASCII.GetBytes(key))
+
+            AES.Mode = Security.Cryptography.CipherMode.CBC
+            Dim DESEncrypter As System.Security.Cryptography.ICryptoTransform = AES.CreateEncryptor
+            Dim Buffer As Byte() = System.Text.ASCIIEncoding.ASCII.GetBytes(plaintext)
+            ciphertext = Convert.ToBase64String(DESEncrypter.TransformFinalBlock(Buffer, 0, Buffer.Length))
+
+            Return Convert.ToBase64String(AES.IV) & Convert.ToBase64String(DESEncrypter.TransformFinalBlock(Buffer, 0, Buffer.Length))
+
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+    End Function
+
+    'AES Key Decrypt 
+    Private Function AESDecrypt(ByVal ciphertext As String, ByVal key As String) As String
+        Dim AES As New System.Security.Cryptography.RijndaelManaged
+        Dim SHA256 As New System.Security.Cryptography.SHA256Cng
+        Dim plaintext As String = ""
+        Dim iv As String = ""
+        Try
+            Dim ivct = ciphertext.Split(CChar("="))
+            iv = ivct(0) & "=="
+            ciphertext = ivct(2) & "=="
+
+            AES.Key = SHA256.ComputeHash(System.Text.ASCIIEncoding.ASCII.GetBytes(key))
+            AES.IV = Convert.FromBase64String(iv)
+            AES.Mode = Security.Cryptography.CipherMode.CBC
+            Dim DESDecrypter As System.Security.Cryptography.ICryptoTransform = AES.CreateDecryptor
+            Dim Buffer As Byte() = Convert.FromBase64String(ciphertext)
+            plaintext = System.Text.ASCIIEncoding.ASCII.GetString(DESDecrypter.TransformFinalBlock(Buffer, 0, Buffer.Length))
+            Return plaintext
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+    End Function
+
+
+
+
     Private Function BuildErrorMsg(ByVal strFunctionName As String, strThrownError As String) As String
         '---------------------------------------------------------------------------------------
         'Function:	BuildErrorMsg

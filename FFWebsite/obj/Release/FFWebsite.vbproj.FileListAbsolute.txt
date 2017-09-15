@@ -158,3 +158,4 @@ C:\Projects\FFWebsite\FFWebsite\obj\Release\FFWebsite.vbproj.GenerateResource.Ca
 C:\Projects\FFWebsite\FFWebsite\obj\Release\FFWebsite.dll
 C:\Projects\FFWebsite\FFWebsite\obj\Release\FFWebsite.xml
 C:\Projects\FFWebsite\FFWebsite\obj\Release\FFWebsite.pdb
+C:\Projects\FFWebsite\FFWebsite\obj\Release\FFWebsite.vbproj.CoreCompileInputs.cache

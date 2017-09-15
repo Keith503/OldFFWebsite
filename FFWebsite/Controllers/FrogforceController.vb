@@ -446,6 +446,51 @@ Namespace Controllers
             Return Ok()
         End Function
 
+        Public Function GetFTCKickOffRegister() As IHttpActionResult
+            Dim ftcKickOffList As List(Of cFTCKickoffRegister)
+            Dim m_cFFServer As New cFFWebSiteServer
+
+            Try
+                'first go get a list of matches that this team has done 
+                ftcKickOffList = m_cFFServer.GetFTCKickoffList()
+
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetFTCKickOffRegister(", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(ftcKickOffList)
+        End Function
+        Public Function FLLWorkshopRegister(<FromBody()> ByVal value As String) As IHttpActionResult
+            Dim obj As cFTCKickoffRegister
+            Dim m_cFFServer As New cFFWebSiteServer
+            Try
+                obj = JsonConvert.DeserializeObject(Of cFTCKickoffRegister)(value)
+                m_cFFServer.UpdateFLLWorkshopRegister(obj)
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("UpdateFLLWorkshopRegister", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok()
+        End Function
+
+        Public Function GetFLLWorkshopRegister() As IHttpActionResult
+            Dim ftcKickOffList As List(Of cFTCKickoffRegister)
+            Dim m_cFFServer As New cFFWebSiteServer
+
+            Try
+                'first go get a list of matches that this team has done 
+                ftcKickOffList = m_cFFServer.GetFLLWorkshopList()
+
+            Catch ex As Exception
+                Dim errmsg As String = BuildErrorMsg("GetFLLWorkshopRegister(", ex.Message.ToString)
+                Return Content(HttpStatusCode.InternalServerError, errmsg)     'Return Error - Danger msgbox (ExpectationFailed Return Warning - Warning messagebox)
+            End Try
+
+            Return Ok(ftcKickOffList)
+        End Function
+
         'Authorize(Roles:="jnl_nt\Audit Tracking edit")> _
         <HttpPost>
         Public Function UploadFile() As IHttpActionResult
