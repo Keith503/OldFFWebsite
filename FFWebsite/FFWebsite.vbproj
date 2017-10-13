@@ -543,6 +543,18 @@
     <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
     <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="docs\FTC Judging and Awards.pdf" />
+    <Content Include="docs\FTC-Build_Class.pdf" />
+    <Content Include="docs\Intro to Programming.pdf" />
+    <Content Include="docs\Mechanical Design.pdf" />
+    <Content Include="docs\Rookie Quick Start.pdf" />
+    <Content Include="docs\2017 SAY Play FTC Kickoff - Encoders.pdf" />
+    <Content Include="docs\2017 SAY Play FTC Kickoff - Sensors.pdf" />
+    <Content Include="docs\REV-Expansion Hub Guide.pdf" />
+    <Content Include="docs\NHS Flyer for 2017 Robotics Meetings.pdf" />
+    <Content Include="docs\Robot Lessons - Lego Pieces.pdf" />
+    <Content Include="docs\Robot Lessons - Mission Strategy.pdf" />
+    <Content Include="docs\Robot Lessons - Robot Design.pdf" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -570,11 +582,19 @@
     <Content Include="img\FFWebsite\17Townhall2.jpg" />
     <Content Include="img\FFWebsite\2017Championship1.jpg" />
     <Content Include="img\FFWebsite\2017Championship2.jpg" />
+    <Content Include="img\FFWebsite\2017_AVL1.jpg" />
+    <Content Include="img\FFWebsite\2017_AVL2.jpg" />
+    <Content Include="img\FFWebsite\2017_Board_Mtg1.jpg" />
+    <Content Include="img\FFWebsite\2017_Board_Mtg2.jpg" />
+    <Content Include="img\FFWebsite\2017_FTC_Kickoff1.jpg" />
+    <Content Include="img\FFWebsite\2017_FTC_Kickoff2.jpg" />
     <Content Include="img\FFWebsite\2017_Girls_Camp1.jpg" />
     <Content Include="img\FFWebsite\2017_Girls_Camp2.jpg" />
     <Content Include="img\FFWebsite\2017_Jumbo.jpg" />
     <Content Include="img\FFWebsite\2017_Maker_Faire1.jpg" />
     <Content Include="img\FFWebsite\2017_Maker_Faire2.jpg" />
+    <Content Include="img\FFWebsite\2017_SP_Camp1.jpg" />
+    <Content Include="img\FFWebsite\2017_SP_Camp2.jpg" />
     <Content Include="img\FFWebsite\Camp_Newspaper1.jpg" />
     <Content Include="img\FFWebsite\Camp_Newspaper2.jpg" />
     <Content Include="img\FFWebsite\FIRST-FTC-RelicRecovery%2717-18-Color.jpg" />

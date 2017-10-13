@@ -15,44 +15,6 @@ c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\FFW
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\FFWebsite.dll
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\FFWebsite.pdb
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\FFWebsite.xml
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Antlr3.Runtime.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\EntityFramework.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\EntityFramework.SqlServer.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.Agent.Intercept.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.DependencyCollector.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.PerfCounterCollector.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.ServerTelemetryChannel.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.Web.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.WindowsServer.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.ApplicationInsights.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.Core.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.EntityFramework.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AspNet.Identity.Owin.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Host.SystemWeb.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Cookies.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Facebook.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Google.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.OAuth.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.Owin.Security.Twitter.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.Web.Infrastructure.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Newtonsoft.Json.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Owin.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Net.Http.Formatting.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Web.Helpers.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.Owin.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Web.Http.WebHost.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Web.Mvc.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Web.Optimization.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Web.Razor.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.Deployment.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\System.Web.WebPages.Razor.dll
-c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\WebGrease.dll
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.DependencyCollector.xml
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.ServerTelemetryChannel.xml
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\bin\Microsoft.AI.Web.xml
@@ -92,7 +54,6 @@ c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\obj\Deb
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.dll
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.xml
 c:\users\owner\documents\visual studio 2015\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.pdb
-C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\MySql.Data.dll
 C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\MySql.Data.xml
 C:\Users\T420\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\ApplicationInsights.config
 C:\Users\T420\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\roslyn\csc.exe
@@ -351,3 +312,11 @@ C:\Projects\FFWebsite\FFWebsite\bin\itext.layout.xml
 C:\Projects\FFWebsite\FFWebsite\bin\itext.pdfa.xml
 C:\Projects\FFWebsite\FFWebsite\bin\itext.sign.xml
 C:\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.vbproj.CoreCompileInputs.cache
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\itext.barcodes.xml
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\itext.forms.xml
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\itext.io.xml
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\itext.kernel.xml
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\itext.layout.xml
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\itext.pdfa.xml
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\bin\itext.sign.xml
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\FFWebsite\FFWebsite\obj\Debug\FFWebsite.vbproj.CoreCompileInputs.cache
