@@ -49,7 +49,9 @@ function activaTab(tab) {
 };
 
 function processUpdate() {
-    var uri = "api/FrogForce/UpdateNbotInterest";
+    //production webserver 
+    //   var uri = "api/FrogForce/UpdateNbotInterest";
+    var uri = "http://locathost:3000/FrogForce/UpdateNbotInterest";
     var sfn = document.getElementById("sfname").value;
     if (sfn === "") {
         msgbox(-1, "Student First Name Missing!", "You must enter a student first name. Try Again!!");
@@ -280,8 +282,9 @@ function processUpdate() {
         Question3: q3,
         PriorExperience: px
     };
-
-    var testpost = $.post(uri, { "": JSON.stringify(ni) })
+//production 
+//    var testpost = $.post(uri, { "": JSON.stringify(ni) })
+    var testpost = $.post(uri, ni)
         .success(function (data) {
             if (confirm('Nbot Interest Form has been successfully saved! - Thank you!!')) {
                 clearform();
