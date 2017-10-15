@@ -555,6 +555,14 @@
     <Content Include="docs\Robot Lessons - Lego Pieces.pdf" />
     <Content Include="docs\Robot Lessons - Mission Strategy.pdf" />
     <Content Include="docs\Robot Lessons - Robot Design.pdf" />
+    <Content Include="docs\NBOT 2017 PRESENTATION.pdf" />
+    <Content Include="docs\Nbot Agreement 17.pdf" />
+    <Content Include="docs\Nbot Townhall Meeting Agenda.pdf" />
+    <Content Include="docs\NBot Townhall Meeting Preparation.pdf" />
+    <Content Include="docs\Program Info Forms.pdf" />
+    <Content Include="docs\Team Formation Forms.pdf" />
+    <Content Include="docs\Townhall Flyer 2017.pdf" />
+    <Content Include="docs\Progression Flyer v3.pdf" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -606,6 +614,11 @@
     <Content Include="img\FFWebsite\FTC_IMG_5.jpg" />
     <Content Include="img\FFWebsite\hydro-dynamics-color.jpg" />
     <Content Include="img\FFWebsite\RapidRobotsLogo.jpg" />
+    <Content Include="img\FFWebsite\Townhall1.jpg" />
+    <Content Include="img\FFWebsite\Townhall2.jpg" />
+    <Content Include="img\FFWebsite\Townhall3.jpg" />
+    <Content Include="img\FFWebsite\Townhall4.jpg" />
+    <Content Include="img\FFWebsite\Townhall5.jpg" />
     <Content Include="img\sort_asc.png" />
     <Content Include="images\sort_asc_disabled.png" />
     <Content Include="images\sort_both.png" />
@@ -971,7 +984,6 @@
     <Content Include="page-fll-workshop-register.html" />
     <Content Include="page-ftc-kickoff-download.html" />
     <Content Include="page-ftc-kickoff-register.html" />
-    <Content Include="page-ftc-resources.html" />
     <Content Include="page-FTCKOP-Inventory.html" />
     <Content Include="page-FTCKOP-KitMaint.html" />
     <Content Include="page-FTCKOP-PartMaint.html" />
@@ -996,6 +1008,7 @@
     <Content Include="page-sd.html" />
     <Content Include="page-single-event.html" />
     <Content Include="page-teamhistory.html" />
+    <Content Include="page-townhall.html" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
