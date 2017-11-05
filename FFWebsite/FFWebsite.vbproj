@@ -603,6 +603,7 @@
     <Content Include="img\FFWebsite\2017_Maker_Faire2.jpg" />
     <Content Include="img\FFWebsite\2017_SP_Camp1.jpg" />
     <Content Include="img\FFWebsite\2017_SP_Camp2.jpg" />
+    <Content Include="img\FFWebsite\2018_Teaser.jpg" />
     <Content Include="img\FFWebsite\Camp_Newspaper1.jpg" />
     <Content Include="img\FFWebsite\Camp_Newspaper2.jpg" />
     <Content Include="img\FFWebsite\FIRST-FTC-RelicRecovery%2717-18-Color.jpg" />
@@ -613,6 +614,9 @@
     <Content Include="img\FFWebsite\FTC_IMG_4.jpg" />
     <Content Include="img\FFWebsite\FTC_IMG_5.jpg" />
     <Content Include="img\FFWebsite\hydro-dynamics-color.jpg" />
+    <Content Include="img\FFWebsite\PowerUp_DesktopWidescreen.jpg" />
+    <Content Include="img\FFWebsite\PowerUp_FacebookCover.jpg" />
+    <Content Include="img\FFWebsite\PowerUp_Tablet.jpg" />
     <Content Include="img\FFWebsite\RapidRobotsLogo.jpg" />
     <Content Include="img\FFWebsite\Townhall1.jpg" />
     <Content Include="img\FFWebsite\Townhall2.jpg" />
